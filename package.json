@@ -1,0 +1,22 @@
+{
+  "name": "@okta/samples-js-react-native",
+  "version": "0.1.0",
+  "description": "React Sample Applications for Okta",
+  "scripts": {
+    "banners": "node tools/maintain-banners.js {okta-hosted-login,tools,scripts}/{*js,!node_modules/,**/*{js,jsx,css}}",
+    "test": "npm test --prefix okta-hosted-login/",
+    "postinstall": "cd okta-hosted-login && yarn install"
+  },
+  "author": "",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/okta/samples-js-react-native.git"
+  },
+  "bugs": "https://github.com/okta/samples-js-react-native/issues",
+  "homepage": "https://github.com/okta/samples-js-react-native",
+  "private": true,
+  "dependencies": {
+    "globby": "^8.0.1"
+  }
+}
