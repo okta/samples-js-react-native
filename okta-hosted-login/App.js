@@ -25,6 +25,10 @@ export default class App extends React.Component {
     this.getMessages = this.getMessages.bind(this);
   }
 
+  async componentDidUpdate() {
+    this.checkAuthentication();
+  }
+
   async componentDidMount() {
     await this.checkAuthentication();
   }
@@ -38,12 +42,11 @@ export default class App extends React.Component {
 
   login = async () => {
     await tokenClient.signInWithRedirect();
-    this.checkAuthentication();
+    this.setContext('Logged in!');
   }
 
   logout = async () => {
     await tokenClient.signOut();
-    this.checkAuthentication();
     this.setState({context: '' });
   }
 
@@ -53,11 +56,19 @@ export default class App extends React.Component {
       return;
     }
     const user = await tokenClient.getUser();
-    this.setContext(JSON.stringify(user, null, 4));
+    this.setContext(`
+      User Profile:
+      ${JSON.stringify(user, null, 4)}
+    `);
   }
 
   getMessages = async () => {
-    fetch(config.resourceServer.messagesUrl, {  
+    if (!this.state.authenticated) {
+      this.setContext('User has not logged in.');
+      return;
+    }
+
+    await fetch(config.resourceServer.messagesUrl, {  
       method: 'GET',
       headers: {
         Authorization: `Bearer ${await tokenClient.getAccessToken()}`,

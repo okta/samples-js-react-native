@@ -8,11 +8,19 @@
     "eject": "react-native-scripts eject",
     "android": "react-native-scripts android",
     "ios": "react-native-scripts ios",
-    "test": "jest",
+    "test": "jest --coverage App.test.js",
     "postinstall": "node post-install.js"
   },
   "jest": {
-    "preset": "jest-expo"
+    "browser": true,
+    "automock": false,
+    "preset": "jest-expo",
+    "transformIgnorePatterns": [
+      "node_modules/(?!@okta|expo|react-native)"
+    ],
+    "setupFiles": [
+      "./setupJest.js"
+    ]
   },
   "dependencies": {
     "@okta/okta-react-native": "file:../../okta-oidc-js/packages/okta-react-native/okta-okta-react-native-0.0.1.tgz",
@@ -21,9 +29,13 @@
     "react-native": "0.54.0"
   },
   "devDependencies": {
+    "babel-preset-react-native": "^4.0.0",
     "colors": "^1.2.1",
-    "react-native-scripts": "1.13.1",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
     "jest-expo": "26.0.0",
+    "react-dom": "^16.3.1",
+    "react-native-scripts": "1.13.1",
     "react-test-renderer": "16.3.0-alpha.1"
   }
 }
