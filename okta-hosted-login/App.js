@@ -52,17 +52,17 @@ export default class App extends React.Component {
     }
   }
 
-  login = async () => {
+  async login() {
     await tokenClient.signInWithRedirect();
     this.setContext('Logged in!');
   }
 
-  logout = async () => {
+  async logout() {
     await tokenClient.signOut();
     this.setState({context: '' });
   }
 
-  getUser = async () => {
+  async getUser() {
     if (!this.state.authenticated) {
       this.setContext('User has not logged in.');
       return;
@@ -74,7 +74,7 @@ export default class App extends React.Component {
     `);
   }
 
-  getMessages = async () => {
+  async getMessages() {
     if (!this.state.authenticated) {
       this.setContext('User has not logged in.');
       return;

@@ -23,7 +23,7 @@
     ]
   },
   "dependencies": {
-    "@okta/okta-react-native": "file:../../okta-oidc-js/packages/okta-react-native/okta-okta-react-native-0.0.1.tgz",
+    "@okta/okta-react-native": "^0.1.0",
     "expo": "^26.0.0",
     "react": "16.3.0-alpha.1",
     "react-native": "0.54.0"

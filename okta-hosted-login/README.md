@@ -15,6 +15,7 @@ Before running this sample, you will need the following:
   * **Grant type allowed**
     * Authorization Code
     * Refresh Token
+* If you are developing with an Android device emulator, make sure to check out the [React Native - Android Development](https://facebook.github.io/react-native/docs/getting-started.html#android-development-environment) setup instructions.
 
 ## Running This Example
 
@@ -28,7 +29,7 @@ cd samples-js-react-native/okta-hosted-login
 Then install dependencies:
 
 ```bash
-npm install
+yarn install
 ```
 
 Now you need to gather the following information from the Okta Developer Console:
@@ -55,17 +56,17 @@ export default {
 Now start the app server:
 
 ```bash
-npm start
+yarn start
 ```
 
 As an alternative, you can launch an Android Emulator or iOS Simulator:
 
 ```bash
 # Android
-npm run android
+yarn start android
 
 # iOS
-npm run ios
+yarn start ios
 ```
 
 If you see a home page that prompts you to login, then things are working!  Clicking the **Log in** button will redirect you to the Okta hosted sign-in page.

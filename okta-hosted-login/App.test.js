@@ -68,26 +68,26 @@ it('should initialize with default state', () => {
   expect(wrapper.state().context).toBe(null);
 });
 
-it('should click login', async () => {
+it('should update the textview after the login button is pressed', async () => {
   const wrapper = shallow(<App />);
   const loginButton = wrapper.find('Button').get(0);
-  await loginButton.props.onPress();
   expect.assertions(2);
   expect(loginButton.props.title).toBe('Login');
+  await loginButton.props.onPress();
   expect(wrapper.state().context).toBe('Logged in!');
 });
 
-it('should click logout', async () => {
+it('should update the textview after the logout button is pressed', async () => {
   const wrapper = shallow(<App />);
   wrapper.setState({authenticated: true});
   const logoutButton = wrapper.find('Button').get(0);
-  await logoutButton.props.onPress();
   expect.assertions(2);
   expect(logoutButton.props.title).toBe('Logout');
+  await logoutButton.props.onPress();
   expect(wrapper.state().context).toBe('');
 });
 
-it('should click profile and fail', async () => {
+it('should click profile and fail when the user is not authenticated', async () => {
   const wrapper = shallow(<App />);
   const profileButton = wrapper.find('Button').get(1);
   profileButton.props.onPress();
@@ -96,7 +96,7 @@ it('should click profile and fail', async () => {
   expect(wrapper.state().context).toBe('User has not logged in.');
 });
 
-it('should click profile and succeed', async () => {
+it('should click profile and succeed when the user is authenticated' , async () => {
   const wrapper = shallow(<App />);
   wrapper.setState({authenticated: true});
   const profileButton = wrapper.find('Button').get(1);
@@ -106,7 +106,7 @@ it('should click profile and succeed', async () => {
   expect(wrapper.state().context).toContain('User Profile');
 });
 
-it('should click messages and fail', async () => {
+it('should click messages and fail when the user is not authenticated', async () => {
   const wrapper = shallow(<App />);
   const messagesButton = wrapper.find('Button').get(2);
   await messagesButton.props.onPress();
@@ -115,7 +115,7 @@ it('should click messages and fail', async () => {
   expect(wrapper.state().context).toBe('User has not logged in.');
 });
 
-it('should click messages and succeed', async () => {
+it('should click messages and succeed when the user is authenticated', async () => {
   const wrapper = shallow(<App />);
   wrapper.setState({authenticated: true});
   const messagesButton = wrapper.find('Button').get(2);
@@ -123,10 +123,10 @@ it('should click messages and succeed', async () => {
   expect.assertions(2);
   expect(messagesButton.props.title).toBe('Messages');
   const messages = wrapper.state().context;
-  expect(messages).toEqual([{ foo: 'foo', bar: 'bar' }]);
+  expect(messages).toEqual(JSON.stringify([{ foo: 'foo', bar: 'bar' }], null, 4));
 });
 
-it('should click messages and fail API call', async () => {
+it('should click messages and produce a console warning when API is called', async () => {
   const wrapper = shallow(<App />);
   wrapper.setState({authenticated: true});
   const messagesButton = wrapper.find('Button').get(2);
