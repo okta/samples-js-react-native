@@ -48,90 +48,95 @@ global.console = {
     return 'error';
   })
 }
+describe('app setup', () => {
+  it('should render without crashing', () => {
+    const rendered = renderer.create(<App />).toJSON();
+    expect.assertions(1);
+    expect(rendered).toBeTruthy();
+  });
 
-it('renders without crashing', () => {
-  const rendered = renderer.create(<App />).toJSON();
-  expect.assertions(1);
-  expect(rendered).toBeTruthy();
+  it('should render correctly', () => {
+    const rendered = renderer.create(<App />).toJSON();
+    expect.assertions(1);
+    expect(rendered).toMatchSnapshot();
+  });
+
+  it('should initialize with default state', () => {
+    const wrapper = shallow(<App />);
+    expect.assertions(2);
+    expect(wrapper.state().authenticated).toBe(false);
+    expect(wrapper.state().context).toBe(null);
+  });
+})
+
+describe('when authenticated', () => {
+  it('should update the textview after the login button is pressed', async () => {
+    const wrapper = shallow(<App />);
+    const loginButton = wrapper.find('Button').get(0);
+    expect.assertions(2);
+    expect(loginButton.props.title).toBe('Login');
+    await loginButton.props.onPress();
+    expect(wrapper.state().context).toBe('Logged in!');
+  });
+
+  it('should update the textview after the logout button is pressed', async () => {
+    const wrapper = shallow(<App />);
+    wrapper.setState({authenticated: true});
+    const logoutButton = wrapper.find('Button').get(0);
+    expect.assertions(2);
+    expect(logoutButton.props.title).toBe('Logout');
+    await logoutButton.props.onPress();
+    expect(wrapper.state().context).toBe('');
+  });
+
+  it('should return user profile information' , async () => {
+    const wrapper = shallow(<App />);
+    wrapper.setState({authenticated: true});
+    const profileButton = wrapper.find('Button').get(1);
+    await profileButton.props.onPress();
+    expect.assertions(2);
+    expect(profileButton.props.title).toBe('Profile');
+    expect(wrapper.state().context).toContain('User Profile');
+  });
+
+  it('should return messages', async () => {
+    const wrapper = shallow(<App />);
+    wrapper.setState({authenticated: true});
+    const messagesButton = wrapper.find('Button').get(2);
+    await messagesButton.props.onPress();
+    expect.assertions(2);
+    expect(messagesButton.props.title).toBe('Messages');
+    const messages = wrapper.state().context;
+    expect(messages).toEqual(JSON.stringify([{ foo: 'foo', bar: 'bar' }], null, 4));
+  });
 });
 
-it('renders correctly', () => {
-  const rendered = renderer.create(<App />).toJSON();
-  expect.assertions(1);
-  expect(rendered).toMatchSnapshot();
-});
+describe('when not authenticated', () => {
+  it('should fail when attempting to access profile information', async () => {
+    const wrapper = shallow(<App />);
+    const profileButton = wrapper.find('Button').get(1);
+    profileButton.props.onPress();
+    expect.assertions(2);
+    expect(profileButton.props.title).toBe('Profile');
+    expect(wrapper.state().context).toBe('User has not logged in.');
+  });
 
-it('should initialize with default state', () => {
-  const wrapper = shallow(<App />);
-  expect.assertions(2);
-  expect(wrapper.state().authenticated).toBe(false);
-  expect(wrapper.state().context).toBe(null);
-});
+  it('should fail when attempted to access messages', async () => {
+    const wrapper = shallow(<App />);
+    const messagesButton = wrapper.find('Button').get(2);
+    await messagesButton.props.onPress();
+    expect.assertions(2);
+    expect(messagesButton.props.title).toBe('Messages');
+    expect(wrapper.state().context).toBe('User has not logged in.');
+  });
 
-it('should update the textview after the login button is pressed', async () => {
-  const wrapper = shallow(<App />);
-  const loginButton = wrapper.find('Button').get(0);
-  expect.assertions(2);
-  expect(loginButton.props.title).toBe('Login');
-  await loginButton.props.onPress();
-  expect(wrapper.state().context).toBe('Logged in!');
-});
-
-it('should update the textview after the logout button is pressed', async () => {
-  const wrapper = shallow(<App />);
-  wrapper.setState({authenticated: true});
-  const logoutButton = wrapper.find('Button').get(0);
-  expect.assertions(2);
-  expect(logoutButton.props.title).toBe('Logout');
-  await logoutButton.props.onPress();
-  expect(wrapper.state().context).toBe('');
-});
-
-it('should click profile and fail when the user is not authenticated', async () => {
-  const wrapper = shallow(<App />);
-  const profileButton = wrapper.find('Button').get(1);
-  profileButton.props.onPress();
-  expect.assertions(2);
-  expect(profileButton.props.title).toBe('Profile');
-  expect(wrapper.state().context).toBe('User has not logged in.');
-});
-
-it('should click profile and succeed when the user is authenticated' , async () => {
-  const wrapper = shallow(<App />);
-  wrapper.setState({authenticated: true});
-  const profileButton = wrapper.find('Button').get(1);
-  await profileButton.props.onPress();
-  expect.assertions(2);
-  expect(profileButton.props.title).toBe('Profile');
-  expect(wrapper.state().context).toContain('User Profile');
-});
-
-it('should click messages and fail when the user is not authenticated', async () => {
-  const wrapper = shallow(<App />);
-  const messagesButton = wrapper.find('Button').get(2);
-  await messagesButton.props.onPress();
-  expect.assertions(2);
-  expect(messagesButton.props.title).toBe('Messages');
-  expect(wrapper.state().context).toBe('User has not logged in.');
-});
-
-it('should click messages and succeed when the user is authenticated', async () => {
-  const wrapper = shallow(<App />);
-  wrapper.setState({authenticated: true});
-  const messagesButton = wrapper.find('Button').get(2);
-  await messagesButton.props.onPress();
-  expect.assertions(2);
-  expect(messagesButton.props.title).toBe('Messages');
-  const messages = wrapper.state().context;
-  expect(messages).toEqual(JSON.stringify([{ foo: 'foo', bar: 'bar' }], null, 4));
-});
-
-it('should click messages and produce a console warning when API is called', async () => {
-  const wrapper = shallow(<App />);
-  wrapper.setState({authenticated: true});
-  const messagesButton = wrapper.find('Button').get(2);
-  await messagesButton.props.onPress();
-  expect.assertions(2);
-  expect(messagesButton.props.title).toBe('Messages');
-  expect(console.warn).toHaveBeenCalled();
+  it('should fail with a console warning when API cannot be reached', async () => {
+    const wrapper = shallow(<App />);
+    wrapper.setState({authenticated: true});
+    const messagesButton = wrapper.find('Button').get(2);
+    await messagesButton.props.onPress();
+    expect.assertions(2);
+    expect(messagesButton.props.title).toBe('Messages');
+    expect(console.warn).toHaveBeenCalled();
+  });
 });
