@@ -2,12 +2,12 @@
   "name": "okta-hosted-login",
   "version": "0.1.0",
   "private": true,
-  "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
+  "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "start": "react-native-scripts start",
-    "eject": "react-native-scripts eject",
-    "android": "react-native-scripts android",
-    "ios": "react-native-scripts ios",
+    "start": "expo start",
+    "eject": "expo eject",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
     "test": "jest --coverage App.test.js",
     "postinstall": "node post-install.js"
   },
@@ -23,19 +23,18 @@
     ]
   },
   "dependencies": {
-    "@okta/okta-react-native": "^0.1.0",
-    "expo": "^26.0.0",
-    "react": "16.3.0-alpha.1",
-    "react-native": "0.54.0"
+    "@okta/okta-react-native": "^0.1.2",
+    "expo": "^33.0.0",
+    "react": "16.8.6",
+    "react-native": "0.59.0"
   },
   "devDependencies": {
     "babel-preset-react-native": "^4.0.0",
-    "colors": "^1.2.1",
-    "enzyme": "^3.3.0",
-    "enzyme-adapter-react-16": "^1.1.1",
-    "jest-expo": "26.0.0",
-    "react-dom": "^16.3.1",
-    "react-native-scripts": "1.13.1",
-    "react-test-renderer": "16.3.0-alpha.1"
+    "colors": "^1.3.3",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
+    "jest-expo": "33.0.0",
+    "react-dom": "^16.8.6",
+    "react-test-renderer": "16.8.6"
   }
 }
