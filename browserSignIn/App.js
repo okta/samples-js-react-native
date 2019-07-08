@@ -13,15 +13,17 @@
 import React from 'react';
 
 import { Button, StyleSheet, Text, View } from 'react-native';
-import TokenClient from '@okta/okta-react-native';
-// import config from './.samples.config';
-
-const tokenClient = new TokenClient({
-  issuer: 'https://dev-403914.okta.com/oauth2/default',
-  client_id: '0oamm83gkANhgFvga356',
-  scope: 'openid profile email',
-  redirect_uri: 'exp://localhost:19000/'
-});
+import { 
+  createConfig, 
+  signIn, 
+  signOut, 
+  getAccessToken, 
+  isAuthenticated,
+  getUser,
+  getUserFromIdToken,
+	EventEmitter
+ } from '@okta/okta-react-native';
+ import configFile from './samples.config';
 
 export default class App extends React.Component {
   constructor() {
@@ -31,60 +33,88 @@ export default class App extends React.Component {
       context: null
     }
     this.checkAuthentication = this.checkAuthentication.bind(this);
-    this.login = this.login.bind(this);
-    this.logout = this.logout.bind(this);
-    this.getUser = this.getUser.bind(this);
     this.getMessages = this.getMessages.bind(this);
-  }
+	}
+	
+	async componentDidMount() {
+		let that = this;
+		EventEmitter.addListener('signInSuccess', function(e: Event) {
+			that.setState({ authenticated: true });
+			that.setContext('Logged in!');
+		});
+		EventEmitter.addListener('signOutSuccess', function(e: Event) {
+			that.setState({ authenticated: false });
+			that.setContext('Logged out!');
+		});
+		EventEmitter.addListener('onError', function(e: Event) {
+			console.log(e);
+		});
+		EventEmitter.addListener('onCancelled', function(e: Event) {
+			console.log(e);
+		});
+		await createConfig({
+      clientId: configFile.oidc.clientId,
+      redirectUri: configFile.oidc.redirectUri,
+      endSessionRedirectUri: configFile.oidc.endSessionRedirectUri,
+      discoveryUri: configFile.oidc.discoveryUri,
+			scopes: configFile.oidc.scopes,
+			requireHardwareBackedKeyStore: configFile.oidc.requireHardwareBackedKeyStore
+		});
+		this.checkAuthentication();
+	}
+
+	componentWillUnmount() {
+		EventEmitter.removeAllListeners();
+	}
 
   async componentDidUpdate() {
     this.checkAuthentication();
   }
 
-  async componentDidMount() {
-    await this.checkAuthentication();
-  }
-
   async checkAuthentication() {
-    const authenticated = await tokenClient.isAuthenticated();
-    if (authenticated !== this.state.authenticated) {
-      this.setState({ authenticated: authenticated });
+    const result = await isAuthenticated();
+    if (result.authenticated !== this.state.authenticated) {
+      this.setState({ authenticated: result.authenticated });
     }
   }
 
   async login() {
-    await tokenClient.signInWithRedirect();
-    this.setContext('Logged in!');
+  	signIn();
   }
 
   async logout() {
-    await tokenClient.signOut();
-    this.setState({context: '' });
+    signOut();
   }
 
-  async getUser() {
-    if (!this.state.authenticated) {
-      this.setContext('User has not logged in.');
-      return;
-    }
-    const user = await tokenClient.getUser();
+  async getUserIdToken() {
+    let user = await getUserFromIdToken();
     this.setContext(`
       User Profile:
       ${JSON.stringify(user, null, 4)}
     `);
-  }
+	}
+	
+	async getMyUser() {
+		let user = await getUser();
+    this.setContext(`
+      User Profile:
+      ${user}
+    `);
+	}
 
   async getMessages() {
     if (!this.state.authenticated) {
       this.setContext('User has not logged in.');
       return;
-    }
+		}
+		
+		let accessTokenResponse = await getAccessToken();
 
-    await fetch('http://localhost:8000/api/messages', {  
+    await fetch(configFile.resourceServer.messagesUrl, {  
       method: 'GET',
       headers: {
-        Authorization: `Bearer ${await tokenClient.getAccessToken()}`,
-        'Content-Type': 'application/json',
+				'Content-Type': 'application/json',
+        'Authorization': `Bearer ${accessTokenResponse.access_token}`,
       }
     })
     .then(response => response.json())
@@ -109,7 +139,34 @@ export default class App extends React.Component {
     this.setState({
       context: message
     });
-  }
+	}
+	
+	renderButtons() {
+		if (this.state.authenticated) {
+			return (
+			<View style={styles.buttonContainer}>
+					<View style={styles.button}>
+            <Button
+              onPress={ async () => { this.getUserIdToken() } }
+              title="Get User From Id Token"
+            />
+          </View>
+					<View style={styles.button}>
+            <Button
+              onPress={ async () => { this.getMyUser() } }
+              title="Get User From Request"
+            />
+          </View>
+					<View style={styles.button}>
+            <Button
+              onPress={ async () => { this.getMessages() } }
+              title="Messages"
+            />
+          </View>
+			</View>
+			);
+		}
+	}
 
   render() {
     return (
@@ -127,20 +184,7 @@ export default class App extends React.Component {
             />
           }
         </View>
-        <View style={styles.buttonContainer}>
-          <View style={styles.button}>
-            <Button
-              onPress={ async () => { this.getUser() } }
-              title="Profile"
-            />
-          </View>
-          <View style={styles.button}>
-            <Button
-              onPress={ async () => { this.getMessages() } }
-              title="Messages"
-            />
-          </View>
-        </View>
+        {this.renderButtons()}
         <Text>{this.state.context}</Text>
       </View>
     );
@@ -149,25 +193,28 @@ export default class App extends React.Component {
 
 const styles = StyleSheet.create({
   buttonContainer: {
-    flexDirection: 'row',
+    flexDirection: 'column',
     justifyContent: 'space-between',
   },
   button: {
-    borderRadius: 15,
+		borderRadius: 40,
     width: '40%',
     height: 40,
     marginTop: 10,
-    marginBottom: 10
+		marginBottom: 10,
+		marginHorizontal: 10
   },
   container: {
     flex: 1,
     flexDirection: 'column',
     backgroundColor: '#FFFFFF',
     alignItems: 'center',
-    paddingTop: 50,
+    paddingTop: 70,
   },
   title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
+    fontSize: 30,
+		fontWeight: 'bold',
+		color: '#0066cc',
+		fontFamily: 'Roboto'
+	}
 });
