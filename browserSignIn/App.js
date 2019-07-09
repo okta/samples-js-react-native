@@ -21,7 +21,7 @@ import {
   isAuthenticated,
   getUser,
   getUserFromIdToken,
-	EventEmitter
+  EventEmitter
  } from '@okta/okta-react-native';
  import configFile from './samples.config';
 
@@ -34,38 +34,38 @@ export default class App extends React.Component {
     }
     this.checkAuthentication = this.checkAuthentication.bind(this);
     this.getMessages = this.getMessages.bind(this);
-	}
-	
-	async componentDidMount() {
-		let that = this;
-		EventEmitter.addListener('signInSuccess', function(e: Event) {
-			that.setState({ authenticated: true });
-			that.setContext('Logged in!');
-		});
-		EventEmitter.addListener('signOutSuccess', function(e: Event) {
-			that.setState({ authenticated: false });
-			that.setContext('Logged out!');
-		});
-		EventEmitter.addListener('onError', function(e: Event) {
-			console.log(e);
-		});
-		EventEmitter.addListener('onCancelled', function(e: Event) {
-			console.log(e);
-		});
-		await createConfig({
+  }
+  
+  async componentDidMount() {
+    let that = this;
+    EventEmitter.addListener('signInSuccess', function(e: Event) {
+      that.setState({ authenticated: true });
+      that.setContext('Logged in!');
+    });
+    EventEmitter.addListener('signOutSuccess', function(e: Event) {
+      that.setState({ authenticated: false });
+      that.setContext('Logged out!');
+    });
+    EventEmitter.addListener('onError', function(e: Event) {
+      console.log(e);
+    });
+    EventEmitter.addListener('onCancelled', function(e: Event) {
+      console.warn(e);
+    });
+    await createConfig({
       clientId: configFile.oidc.clientId,
       redirectUri: configFile.oidc.redirectUri,
       endSessionRedirectUri: configFile.oidc.endSessionRedirectUri,
       discoveryUri: configFile.oidc.discoveryUri,
-			scopes: configFile.oidc.scopes,
-			requireHardwareBackedKeyStore: configFile.oidc.requireHardwareBackedKeyStore
-		});
-		this.checkAuthentication();
-	}
-
-	componentWillUnmount() {
-		EventEmitter.removeAllListeners();
-	}
+      scopes: configFile.oidc.scopes,
+      requireHardwareBackedKeyStore: configFile.oidc.requireHardwareBackedKeyStore
+    });
+    this.checkAuthentication();
+  }
+  
+  componentWillUnmount() {
+    EventEmitter.removeAllListeners();
+  }
 
   async componentDidUpdate() {
     this.checkAuthentication();
@@ -79,7 +79,7 @@ export default class App extends React.Component {
   }
 
   async login() {
-  	signIn();
+    signIn();
   }
 
   async logout() {
@@ -92,28 +92,28 @@ export default class App extends React.Component {
       User Profile:
       ${JSON.stringify(user, null, 4)}
     `);
-	}
-	
-	async getMyUser() {
-		let user = await getUser();
+  }
+  
+  async getMyUser() {
+    let user = await getUser();
     this.setContext(`
       User Profile:
       ${user}
     `);
-	}
+  }
 
   async getMessages() {
     if (!this.state.authenticated) {
       this.setContext('User has not logged in.');
       return;
-		}
-		
-		let accessTokenResponse = await getAccessToken();
+    }
+    
+    let accessTokenResponse = await getAccessToken();
 
     await fetch(configFile.resourceServer.messagesUrl, {  
       method: 'GET',
       headers: {
-				'Content-Type': 'application/json',
+        'Content-Type': 'application/json',
         'Authorization': `Bearer ${accessTokenResponse.access_token}`,
       }
     })
@@ -139,34 +139,34 @@ export default class App extends React.Component {
     this.setState({
       context: message
     });
-	}
-	
-	renderButtons() {
-		if (this.state.authenticated) {
-			return (
-			<View style={styles.buttonContainer}>
-					<View style={styles.button}>
-            <Button
-              onPress={ async () => { this.getUserIdToken() } }
-              title="Get User From Id Token"
-            />
-          </View>
-					<View style={styles.button}>
-            <Button
-              onPress={ async () => { this.getMyUser() } }
-              title="Get User From Request"
-            />
-          </View>
-					<View style={styles.button}>
-            <Button
-              onPress={ async () => { this.getMessages() } }
-              title="Messages"
-            />
-          </View>
-			</View>
-			);
-		}
-	}
+  }
+  
+  renderButtons() {
+    if (this.state.authenticated) {
+      return (
+      <View style={styles.buttonContainer}>
+        <View style={styles.button}>
+          <Button
+            onPress={ async () => { this.getUserIdToken() } }
+            title="Get User From Id Token"
+          />
+        </View>
+        <View style={styles.button}>
+          <Button
+            onPress={ async () => { this.getMyUser() } }
+            title="Get User From Request"
+          />
+        </View>
+        <View style={styles.button}>
+          <Button
+            onPress={ async () => { this.getMessages() } }
+            title="Messages"
+          />
+        </View>
+      </View>
+      );
+    }
+  }
 
   render() {
     return (
@@ -195,14 +195,15 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: 'column',
     justifyContent: 'space-between',
+    marginTop: 40
   },
   button: {
-		borderRadius: 40,
-    width: '40%',
+    borderRadius: 40,
+    width: 200,
     height: 40,
     marginTop: 10,
-		marginBottom: 10,
-		marginHorizontal: 10
+    marginBottom: 10,
+    marginHorizontal: 10
   },
   container: {
     flex: 1,
@@ -213,8 +214,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 30,
-		fontWeight: 'bold',
-		color: '#0066cc',
-		fontFamily: 'Roboto'
-	}
+    fontWeight: 'bold',
+    color: '#0066cc'
+  }
 });
