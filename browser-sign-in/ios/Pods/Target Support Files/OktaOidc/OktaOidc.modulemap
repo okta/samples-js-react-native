@@ -1,0 +1,6 @@
+framework module OktaOidc {
+  umbrella header "OktaOidc-umbrella.h"
+
+  export *
+  module * { export * }
+}

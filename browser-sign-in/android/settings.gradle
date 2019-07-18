@@ -1,0 +1,5 @@
+rootProject.name = 'browserSignIn'
+include ':@okta_okta-react-native'
+project(':@okta_okta-react-native').projectDir = new File(rootProject.projectDir, '../node_modules/@okta/okta-react-native/android')
+
+include ':app'
