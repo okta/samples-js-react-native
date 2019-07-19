@@ -8,7 +8,4 @@ target 'browserSignIn' do
 	# Pods for browserSignIn
 	pod 'OktaOidc', '~> 3.0'
 
-
-  pod 'OktaSdkBridgeReactNative', :path => '../node_modules/@okta/okta-react-native'
-
 end
