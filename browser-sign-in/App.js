@@ -47,7 +47,7 @@ export default class App extends React.Component {
       that.setContext('Logged out!');
     });
     EventEmitter.addListener('onError', function(e: Event) {
-      console.log(e);
+      console.error(e);
     });
     EventEmitter.addListener('onCancelled', function(e: Event) {
       console.warn(e);
