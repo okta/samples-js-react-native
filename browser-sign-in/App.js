@@ -48,6 +48,7 @@ export default class App extends React.Component {
     });
     EventEmitter.addListener('onError', function(e: Event) {
       console.error(e);
+      that.setContext(e);
     });
     EventEmitter.addListener('onCancelled', function(e: Event) {
       console.warn(e);
