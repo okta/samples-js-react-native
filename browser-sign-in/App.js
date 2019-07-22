@@ -132,7 +132,7 @@ export default class App extends React.Component {
         json = await userInfo.json();
         this.setContext(JSON.stringify(json));
       } catch(e) {
-        const message = 'Failed to fetch messages. Make sure you have logged in and access token is valid. Status Code: ' + e;
+        const message = 'Failed to fetch user. Make sure you have logged in and access token is valid. Status Code: ' + e;
         console.warn(message);
         this.setContext(message);
       }
