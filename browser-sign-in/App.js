@@ -21,7 +21,7 @@ import {
   isAuthenticated,
   getUser,
   getUserFromIdToken,
-  EventEmitter
+  EventEmitter,
  } from '@okta/okta-react-native';
  import configFile from './samples.config';
 
@@ -33,7 +33,7 @@ export default class App extends React.Component {
       context: null
     }
     this.checkAuthentication = this.checkAuthentication.bind(this);
-    this.getMessages = this.getMessages.bind(this);
+    this.getMyUserThroughAccessToken = this.getMyUserThroughAccessToken.bind(this);
   }
   
   async componentDidMount() {
@@ -47,8 +47,8 @@ export default class App extends React.Component {
       that.setContext('Logged out!');
     });
     EventEmitter.addListener('onError', function(e: Event) {
-      console.error(e);
-      that.setContext(e);
+      console.warn(e);
+      that.setContext(e.error_message);
     });
     EventEmitter.addListener('onCancelled', function(e: Event) {
       console.warn(e);
@@ -103,37 +103,42 @@ export default class App extends React.Component {
     `);
   }
 
-  async getMessages() {
-    if (!this.state.authenticated) {
-      this.setContext('User has not logged in.');
-      return;
-    }
+  async getMyUserThroughAccessToken() {
+    const accessToken = await getAccessToken();
+
+    let headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    };
     
-    let accessTokenResponse = await getAccessToken();
-
-    await fetch(configFile.resourceServer.messagesUrl, {  
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${accessTokenResponse.access_token}`,
+    if (accessToken) {
+      try {
+        const wellKnown = await fetch(`${configFile.oidc.discoveryUri}/.well-known/openid-configuration`, {
+          method: 'GET',
+          headers: headers,
+        });
+        let json = await wellKnown.json();
+        headers['Authorization'] = `Bearer ${accessToken.access_token}`;
+        const userInfo = await fetch(`${json.userinfo_endpoint}`, {
+          method: 'GET',
+          headers: headers
+        });
+        json = await userInfo.json();
+        this.setContext(JSON.stringify(json));
+      } catch(e) {
+        if (e.name === 'ApiError' && !e.errorCode) {
+          console.warn(err);
+          const error = `
+          Failed to fetch messages. Please verify the following:
+          - You've downloaded one of our resource server examples, and it's running on port 8000.
+          - Your resource server example is using the same Okta authorization server (issuer) that you have configured this application to use.
+          `;
+          console.warn(error);
+          this.setContext('Failed to fetch messages.');
+        }
+        throw e;
       }
-    })
-    .then(response => response.json())
-    .then(json => {
-      this.setContext(JSON.stringify(json.messages, null, 4));
-    })
-    .catch((err) => {
-      console.warn(err);
-      const error = `
-      Failed to fetch messages. Please verify the following:
-
-      - You've downloaded one of our resource server examples, and it's running on port 8000.
-
-      - Your resource server example is using the same Okta authorization server (issuer) that you have configured this application to use.
-      `
-      console.warn(error);
-      this.setContext('Failed to fetch messages.');
-    });
+    }
   }
 
   setContext = (message) => {
@@ -160,8 +165,8 @@ export default class App extends React.Component {
         </View>
         <View style={styles.button}>
           <Button
-            onPress={ async () => { this.getMessages() } }
-            title="Messages"
+            onPress={ async () => { this.getMyUserThroughAccessToken() } }
+            title="Get User From Access Token"
           />
         </View>
       </View>
