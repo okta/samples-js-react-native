@@ -121,7 +121,7 @@ export default class App extends React.Component {
           throw Error(wellKnown.status);
         }
         let json = await wellKnown.json();
-        //headers['Authorization'] = `Bearer ${accessToken.access_token}`;
+        headers['Authorization'] = `Bearer ${accessToken.access_token}`;
         const userInfo = await fetch(`${json.userinfo_endpoint}`, {
           method: 'GET',
           headers: headers
