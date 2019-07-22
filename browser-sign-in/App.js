@@ -117,27 +117,29 @@ export default class App extends React.Component {
           method: 'GET',
           headers: headers,
         });
+        if (!wellKnown.ok) {
+          throw Error(wellKnown.status);
+        }
         let json = await wellKnown.json();
-        headers['Authorization'] = `Bearer ${accessToken.access_token}`;
+        //headers['Authorization'] = `Bearer ${accessToken.access_token}`;
         const userInfo = await fetch(`${json.userinfo_endpoint}`, {
           method: 'GET',
           headers: headers
         });
+        if (!userInfo.ok) {
+          throw Error(userInfo.status);
+        }
         json = await userInfo.json();
         this.setContext(JSON.stringify(json));
       } catch(e) {
-        if (e.name === 'ApiError' && !e.errorCode) {
-          console.warn(err);
-          const error = `
-          Failed to fetch messages. Please verify the following:
-          - You've downloaded one of our resource server examples, and it's running on port 8000.
-          - Your resource server example is using the same Okta authorization server (issuer) that you have configured this application to use.
-          `;
-          console.warn(error);
-          this.setContext('Failed to fetch messages.');
-        }
-        throw e;
+        const message = 'Failed to fetch messages. Make sure you have logged in and access token is valid. Status Code: ' + e;
+        console.warn(message);
+        this.setContext(message);
       }
+    } else {
+      const message = 'There is no access token available!';
+      console.warn(message);
+      this.setContext(message);
     }
   }
 
