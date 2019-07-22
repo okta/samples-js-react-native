@@ -13,15 +13,10 @@
 import React from 'react';
 
 import { Button, StyleSheet, Text, View } from 'react-native';
-import TokenClient from '@okta/okta-react-native';
+import {TokenClient} from '@okta/okta-react-native';
 // import config from './.samples.config';
 
-const tokenClient = new TokenClient({
-  issuer: 'https://dev-403914.okta.com/oauth2/default',
-  client_id: '0oamm83gkANhgFvga356',
-  scope: 'openid profile email',
-  redirect_uri: 'exp://localhost:19000/'
-});
+const tokenClient = new TokenClient();
 
 export default class App extends React.Component {
   constructor() {
