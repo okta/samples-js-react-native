@@ -57,10 +57,7 @@ export default {
     endSessionRedirectUri: 'com.sampleapplication:/',
     scope: ["openid", "profile", "offline_access"],
     requireHardwareBackedKeyStore: false
-  },
-  resourceServer: {
-    messagesUrl: 'http://{yourIpAddress}:8000/api/messages',
-  },
+  }
 };
 ```
 
@@ -84,18 +81,14 @@ If you see a home page that prompts you to login, then things are working!  Clic
 
 You can login with the same account that you created when signing up for your Developer Org, or you can use a known username and password from your Okta Directory.
 
-## Integrating The Resource Server
+## Methods
+In this sample application, once the user logs in, there will be three methods that each shows a different way to get user info. 
 
-If you were able to successfully login in the previous section you can continue with the resource server example.  Please download and run one of these sample applications in another terminal:
+### Get User From ID Token ###
+This method calls `getUserFromIdToken()` to retrieve user info from decoding the ID Token claims.
 
-* [Node/Express Resource Server Example](https://github.com/okta/samples-nodejs-express-4/tree/master/resource-server)
-* [Java/Spring MVC Resource Server Example](https://github.com/okta/samples-java-spring-mvc/tree/master/resource-server)
+### Get User From Request ###
+This method calls `getUser()` to retrieve user info by passing in the access token, and making a request to the user info endpoint. It is done on the native modules. 
 
-Once you have the resource server running (it will run on port 8000) you can select the `Messages` button within the React Native application to see the authentication flow.  The React Native application will use its stored access token to authenticate itself with the resource server, you will see this as the `Authorization: Bearer <access_token>` header on the request if you inspect the network traffic.
-
-> **Note:** You may need to proxy the `localhost:8080` instance through a tunnel like [ngrok](https://ngrok.com/) in order for it to be used on an emulator.
-
-[Create React Native App]: https://github.com/react-community/create-react-native-app
-[Auth Code Flow + PKCE]: https://developer.okta.com/authentication-guide/implementing-authentication/auth-code-pkce
-[Okta React Native Library]: https://github.com/okta/okta-oidc-js/tree/master/packages/okta-react-native
-[OIDC Native App Setup Instructions]: https://developer.okta.com/authentication-guide/implementing-authentication/auth-code-pkce#1-setting-up-your-application
+### Get User From Access Token ###
+This method shows you how to use the access token from `getAccessToken()` to exchange user information. It shows how to make a fetch request to the user info endpoint with access token as the header.
