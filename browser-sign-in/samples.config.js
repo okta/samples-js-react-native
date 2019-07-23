@@ -18,8 +18,5 @@ export default {
     discoveryUri: 'https://{youOktaOrg}.okta.com/',
     scopes: ["openid", "profile", "offline_access"],
     requireHardwareBackedKeyStore: false,
-  },
-  resourceServer: {
-    messagesUrl: 'http://{ipAddress}:8000/api/messages',
   }
 };
