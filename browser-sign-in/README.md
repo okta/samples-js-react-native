@@ -7,8 +7,12 @@ This example shows you how to use the [Okta React Native Library](https://github
 Before running this sample, you will need the following:
 
 * An Okta Developer Account, you can sign up for one at <https://developer.okta.com/signup/>.
-* An Okta Application, configured for Native mode. This is done from the Okta Developer Console and you can find [OIDC Native App Setup Instructions][].  When following the wizard, update the following values:
+* An Okta Application, configured for Native mode. This is done from the Okta Developer Console. After login, from the Admin dashboard, navigate to `Applications → Add Application`. Choose Native as the platform. Populate your new Native OpenID Connect application with values similar to:
+  * **Application Name** 
+    * Native OpenId Connect App (must be unique)
   * **Login redirect URIs**
+    * `com.sampleapplication:/`
+  * **End Session URIs**
     * `com.sampleapplication:/`
   * **Grant type allowed**
     * Authorization Code
