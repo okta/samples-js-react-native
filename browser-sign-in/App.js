@@ -182,11 +182,11 @@ export default class App extends React.Component {
         <Text style={styles.title}>Okta + React Native</Text>
         <View style={styles.button}>
           {this.state.authenticated ?
-            <Button
+            <Button testID='logoutButton'
               onPress={ async () => { this.logout() } }
               title="Logout"
             /> :
-            <Button
+            <Button testID='loginButton'
               onPress={ async () => { this.login() } }
               title="Login"
             />
