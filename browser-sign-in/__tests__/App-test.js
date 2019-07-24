@@ -161,6 +161,7 @@ describe('when authenticated', () => {
   it('should return user profile information from id token' , async () => {
     const mockGetIdToken = require('react-native').NativeModules.OktaSdkBridge.getIdToken;
     mockGetIdToken.mockImplementationOnce(() => {
+      // id_token returns { a: 'b' }
       return {'id_token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhIjoiYiJ9.jiMyrsmD8AoHWeQgmxZ5yq8z0lXS67_QGs52AzC8Ru8'};
     });
     const wrapper = shallow(<App />);
