@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest"
+    "test": "jest __tests__/App-test.js"
   },
   "dependencies": {
     "@okta/okta-react-native": "^1.0.1",
@@ -15,13 +15,33 @@
     "@babel/core": "^7.5.0",
     "@babel/runtime": "^7.5.0",
     "babel-jest": "^24.8.0",
+    "detox": "^13.2.0",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
     "jest": "^24.8.0",
     "metro-react-native-babel-preset": "^0.55.0",
+    "react-dom": "^16.8.6",
     "react-test-renderer": "16.8.3"
   },
   "jest": {
-    "preset": "react-native"
+    "preset": "react-native",
+    "automock": false,
+    "transformIgnorePatterns": [
+      "node_modules/(?!@okta|react-native)"
+    ],
+    "setupFiles": [
+      "./setupJest.js"
+    ]
+  },
+  "detox": {
+    "configurations": {
+      "ios.sim.debug": {
+        "binaryPath": "ios/build/Build/Products/Debug-iphonesimulator/browserSignIn.app",
+        "build": "xcodebuild -workspace ios/browserSignIn.xcworkspace -scheme browserSignIn -configuration Debug -sdk iphonesimulator -derivedDataPath ios/build",
+        "type": "ios.simulator",
+        "name": "iPhone X"
+      }
+    },
+    "test-runner": "jest"
   }
 }
