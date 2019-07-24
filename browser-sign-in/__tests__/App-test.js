@@ -134,7 +134,7 @@ describe('app setup', () => {
   });
 });
 
-describe('when authenticated', () => {
+describe('authentication flow', () => {
   it('should detect when the user has logged in', async () => {
     const wrapper = shallow(<App />);
     const loginButton = wrapper.find('Button').get(0);
