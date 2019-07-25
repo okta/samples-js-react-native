@@ -14,6 +14,7 @@ import React from 'react';
 import App from '../App';
 import { shallow, render } from 'enzyme';
 import renderer from 'react-test-renderer';
+import { waitForState } from 'enzyme-async-helpers';
 
 import { NativeModules, NativeEventEmitter } from 'react-native';
 
@@ -161,11 +162,10 @@ describe('authentication flow', () => {
     wrapper.setState({authenticated: true});
     const profileButton = wrapper.find('Button').get(1);
     await profileButton.props.onPress();
-    setTimeout( function() { 
-      expect.assertions(2);
-      expect(profileButton.props.title).toBe('Get User From Id Token');
-      expect(wrapper.state().context).toContain('User Profile');
-    }, 100);
+    await waitForState(wrapper, state => state.context !== null);
+    expect.assertions(2);
+    expect(profileButton.props.title).toBe('Get User From Id Token');
+    expect(wrapper.state().context).toContain('User Profile');
   });
 
   it('should return user profile information from getUser method' , async () => {
@@ -173,6 +173,7 @@ describe('authentication flow', () => {
     wrapper.setState({authenticated: true});
     const profileButton = wrapper.find('Button').get(2);
     await profileButton.props.onPress();
+    await waitForState(wrapper, state => state.context !== null);
     expect.assertions(2);
     expect(profileButton.props.title).toBe('Get User From Request');
     expect(wrapper.state().context).toContain('User Profile');
@@ -187,11 +188,10 @@ describe('authentication flow', () => {
     wrapper.setState({authenticated: true});
     const profileButton = wrapper.find('Button').get(3);
     await profileButton.props.onPress();
-    setTimeout( function() { 
-      expect.assertions(2);
-      expect(profileButton.props.title).toBe('Get User From Access Token');
-      expect(wrapper.state().context).toContain('foo');
-    }, 100);
+    await waitForState(wrapper, state => state.context !== null);
+    expect.assertions(2);
+    expect(profileButton.props.title).toBe('Get User From Access Token');
+    expect(wrapper.state().context).toContain('foo');
   });
 });
 
