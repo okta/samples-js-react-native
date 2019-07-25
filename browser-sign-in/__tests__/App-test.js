@@ -74,19 +74,16 @@ global.fetch = jest
 describe('app setup', () => {
   it('should render without crashing', () => {
     const rendered = renderer.create(<App />).toJSON();
-    expect.assertions(1);
     expect(rendered).toBeTruthy();
   });
 
   it('should render correctly', () => {
     const rendered = renderer.create(<App />).toJSON();
-    expect.assertions(1);
     expect(rendered).toMatchSnapshot();
   });
 
   it('should initialize with default state', () => {
     const wrapper = shallow(<App />);
-    expect.assertions(2);
     expect(wrapper.state().authenticated).toBe(false);
     expect(wrapper.state().context).toBe(null);
   });
@@ -94,7 +91,6 @@ describe('app setup', () => {
   it('should render login button if not authenticated', () => {
     const wrapper = shallow(<App />);
     const loginButton = wrapper.find('Button').get(0);
-    expect.assertions(1);
     expect(loginButton.props.title).toBe('Login');
   });
 
@@ -105,7 +101,6 @@ describe('app setup', () => {
     const getUserFromIdButton = wrapper.find('Button').get(1);
     const getUserButton = wrapper.find('Button').get(2);
     const getUserFromTokenButton = wrapper.find('Button').get(3);
-    expect.assertions(4);
     expect(logoutButton.props.title).toBe('Logout');
     expect(getUserFromIdButton.props.title).toBe('Get User From Id Token');
     expect(getUserButton.props.title).toBe('Get User From Request');
@@ -116,7 +111,6 @@ describe('app setup', () => {
     const wrapper = shallow(<App />);
     wrapper.setState({authenticated: true});
     const loginButton = wrapper.find('Button').get(0);
-    expect.assertions(1);
     expect(loginButton.props.title).not.toBe('Login');
   });
 
@@ -126,7 +120,6 @@ describe('app setup', () => {
     const getUserFromIdButton = wrapper.find('Button').get(1);
     const getUserButton = wrapper.find('Button').get(2);
     const getUserFromTokenButton = wrapper.find('Button').get(3);
-    expect.assertions(4);
     expect(logoutButton.props.title).not.toBe('Logout');
     expect(getUserFromIdButton).toBe(undefined);
     expect(getUserButton).toBe(undefined);
