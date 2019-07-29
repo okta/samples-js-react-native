@@ -132,7 +132,6 @@ describe('authentication flow', () => {
   it('should detect when the user has logged in', async () => {
     const wrapper = shallow(<App />);
     const loginButton = wrapper.find('Button').get(0);
-    expect.assertions(3);
     await loginButton.props.onPress();
     expect(loginButton.props.title).toBe('Login');
     nativeEmitter.emit('signInSuccess');
@@ -144,7 +143,6 @@ describe('authentication flow', () => {
     const wrapper = shallow(<App />);
     wrapper.setState({authenticated: true});
     const logoutButton = wrapper.find('Button').get(0);
-    expect.assertions(3);
     await logoutButton.props.onPress();
     expect(logoutButton.props.title).toBe('Logout');
     nativeEmitter.emit('signOutSuccess');
@@ -163,7 +161,6 @@ describe('authentication flow', () => {
     const profileButton = wrapper.find('Button').get(1);
     await profileButton.props.onPress();
     await waitForState(wrapper, state => state.context !== null);
-    expect.assertions(2);
     expect(profileButton.props.title).toBe('Get User From Id Token');
     expect(wrapper.state().context).toContain('User Profile');
   });
@@ -174,7 +171,6 @@ describe('authentication flow', () => {
     const profileButton = wrapper.find('Button').get(2);
     await profileButton.props.onPress();
     await waitForState(wrapper, state => state.context !== null);
-    expect.assertions(2);
     expect(profileButton.props.title).toBe('Get User From Request');
     expect(wrapper.state().context).toContain('User Profile');
   });
@@ -189,7 +185,6 @@ describe('authentication flow', () => {
     const profileButton = wrapper.find('Button').get(3);
     await profileButton.props.onPress();
     await waitForState(wrapper, state => state.context !== null);
-    expect.assertions(2);
     expect(profileButton.props.title).toBe('Get User From Access Token');
     expect(wrapper.state().context).toContain('foo');
   });
