@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2019, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -9,14 +9,14 @@
  *
  * See the License for the specific language governing permissions and limitations under the License.
  */
- 
+
 export default {
   oidc: {
-    clientId: '{clientId}',
-    redirectUri: '{redirectUri}',
-    endSessionRedirectUri: '{endSessionRedirectUri}',
-    discoveryUri: 'https://{youOktaOrg}.okta.com/',
-    scopes: ["openid", "profile", "offline_access"],
+    clientId: '0oa2p7eq7uDmZY4sJ0g7',
+    redirectUri: 'com.okta.example:/callback',
+    endSessionRedirectUri: 'com.okta.example:/logout',
+    discoveryUri: 'https://sdk-test.trexcloud.com',
+    scopes: ['openid', 'profile', 'offline_access'],
     requireHardwareBackedKeyStore: false,
-  }
+  },
 };
