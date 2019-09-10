@@ -9,14 +9,14 @@
  *
  * See the License for the specific language governing permissions and limitations under the License.
  */
-
+ 
 export default {
   oidc: {
-    clientId: '0oa2p7eq7uDmZY4sJ0g7',
-    redirectUri: 'com.okta.example:/callback',
-    endSessionRedirectUri: 'com.okta.example:/logout',
-    discoveryUri: 'https://sdk-test.trexcloud.com',
-    scopes: ['openid', 'profile', 'offline_access'],
+    clientId: '{clientId}',
+    redirectUri: '{redirectUri}',
+    endSessionRedirectUri: '{endSessionRedirectUri}',
+    discoveryUri: 'https://{youOktaOrg}.okta.com/',
+    scopes: ["openid", "profile", "offline_access"],
     requireHardwareBackedKeyStore: false,
-  },
+  }
 };
