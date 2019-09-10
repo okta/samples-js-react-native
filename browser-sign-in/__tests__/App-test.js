@@ -43,6 +43,16 @@ jest.mock('NativeModules', () => {
   }
 });
 
+jest
+  .mock(
+    '../node_modules/react-native/Libraries/Components/StatusBar/StatusBar',
+    () => 'StatusBar',
+  )
+  .mock(
+    '../node_modules/react-native/Libraries/Components/ScrollView/ScrollView',
+    () => 'ScrollView',
+  );
+
 global.fetch = jest
   .fn()
   .mockImplementation(() => {
