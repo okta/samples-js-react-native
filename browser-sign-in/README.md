@@ -32,9 +32,6 @@ Then install dependencies:
 
 ```bash
 npm install
-
-cd ios
-pod install
 ```
 
 After that, you will need to link the native modules. If you're still in the ios folder, return to the root folder.
@@ -43,7 +40,12 @@ After that, you will need to link the native modules. If you're still in the ios
 react-native link @okta/okta-react-native
 ```
 
-If linking did not work properly, you will need to manually link according to the instructions [here](https://github.com/okta/okta-oidc-js/tree/master/packages/okta-react-native#manual-installation-optional).
+Install dependecies for iOS.
+
+```ruby
+cd ios
+pod install
+```
 
 Now you need to gather the following information from the Okta Developer Console:
 
