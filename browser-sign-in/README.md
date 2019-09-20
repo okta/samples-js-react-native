@@ -12,7 +12,7 @@ Before running this sample, you will need the following:
     * Native OpenId Connect App (must be unique)
   * **Login redirect URIs**
     * `com.sampleapplication:/`
-  * **End Session URIs**
+  * **Logout redirect URIs**
     * `com.sampleapplication:/`
   * **Grant type allowed**
     * Authorization Code
