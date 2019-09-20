@@ -11,7 +11,10 @@
     "@okta/configuration-validation": "^0.4.1",
     "@okta/okta-auth-js": "^2.8.0",
     "react": "16.8.6",
-    "react-native": "0.60.5"
+    "react-native": "0.60.5",
+    "react-native-gesture-handler": "^1.4.1",
+    "react-navigation": "^4.0.6",
+    "react-navigation-stack": "^1.8.0"
   },
   "devDependencies": {
     "@babel/core": "^7.6.0",

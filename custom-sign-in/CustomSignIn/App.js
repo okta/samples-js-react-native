@@ -24,21 +24,48 @@ import {
   ActivityIndicator,
 } from 'react-native';
 
-export default class App extends React.Component {
-  
+import {createAppContainer} from 'react-navigation';
+
+import {createStackNavigator} from 'react-navigation-stack';
+
+class ProfileScreen extends React.Component {
+  static navigationOptions = {
+    title: 'Details',
+  };
+  render() {
+    const {navigation} = this.props;
+    const transaction = navigation.getParam('transaction', 'NO-ID');
+    //const name = ((user || {}).personalInfo || {}).name;
+    const login = transaction.data._embedded.user.id;
+    return (
+      <Fragment>
+        <StatusBar barStyle="dark-content" />
+        <SafeAreaView style={styles.container}>
+        <Text>{login}</Text>
+        </SafeAreaView>
+      </Fragment>
+    );
+  }
+}
+
+class LoginScreen extends React.Component {
+  static navigationOptions = {
+    title: 'Login',
+  };
+
   constructor() {
     super();
     this.state = {
-      authenticated: false,
-      context: null,
       userName: '',
       password: '',
       progress: false,
     };
-      var OktaAuth = require('@okta/okta-auth-js');
-   var config = {
-   // The URL for your Okta organization
-      url: 'https://sdk-test.trexcloud.com'
+    var OktaAuth = require('@okta/okta-auth-js');
+    var config = {
+      url: 'https://sdk-test.trexcloud.com',
+      redirectUri: 'com.okta.example:/callback',
+      clientId: '0oa2p7eq7uDmZY4sJ0g7',
+      issuer: 'https://sdk-test.trexcloud.com/oauth2/default',
    };
 
     this.authClient = new OktaAuth(config);
@@ -54,10 +81,12 @@ export default class App extends React.Component {
     .then(function(transaction) {
       if (transaction.status === 'SUCCESS') {
         //authClient.session.setCookieAndRedirect(transaction.sessionToken); // Sets a cookie on redirect
-        self.setContext(`
+        /*self.setContext(`
           User Profile:
           ${transaction.sessionToken}
-    `   );
+    `   );*/
+        const {navigate} = self.props.navigation;
+        navigate('Profile', {transaction: transaction});
       } else {
         throw 'We cannot handle the ' + transaction.status + ' status';
       }
@@ -119,6 +148,15 @@ export default class App extends React.Component {
     );
   }
 }
+
+const MainNavigator = createStackNavigator({
+  LoginScreen: {screen: LoginScreen},
+  Profile: {screen: ProfileScreen},
+});
+
+const App = createAppContainer(MainNavigator);
+
+export default App;
 
 const styles = StyleSheet.create({
   textInput: {
