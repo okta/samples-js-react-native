@@ -10,6 +10,7 @@
   "dependencies": {
     "@okta/configuration-validation": "^0.4.1",
     "@okta/okta-auth-js": "^2.8.0",
+    "@okta/okta-react-native": "^1.2.0",
     "react": "16.8.6",
     "react-native": "0.60.5",
     "react-native-gesture-handler": "^1.4.1",

@@ -1,4 +1,4 @@
-platform :ios, '9.0'
+platform :ios, '11.0'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
 target 'CustomSignIn' do
@@ -26,6 +26,8 @@ target 'CustomSignIn' do
   pod 'DoubleConversion', :podspec => '../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec'
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
+
+  pod 'OktaSdkBridgeReactNative', :path => '../node_modules/@okta/okta-react-native'
 
   target 'CustomSignInTests' do
     inherit! :search_paths

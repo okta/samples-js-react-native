@@ -22,21 +22,99 @@ import {
   TextInput,
   ActivityIndicator,
 } from 'react-native';
+import {
+  createConfig,
+  authenticate,
+  isAuthenticated,
+  getAccessToken,
+  EventEmitter,
+} from '@okta/okta-react-native';
+import configFile from './../oidc.config';
 
 export default class ProfileScreen extends React.Component {
   static navigationOptions = {
     title: 'Details',
   };
+
+  constructor() {
+    super();
+    this.state = {
+      authenticated: false,
+      accessToken: null,
+    };
+  }
+
+  async componentDidMount() {
+    let self = this;
+    EventEmitter.addListener('signInSuccess', function(e: Event) {
+      self.getAccessToken();
+    });
+    await createConfig({
+      clientId: configFile.oidc.clientId,
+      redirectUri: configFile.oidc.redirectUri,
+      endSessionRedirectUri: configFile.oidc.endSessionRedirectUri,
+      discoveryUri: configFile.oidc.discoveryUri,
+      scopes: configFile.oidc.scopes,
+      requireHardwareBackedKeyStore:
+        configFile.oidc.requireHardwareBackedKeyStore,
+    });
+  }
+
+  componentWillUnmount() {
+    EventEmitter.removeAllListeners('signInSuccess');
+  }
+
+  async getAccessToken() {
+    const promise = await getAccessToken();
+    this.setState({accessToken: promise.access_token});
+    this.setState({authenticated: true});
+  }
+
+  async exchangeSessionToken({sessionToken}) {
+    authenticate({sessionToken});
+  }
+
   render() {
     const {navigation} = this.props;
     const transaction = navigation.getParam('transaction', 'NO-ID');
-    //const name = ((user || {}).personalInfo || {}).name;
-    const login = transaction.data._embedded.user.id;
+    const firstName = transaction.data._embedded.user.profile.firstName;
+    const lastName = transaction.data._embedded.user.profile.lastName;
+    const login = transaction.data._embedded.user.profile.login;
+    const expiresAt = transaction.data.expiresAt;
+    let accessTokenArea;
+    if (this.state.authenticated) {
+      accessTokenArea = (
+        <View style={{marginTop: 60, height: 140}}>
+          <Text>Access Token:</Text>
+          <Text style={{marginTop: 20}}>{this.state.accessToken}</Text>
+        </View>
+      );
+    } else {
+      accessTokenArea = (
+        <View style={{marginTop: 60, height: 40}}>
+          <Button
+            testID="getAccessTokenButton"
+            onPress={async () => {
+              //this.state.progress = true;
+              this.exchangeSessionToken({
+                sessionToken: transaction.sessionToken,
+              });
+            }}
+            title="Get Access Token"
+          />
+        </View>
+      );
+    }
     return (
       <Fragment>
         <StatusBar barStyle="dark-content" />
         <SafeAreaView style={styles.container}>
-        <Text>{login}</Text>
+          <Text style={styles.titleHello}>
+            Hello {firstName} {lastName}
+          </Text>
+          <Text style={styles.titleDetails}>Login: {login}</Text>
+          <Text style={styles.titleDetails}>Session expires: {expiresAt}</Text>
+          {accessTokenArea}
         </SafeAreaView>
       </Fragment>
     );
@@ -72,11 +150,17 @@ const styles = StyleSheet.create({
   context: {
     marginTop: 20,
   },
-  title: {
-    fontSize: 30,
+  titleHello: {
+    fontSize: 20,
     fontWeight: 'bold',
     color: '#0066cc',
     paddingTop: 40,
+    textAlign: 'center',
+  },
+  titleDetails: {
+    fontSize: 15,
+    fontWeight: 'bold',
+    paddingTop: 15,
     textAlign: 'center',
   },
 });

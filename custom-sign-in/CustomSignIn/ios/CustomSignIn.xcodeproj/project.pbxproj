@@ -17,6 +17,7 @@
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* CustomSignInTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* CustomSignInTests.m */; };
 		650A900828F38BCD64023FA5 /* libPods-CustomSignIn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E08F55C8B33F16517269B33 /* libPods-CustomSignIn.a */; };
+		A1450A34233944F100FF45BC /* DummySwiftFileForOidc.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1450A33233944F100FF45BC /* DummySwiftFileForOidc.swift */; };
 		B0106A535C5EB7BFC8E75D8F /* libPods-CustomSignInTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1106BE61E57A579D1DDF4AC5 /* libPods-CustomSignInTests.a */; };
 		BE5DB870C379FEA1131CF3F4 /* libPods-CustomSignIn-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E3AFFF1C12944BBC8B141A77 /* libPods-CustomSignIn-tvOSTests.a */; };
 		DBD3B7B47590548790E8D671 /* libPods-CustomSignIn-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BDCEE5C8B5AECC79BD0E23EC /* libPods-CustomSignIn-tvOS.a */; };
@@ -62,6 +63,8 @@
 		81B626B3CB0D982A0584763E /* Pods-CustomSignIn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CustomSignIn.release.xcconfig"; path = "Target Support Files/Pods-CustomSignIn/Pods-CustomSignIn.release.xcconfig"; sourceTree = "<group>"; };
 		8E08F55C8B33F16517269B33 /* libPods-CustomSignIn.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CustomSignIn.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		98935594DBC69BE35E6C4B48 /* Pods-CustomSignInTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CustomSignInTests.release.xcconfig"; path = "Target Support Files/Pods-CustomSignInTests/Pods-CustomSignInTests.release.xcconfig"; sourceTree = "<group>"; };
+		A1450A32233944F100FF45BC /* CustomSignIn-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CustomSignIn-Bridging-Header.h"; sourceTree = "<group>"; };
+		A1450A33233944F100FF45BC /* DummySwiftFileForOidc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummySwiftFileForOidc.swift; sourceTree = "<group>"; };
 		BDCEE5C8B5AECC79BD0E23EC /* libPods-CustomSignIn-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CustomSignIn-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3AFFF1C12944BBC8B141A77 /* libPods-CustomSignIn-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CustomSignIn-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
@@ -132,6 +135,8 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				A1450A33233944F100FF45BC /* DummySwiftFileForOidc.swift */,
+				A1450A32233944F100FF45BC /* CustomSignIn-Bridging-Header.h */,
 			);
 			name = CustomSignIn;
 			sourceTree = "<group>";
@@ -194,7 +199,6 @@
 				7BDEDD016F647AD67EC07582 /* Pods-CustomSignInTests.debug.xcconfig */,
 				98935594DBC69BE35E6C4B48 /* Pods-CustomSignInTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -292,6 +296,9 @@
 						CreatedOnToolsVersion = 6.2;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
+					13B07F861A680F5B00A75B9A = {
+						LastSwiftMigration = 1100;
+					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
 						ProvisioningStyle = Automatic;
@@ -308,6 +315,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -528,6 +536,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A1450A34233944F100FF45BC /* DummySwiftFileForOidc.swift in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
@@ -582,13 +591,14 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7BDEDD016F647AD67EC07582 /* Pods-CustomSignInTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = CustomSignInTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -605,10 +615,11 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 98935594DBC69BE35E6C4B48 /* Pods-CustomSignInTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = CustomSignInTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -626,9 +637,11 @@
 			baseConfigurationReference = 0EC4BA3186F4B05FF79EF824 /* Pods-CustomSignIn.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				INFOPLIST_FILE = CustomSignIn/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -637,6 +650,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = CustomSignIn;
+				SWIFT_OBJC_BRIDGING_HEADER = "CustomSignIn-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -646,8 +662,10 @@
 			baseConfigurationReference = 81B626B3CB0D982A0584763E /* Pods-CustomSignIn.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				INFOPLIST_FILE = CustomSignIn/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -656,6 +674,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = CustomSignIn;
+				SWIFT_OBJC_BRIDGING_HEADER = "CustomSignIn-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
@@ -684,7 +704,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 9.2;
+				TVOS_DEPLOYMENT_TARGET = 12.0;
 			};
 			name = Debug;
 		};
@@ -712,7 +732,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = appletvos;
 				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 9.2;
+				TVOS_DEPLOYMENT_TARGET = 12.0;
 			};
 			name = Release;
 		};
@@ -816,7 +836,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -862,7 +882,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
