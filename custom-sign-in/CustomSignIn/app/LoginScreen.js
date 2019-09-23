@@ -20,8 +20,8 @@ import {
   View,
   StatusBar,
   TextInput,
-  ActivityIndicator,
 } from 'react-native';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 export default class LoginScreen extends React.Component {
   static navigationOptions = {
@@ -38,39 +38,32 @@ export default class LoginScreen extends React.Component {
     var OktaAuth = require('@okta/okta-auth-js');
     var config = {
       url: 'https://sdk-test.trexcloud.com',
-   };
+    };
 
     this.authClient = new OktaAuth(config);
   }
 
   async login() {
     let self = this;
+    this.setState({progress: true});
     this.authClient
       .signIn({
         username: this.state.userName,
         password: this.state.password,
-    })
-    .then(function(transaction) {
-      if (transaction.status === 'SUCCESS') {
-        const {navigate} = self.props.navigation;
-        navigate('Profile', {transaction: transaction});
-      } else {
-        throw 'We cannot handle the ' + transaction.status + ' status';
-      }
-    })
-    .fail(function(err) {
-      console.error(err);
-    });
-  }
-
-  showProgress() {
-    if (this.state.progress) {
-      return (
-        <View>
-           <ActivityIndicator size="large" color="#0000ff" />
-        </View>
-      );
-    }
+      })
+      .then(function(transaction) {
+        self.setState({progress: false});
+        if (transaction.status === 'SUCCESS') {
+          const {navigate} = self.props.navigation;
+          navigate('Profile', {transaction: transaction});
+        } else {
+          throw 'We cannot handle the ' + transaction.status + ' status';
+        }
+      })
+      .fail(function(err) {
+        console.error(err);
+        self.setState({progress: false});
+      });
   }
 
   render() {
@@ -78,22 +71,27 @@ export default class LoginScreen extends React.Component {
       <Fragment>
         <StatusBar barStyle="dark-content" />
         <SafeAreaView style={styles.container}>
+          <Spinner
+            visible={this.state.progress}
+            textContent={'Loading...'}
+            textStyle={styles.spinnerTextStyle}
+          />
           <Text style={styles.title}>Native Sign-In</Text>
           <View style={styles.buttonContainer}>
             <View style={styles.button}>
-            <TextInput
+              <TextInput
                 style={styles.textInput}
                 placeholder="Login"
                 onChangeText={text => (this.state.userName = text)}
-            />
-            <TextInput
+              />
+              <TextInput
                 style={styles.textInput}
                 placeholder="Password"
                 secureTextEntry={true}
                 onChangeText={text => (this.state.password = text)}
-            />
-            <View style={{marginTop: 40, height: 40}}>
-              <Button
+              />
+              <View style={{marginTop: 40, height: 40}}>
+                <Button
                   testID="loginButton"
                   onPress={async () => {
                     this.state.progress = true;
@@ -101,9 +99,8 @@ export default class LoginScreen extends React.Component {
                   }}
                   title="Login"
                 />
+              </View>
             </View>
-            </View>
-            {this.showProgress()}
           </View>
           <ScrollView
             contentInsetAdjustmentBehavior="automatic"
@@ -117,6 +114,9 @@ export default class LoginScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  spinnerTextStyle: {
+    color: '#FFF'
+  },
   textInput: {
     marginTop: 10,
     height: 40,

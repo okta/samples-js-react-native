@@ -27,6 +27,7 @@ target 'CustomSignIn' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
+
   pod 'OktaSdkBridgeReactNative', :path => '../node_modules/@okta/okta-react-native'
 
   target 'CustomSignInTests' do
