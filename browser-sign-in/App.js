@@ -76,7 +76,10 @@ export default class App extends React.Component {
   }
 
   componentWillUnmount() {
-    EventEmitter.removeAllListeners();
+    EventEmitter.removeAllListeners('signInSuccess');
+    EventEmitter.removeAllListeners('signOutSuccess');
+    EventEmitter.removeAllListeners('onError');
+    EventEmitter.removeAllListeners('onCancelled');
   }
 
   async componentDidUpdate() {
