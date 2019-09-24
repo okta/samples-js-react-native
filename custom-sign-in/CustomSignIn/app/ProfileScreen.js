@@ -13,27 +13,24 @@
 import React, {Fragment} from 'react';
 import {
   SafeAreaView,
-  ScrollView,
   Button,
   StyleSheet,
   Text,
   View,
   StatusBar,
-  TextInput,
-  ActivityIndicator,
 } from 'react-native';
 import {
   createConfig,
   authenticate,
-  isAuthenticated,
   getAccessToken,
   EventEmitter,
 } from '@okta/okta-react-native';
+import Spinner from 'react-native-loading-spinner-overlay';
 import configFile from './../oidc.config';
 
 export default class ProfileScreen extends React.Component {
   static navigationOptions = {
-    title: 'Details',
+    title: 'User Profile',
   };
 
   constructor() {
@@ -41,6 +38,7 @@ export default class ProfileScreen extends React.Component {
     this.state = {
       authenticated: false,
       accessToken: null,
+      progress: false,
     };
   }
 
@@ -48,6 +46,14 @@ export default class ProfileScreen extends React.Component {
     let self = this;
     EventEmitter.addListener('signInSuccess', function(e: Event) {
       self.getAccessToken();
+    });
+    EventEmitter.addListener('onError', function(e: Event) {
+      console.warn(e);
+      self.setState({progress: false});
+    });
+    EventEmitter.addListener('onCancelled', function(e: Event) {
+      console.warn(e);
+      self.setState({progress: false});
     });
     await createConfig({
       clientId: configFile.oidc.clientId,
@@ -62,15 +68,19 @@ export default class ProfileScreen extends React.Component {
 
   componentWillUnmount() {
     EventEmitter.removeAllListeners('signInSuccess');
+    EventEmitter.removeAllListeners('onError');
+    EventEmitter.removeAllListeners('onCancelled');
   }
 
   async getAccessToken() {
     const promise = await getAccessToken();
     this.setState({accessToken: promise.access_token});
     this.setState({authenticated: true});
+    this.setState({progress: false});
   }
 
   async exchangeSessionToken({sessionToken}) {
+    this.setState({progress: true});
     authenticate({sessionToken});
   }
 
@@ -95,7 +105,6 @@ export default class ProfileScreen extends React.Component {
           <Button
             testID="getAccessTokenButton"
             onPress={async () => {
-              //this.state.progress = true;
               this.exchangeSessionToken({
                 sessionToken: transaction.sessionToken,
               });
@@ -109,6 +118,11 @@ export default class ProfileScreen extends React.Component {
       <Fragment>
         <StatusBar barStyle="dark-content" />
         <SafeAreaView style={styles.container}>
+          <Spinner
+            visible={this.state.progress}
+            textContent={'Loading...'}
+            textStyle={styles.spinnerTextStyle}
+          />
           <Text style={styles.titleHello}>
             Hello {firstName} {lastName}
           </Text>
@@ -122,16 +136,8 @@ export default class ProfileScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  textInput: {
-    marginTop: 10,
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-  },
-  buttonContainer: {
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    marginTop: 10,
+  spinnerTextStyle: {
+    color: '#FFF',
   },
   button: {
     borderRadius: 40,
@@ -146,9 +152,6 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     backgroundColor: '#FFFFFF',
     alignItems: 'center',
-  },
-  context: {
-    marginTop: 20,
   },
   titleHello: {
     fontSize: 20,

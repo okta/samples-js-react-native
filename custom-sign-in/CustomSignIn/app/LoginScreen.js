@@ -13,7 +13,6 @@
 import React, {Fragment} from 'react';
 import {
   SafeAreaView,
-  ScrollView,
   Button,
   StyleSheet,
   Text,
@@ -31,8 +30,6 @@ export default class LoginScreen extends React.Component {
   constructor() {
     super();
     this.state = {
-      userName: '',
-      password: '',
       progress: false,
     };
     var OktaAuth = require('@okta/okta-auth-js');
@@ -41,6 +38,8 @@ export default class LoginScreen extends React.Component {
     };
 
     this.authClient = new OktaAuth(config);
+    this.userName = '';
+    this.password = '';
   }
 
   async login() {
@@ -48,8 +47,8 @@ export default class LoginScreen extends React.Component {
     this.setState({progress: true});
     this.authClient
       .signIn({
-        username: this.state.userName,
-        password: this.state.password,
+        username: this.userName,
+        password: this.password,
       })
       .then(function(transaction) {
         self.setState({progress: false});
@@ -82,13 +81,13 @@ export default class LoginScreen extends React.Component {
               <TextInput
                 style={styles.textInput}
                 placeholder="Login"
-                onChangeText={text => (this.state.userName = text)}
+                onChangeText={text => (this.userName = text)}
               />
               <TextInput
                 style={styles.textInput}
                 placeholder="Password"
                 secureTextEntry={true}
-                onChangeText={text => (this.state.password = text)}
+                onChangeText={text => (this.password = text)}
               />
               <View style={{marginTop: 40, height: 40}}>
                 <Button
@@ -102,11 +101,6 @@ export default class LoginScreen extends React.Component {
               </View>
             </View>
           </View>
-          <ScrollView
-            contentInsetAdjustmentBehavior="automatic"
-            style={styles.context}>
-            <Text>{this.state.context}</Text>
-          </ScrollView>
         </SafeAreaView>
       </Fragment>
     );
@@ -141,9 +135,6 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     backgroundColor: '#FFFFFF',
     alignItems: 'center',
-  },
-  context: {
-    marginTop: 20,
   },
   title: {
     fontSize: 30,
