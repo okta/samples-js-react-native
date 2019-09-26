@@ -30,16 +30,16 @@ export default class LoginScreen extends React.Component {
   constructor() {
     super();
     this.state = {
+      userName: '',
+      password: '',
       progress: false,
     };
     var OktaAuth = require('@okta/okta-auth-js');
     var config = {
-      url: 'https://sdk-test.trexcloud.com',
+      url: 'https://{yourOktaDomain}',
     };
 
     this.authClient = new OktaAuth(config);
-    this.userName = '';
-    this.password = '';
   }
 
   async login() {
@@ -47,8 +47,8 @@ export default class LoginScreen extends React.Component {
     this.setState({progress: true});
     this.authClient
       .signIn({
-        username: this.userName,
-        password: this.password,
+        username: this.state.userName,
+        password: this.state.password,
       })
       .then(function(transaction) {
         self.setState({progress: false});
@@ -81,13 +81,13 @@ export default class LoginScreen extends React.Component {
               <TextInput
                 style={styles.textInput}
                 placeholder="Login"
-                onChangeText={text => (this.userName = text)}
+                onChangeText={text => (this.state.userName = text)}
               />
               <TextInput
                 style={styles.textInput}
                 placeholder="Password"
                 secureTextEntry={true}
-                onChangeText={text => (this.password = text)}
+                onChangeText={text => (this.state.password = text)}
               />
               <View style={{marginTop: 40, height: 40}}>
                 <Button

@@ -15,8 +15,8 @@ export default {
     clientId: '{clientId}',
     redirectUri: '{redirectUri}',
     endSessionRedirectUri: '{endSessionRedirectUri}',
-    discoveryUri: 'https://{youOktaOrg}.okta.com/',
-    scopes: ["openid", "profile", "offline_access"],
+    discoveryUri: 'https://{yourOktaDomain}',
+    scopes: ['openid', 'profile', 'offline_access'],
     requireHardwareBackedKeyStore: false,
   }
 };

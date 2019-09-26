@@ -26,7 +26,7 @@ import {
   EventEmitter,
 } from '@okta/okta-react-native';
 import Spinner from 'react-native-loading-spinner-overlay';
-import configFile from './../oidc.config';
+import configFile from './../samples.config';
 
 export default class ProfileScreen extends React.Component {
   static navigationOptions = {
@@ -87,10 +87,7 @@ export default class ProfileScreen extends React.Component {
   render() {
     const {navigation} = this.props;
     const transaction = navigation.getParam('transaction', 'NO-ID');
-    const firstName = transaction.data._embedded.user.profile.firstName;
-    const lastName = transaction.data._embedded.user.profile.lastName;
-    const login = transaction.data._embedded.user.profile.login;
-    const expiresAt = transaction.data.expiresAt;
+    const userProfile = transaction.data._embedded.user.profile;
     let accessTokenArea;
     if (this.state.authenticated) {
       accessTokenArea = (
@@ -124,10 +121,12 @@ export default class ProfileScreen extends React.Component {
             textStyle={styles.spinnerTextStyle}
           />
           <Text style={styles.titleHello}>
-            Hello {firstName} {lastName}
+            Hello {userProfile.firstName} {userProfile.lastName}
           </Text>
-          <Text style={styles.titleDetails}>Login: {login}</Text>
-          <Text style={styles.titleDetails}>Session expires: {expiresAt}</Text>
+          <Text style={styles.titleDetails}>Login: {userProfile.login}</Text>
+          <Text style={styles.titleDetails}>
+            Session expires: {userProfile.expiresAt}
+          </Text>
           {accessTokenArea}
         </SafeAreaView>
       </Fragment>
