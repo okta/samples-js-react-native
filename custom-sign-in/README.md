@@ -17,7 +17,7 @@ git clone git@github.com:okta/samples-js-react-native.git
 cd samples-js-react-native/custom-sign-in
 ```
 
-Assign your Org URL to `url` parameter in `app/LoginScreen.js` file (line #37):
+Assign your Org URL to `url` parameter in `app/LoginScreen.js` file:
 
 ```javascript
 var config = {
