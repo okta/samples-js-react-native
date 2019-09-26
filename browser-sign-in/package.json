@@ -8,7 +8,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@okta/okta-react-native": "^1.1.0",
+    "@okta/okta-react-native": "^1.2.1",
     "react": "16.8.6",
     "react-native": "^0.60.0"
   },
@@ -16,13 +16,14 @@
     "@babel/core": "^7.5.5",
     "@babel/runtime": "^7.5.5",
     "@react-native-community/eslint-config": "^0.0.5",
-    "eslint": "^6.1.0",
     "babel-jest": "^24.8.0",
     "detox": "^13.2.0",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
     "enzyme-async-helpers": "^0.9.1",
+    "eslint": "^6.1.0",
     "jest": "^24.8.0",
+    "metro": "^0.56.0",
     "metro-react-native-babel-preset": "^0.55.0",
     "react-dom": "^16.8.6",
     "react-test-renderer": "16.8.6"
