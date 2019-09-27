@@ -125,7 +125,7 @@ export default class ProfileScreen extends React.Component {
           </Text>
           <Text style={styles.titleDetails}>Login: {userProfile.login}</Text>
           <Text style={styles.titleDetails}>
-            Session expires: {userProfile.expiresAt}
+            Session expires: {transaction.expiresAt}
           </Text>
           {accessTokenArea}
         </SafeAreaView>
