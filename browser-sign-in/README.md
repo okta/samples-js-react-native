@@ -8,7 +8,7 @@ Before running this sample, you will need the following:
 
 * An Okta Developer Account, you can sign up for one at <https://developer.okta.com/signup/>.
 * An Okta Application, configured for Native mode. This is done from the Okta Developer Console. After login, from the Admin dashboard, navigate to `Applications → Add Application`. Choose Native as the platform. Populate your new Native OpenID Connect application with values similar to:
-  * **Application Name** 
+  * **Application Name**
     * Native OpenId Connect App (must be unique)
   * **Login redirect URIs**
     * `com.sampleapplication:/`
@@ -90,13 +90,13 @@ If you see a home page that prompts you to login, then things are working!  Clic
 You can login with the same account that you created when signing up for your Developer Org, or you can use a known username and password from your Okta Directory.
 
 ## Methods
-In this sample application, once the user logs in, there will be three methods that each shows a different way to get user info. 
+In this sample application, once the user logs in, there will be three methods that each shows a different way to get user info.
 
 ### Get User From ID Token ###
 This method calls `getUserFromIdToken()` to retrieve user info from decoding the ID Token claims.
 
 ### Get User From Request ###
-This method calls `getUser()` to retrieve user info by passing in the access token, and making a request to the user info endpoint. It is done on the native modules. 
+This method calls `getUser()` to retrieve user info by passing in the access token, and making a request to the user info endpoint. It is done on the native modules.
 
 ### Get User From Access Token ###
 This method shows you how to use the access token from `getAccessToken()` to exchange user information. It shows how to make a fetch request to the user info endpoint with access token as the header.
