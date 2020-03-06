@@ -67,6 +67,8 @@ export default {
 };
 ```
 
+If you set up your Okta Application with redirect URLs other than `com.sampleapplication:/`, update the value in `android/app/bundle.gradle` under defaultConfig > manifestPlaceholders > appAuthRedirectScheme.
+
 Now start the app server:
 
 ```bash
