@@ -136,6 +136,7 @@ android {
         manifestPlaceholders = [
                 appAuthRedirectScheme: 'com.example'
         ]
+        multiDexEnabled true
     }
     splits {
         abi {
@@ -181,6 +182,7 @@ android {
     }
 
     packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
         pickFirst '**/armeabi-v7a/libc++_shared.so'
         pickFirst '**/x86/libc++_shared.so'
         pickFirst '**/arm64-v8a/libc++_shared.so'
@@ -191,7 +193,6 @@ android {
 }
 
 dependencies {
-    implementation project(':@okta_okta-react-native')
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.facebook.react:react-native:+"  // From node_modules
 

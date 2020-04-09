@@ -39,12 +39,12 @@ export default class ProfileScreen extends React.Component {
 
   async componentDidMount() {
     try {
-      const userData = await getUser();
+      const user = await getUser();
       const token = await getAccessToken();
   
       this.setState({
         progress: false,
-        user: JSON.parse(userData),
+        user,
         accessToken: token.access_token
       });
     } catch (e) {
@@ -65,14 +65,14 @@ export default class ProfileScreen extends React.Component {
   }
 
   render() {
-    const { user, accessToken, error } = this.state;
+    const { user, accessToken, error, progress } = this.state;
 
     return (
       <>
         <StatusBar barStyle="dark-content" />
         <SafeAreaView style={styles.container}>
           <Spinner
-            visible={!user || !accessToken}
+            visible={progress}
             textContent={'Loading...'}
             textStyle={styles.spinnerTextStyle}
           />
