@@ -20,6 +20,7 @@ import {
   StatusBar,
   TextInput,
 } from 'react-native';
+import { signIn } from '@okta/okta-react-native';
 import Spinner from 'react-native-loading-spinner-overlay';
 
 export default class LoginScreen extends React.Component {
@@ -30,72 +31,63 @@ export default class LoginScreen extends React.Component {
   constructor() {
     super();
     this.state = {
-      userName: '',
+      username: '',
       password: '',
       progress: false,
+      error: '',
     };
-    var OktaAuth = require('@okta/okta-auth-js');
-    var config = {
-      url: 'https://{yourOktaDomain}',
-    };
-
-    this.authClient = new OktaAuth(config);
   }
 
-  async login() {
-    let self = this;
-    this.setState({progress: true});
-    this.authClient
-      .signIn({
-        username: this.state.userName,
-        password: this.state.password,
-      })
-      .then(function(transaction) {
-        self.setState({progress: false});
-        if (transaction.status === 'SUCCESS') {
-          const {navigate} = self.props.navigation;
-          navigate('Profile', {transaction: transaction});
-        } else {
-          throw 'We cannot handle the ' + transaction.status + ' status';
+  login() {
+    this.setState({ progress: true });
+
+    const { username, password } = this.state;
+    const { navigation } = this.props;
+    signIn({ username, password })
+      .then(token => {
+        if (!token) {
+          throw new Error('Failed to get accessToken');
         }
+
+        this.setState({ progress: false, error: '' }, () => navigation.navigate('Profile'));
       })
-      .fail(function(err) {
-        console.error(err);
-        self.setState({progress: false});
+      .catch(e => {
+        console.log(e.code, e.message);
+        this.setState({ progress: false, error: e.message });
       });
   }
 
   render() {
+    const { progress, error } = this.state;
+
     return (
       <Fragment>
         <StatusBar barStyle="dark-content" />
         <SafeAreaView style={styles.container}>
           <Spinner
-            visible={this.state.progress}
+            visible={progress}
             textContent={'Loading...'}
             textStyle={styles.spinnerTextStyle}
           />
           <Text style={styles.title}>Native Sign-In</Text>
+          { !!error && <Text style={styles.error}>{error}</Text> }
           <View style={styles.buttonContainer}>
             <View style={styles.button}>
               <TextInput
                 style={styles.textInput}
-                placeholder="Login"
-                onChangeText={text => (this.state.userName = text)}
+                placeholder="User Name"
+                onChangeText={username => this.setState({ username })}
               />
               <TextInput
                 style={styles.textInput}
                 placeholder="Password"
                 secureTextEntry={true}
-                onChangeText={text => (this.state.password = text)}
+                onChangeText={password => this.setState({ password })}
               />
               <View style={{marginTop: 40, height: 40}}>
                 <Button
                   testID="loginButton"
-                  onPress={async () => {
-                    this.state.progress = true;
-                    this.login();
-                  }}
+                  onPress={this.login.bind(this)}
                   title="Login"
                 />
               </View>
@@ -142,5 +134,8 @@ const styles = StyleSheet.create({
     color: '#0066cc',
     paddingTop: 40,
     textAlign: 'center',
+  },
+  error: {
+    color: 'red'
   },
 });

@@ -10,126 +10,93 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React, {Fragment} from 'react';
+import React from 'react';
 import {
   SafeAreaView,
-  Button,
   StyleSheet,
   Text,
   View,
   StatusBar,
+  Button
 } from 'react-native';
-import {
-  createConfig,
-  authenticate,
-  getAccessToken,
-  EventEmitter,
-} from '@okta/okta-react-native';
+import { getAccessToken, getUser, clearTokens } from '@okta/okta-react-native';
 import Spinner from 'react-native-loading-spinner-overlay';
-import configFile from './../samples.config';
 
 export default class ProfileScreen extends React.Component {
   static navigationOptions = {
     title: 'User Profile',
   };
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      authenticated: false,
       accessToken: null,
-      progress: false,
+      user: null,
+      progress: true,
+      error: ''
     };
   }
 
   async componentDidMount() {
-    let self = this;
-    EventEmitter.addListener('signInSuccess', function(e: Event) {
-      self.getAccessToken();
-    });
-    EventEmitter.addListener('onError', function(e: Event) {
-      console.warn(e);
-      self.setState({progress: false});
-    });
-    EventEmitter.addListener('onCancelled', function(e: Event) {
-      console.warn(e);
-      self.setState({progress: false});
-    });
-    await createConfig({
-      clientId: configFile.oidc.clientId,
-      redirectUri: configFile.oidc.redirectUri,
-      endSessionRedirectUri: configFile.oidc.endSessionRedirectUri,
-      discoveryUri: configFile.oidc.discoveryUri,
-      scopes: configFile.oidc.scopes,
-      requireHardwareBackedKeyStore:
-        configFile.oidc.requireHardwareBackedKeyStore,
-    });
+    try {
+      const userData = await getUser();
+      const token = await getAccessToken();
+  
+      this.setState({
+        progress: false,
+        user: JSON.parse(userData),
+        accessToken: token.access_token
+      });
+    } catch (e) {
+      console.log(e.code, e.message);
+      this.setState({ progress: false, error: e.message });
+    }
   }
 
-  componentWillUnmount() {
-    EventEmitter.removeAllListeners('signInSuccess');
-    EventEmitter.removeAllListeners('onError');
-    EventEmitter.removeAllListeners('onCancelled');
-  }
-
-  async getAccessToken() {
-    const promise = await getAccessToken();
-    this.setState({accessToken: promise.access_token});
-    this.setState({authenticated: true});
-    this.setState({progress: false});
-  }
-
-  async exchangeSessionToken({sessionToken}) {
-    this.setState({progress: true});
-    authenticate({sessionToken});
+  logout() {
+    clearTokens()
+      .then(() => {
+        this.props.navigation.navigate('Login');
+      })
+      .catch(e => {
+        console.log(e.code, e.message);
+        this.setState({ error: e.message })
+      });
   }
 
   render() {
-    const {navigation} = this.props;
-    const transaction = navigation.getParam('transaction', 'NO-ID');
-    const userProfile = transaction.data._embedded.user.profile;
-    let accessTokenArea;
-    if (this.state.authenticated) {
-      accessTokenArea = (
-        <View style={{marginTop: 60, height: 140}}>
-          <Text>Access Token:</Text>
-          <Text style={{marginTop: 20}}>{this.state.accessToken}</Text>
-        </View>
-      );
-    } else {
-      accessTokenArea = (
-        <View style={{marginTop: 60, height: 40}}>
-          <Button
-            testID="getAccessTokenButton"
-            onPress={async () => {
-              this.exchangeSessionToken({
-                sessionToken: transaction.sessionToken,
-              });
-            }}
-            title="Get Access Token"
-          />
-        </View>
-      );
-    }
+    const { user, accessToken, error } = this.state;
+
     return (
-      <Fragment>
+      <>
         <StatusBar barStyle="dark-content" />
         <SafeAreaView style={styles.container}>
           <Spinner
-            visible={this.state.progress}
+            visible={!user || !accessToken}
             textContent={'Loading...'}
             textStyle={styles.spinnerTextStyle}
           />
-          <Text style={styles.titleHello}>
-            Hello {userProfile.firstName} {userProfile.lastName}
-          </Text>
-          <Text style={styles.titleDetails}>Login: {userProfile.login}</Text>
-          <Text style={styles.titleDetails}>
-            Session expires: {transaction.expiresAt}
-          </Text>
-          {accessTokenArea}
+          <View style={{ marginTop: 10 }}>
+            <Button
+              testID="logoutButton"
+              onPress={this.logout.bind(this)}
+              title="Logout"
+            />
+          </View>
+          { !!error && <Text style={styles.error}>{error}</Text> }
+          { user && 
+            <Text style={styles.titleHello}>
+              Hello {user.name}
+            </Text> 
+          }
+          { accessToken &&
+            <View style={{ marginTop: 60, height: 140 }}>
+              <Text>Access Token:</Text>
+              <Text style={{ marginTop: 20 }}>{accessToken}</Text>
+            </View>
+          }
         </SafeAreaView>
-      </Fragment>
+      </>
     );
   }
 }
@@ -164,5 +131,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     paddingTop: 15,
     textAlign: 'center',
+  },
+  error: {
+    color: 'red'
   },
 });

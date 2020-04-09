@@ -16,7 +16,7 @@ import LoginScreen from './app/LoginScreen.js';
 import ProfileScreen from './app/ProfileScreen.js';
 
 const MainNavigator = createStackNavigator({
-  LoginScreen: {screen: LoginScreen},
+  Login: {screen: LoginScreen},
   Profile: {screen: ProfileScreen},
 });
 

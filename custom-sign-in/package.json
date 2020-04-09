@@ -1,9 +1,11 @@
 {
-  "name": "CustomSignIn",
+  "name": "custom-sign-in",
   "version": "0.0.1",
   "private": true,
   "scripts": {
     "start": "react-native start",
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
     "test": "jest",
     "lint": "eslint ."
   },
@@ -15,6 +17,7 @@
     "react-native": "0.60.5",
     "react-native-gesture-handler": "^1.4.1",
     "react-native-loading-spinner-overlay": "^1.0.1",
+    "react-native-screens": "^2.4.0",
     "react-navigation": "^4.0.6",
     "react-navigation-stack": "^1.8.0"
   },
