@@ -750,9 +750,10 @@
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/@okta/configuration-validation/-/configuration-validation-0.3.0.tgz#41954ce0567b25b7ff0d4eb7fc60468a709444d7"
 
-"@okta/okta-react-native@^1.2.1":
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/@okta/okta-react-native/-/okta-react-native-1.2.1.tgz#559a92118eadff0c6c5418f8b54f46f137cef449"
+"@okta/okta-react-native@^1.3.0":
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/@okta/okta-react-native/-/okta-react-native-1.3.0.tgz#bac9c8aff89b25047b610b8ac1e56df95f55974b"
+  integrity sha512-C4OLSU3IactTg8exUBqwoRvi0sXhnsJjb4Cv89YtMzNAcq760noJgRH35ubh/KW+7R3djIjKgr2Q4o/O4PZL5Q==
   dependencies:
     "@okta/configuration-validation" "^0.3.0"
     jwt-lite "^1.1.2"
