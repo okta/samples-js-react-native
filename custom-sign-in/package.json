@@ -11,13 +11,12 @@
   },
   "dependencies": {
     "@okta/configuration-validation": "^0.4.1",
-    "@okta/okta-auth-js": "2.11.2",
-    "@okta/okta-react-native": "^1.2.1",
+    "@okta/okta-react-native": "file:okta-okta-react-native-v1.4.0.tgz",
+    "events": "^3.1.0",
     "react": "16.8.6",
     "react-native": "0.60.5",
     "react-native-gesture-handler": "^1.4.1",
     "react-native-loading-spinner-overlay": "^1.0.1",
-    "react-native-screens": "^2.4.0",
     "react-navigation": "^4.0.6",
     "react-navigation-stack": "^1.8.0"
   },

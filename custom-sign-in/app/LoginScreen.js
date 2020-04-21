@@ -36,6 +36,8 @@ export default class LoginScreen extends React.Component {
       progress: false,
       error: '',
     };
+
+    this.login = this.login.bind(this);
   }
 
   login() {
@@ -45,14 +47,11 @@ export default class LoginScreen extends React.Component {
     const { navigation } = this.props;
     signIn({ username, password })
       .then(token => {
-        if (!token) {
-          throw new Error('Failed to get accessToken');
-        }
-
+        console.log('accessToken ', token);
         this.setState({ progress: false, error: '' }, () => navigation.navigate('Profile'));
       })
       .catch(e => {
-        console.log(e.code, e.message);
+        console.log(e);
         this.setState({ progress: false, error: e.message });
       });
   }
@@ -87,7 +86,7 @@ export default class LoginScreen extends React.Component {
               <View style={{marginTop: 40, height: 40}}>
                 <Button
                   testID="loginButton"
-                  onPress={this.login.bind(this)}
+                  onPress={this.login}
                   title="Login"
                 />
               </View>
