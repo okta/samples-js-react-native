@@ -35,6 +35,7 @@ export default class ProfileScreen extends React.Component {
     };
 
     this.logout = this.logout.bind(this);
+    this.getAccessToken = this.getAccessToken.bind(this);
   }
 
   componentDidMount() {
@@ -43,18 +44,29 @@ export default class ProfileScreen extends React.Component {
         <Text onPress={this.logout} style={styles.logoutButton}>Logout</Text>
     });
 
-    Promise.all([getUser(), getAccessToken()])
-      .then(([user, token]) => {
+    this.setState({ progress: true });
+    getUser()
+      .then(user => {
+        console.log(user);
+        this.setState({ progress: false, user });
+      })
+      .catch(e => {
+        this.setState({ progress: false, error: e.message });
+      });
+  }
+
+  getAccessToken() {
+    this.setState({ progress: false });
+    getAccessToken()
+      .then(token => {
         this.setState({
           progress: false,
-          user,
           accessToken: token.access_token
         });
       })
       .catch(e => {
-        console.log(e.code, e.message);
         this.setState({ progress: false, error: e.message });
-      });
+      })
   }
 
   logout() {
@@ -80,17 +92,32 @@ export default class ProfileScreen extends React.Component {
             textStyle={styles.spinnerTextStyle}
           />
           <Error error={error} />
-          { user && 
-            <Text style={styles.titleHello}>
-              Hello {user.name}
-            </Text> 
-          }
-          { accessToken &&
-            <View style={styles.tokenContainer}>
-              <Text style={styles.tokenTitle}>Access Token:</Text>
-              <Text style={{ marginTop: 20 }}>{accessToken}</Text>
+          { user && (
+            <View style={{ paddingLeft: 20, paddingTop: 20 }}>
+              <Text style={styles.titleHello}>Hello {user.name}</Text>
+              <View style={{ flexDirection: 'row' }}>
+                <Text>Name: </Text>
+                <Text>{user.name}</Text>
+              </View>
+              <View style={{ flexDirection: 'row' }}>
+                <Text>Locale: </Text>
+                <Text>{user.locale}</Text>
+              </View>
+              <View style={{ flexDirection: 'row' }}>
+                <Text>Zone Info: </Text>
+                <Text>{user.zoneinfo}</Text>
+              </View>
             </View>
-          }
+          )}
+          <View style={{ flexDirection: 'column', marginTop: 20, paddingLeft: 20, width: 300 }}>
+            <Button style={{ marginTop:40 }} title="Get access token" onPress={this.getAccessToken} />
+            { accessToken &&
+              <View style={styles.tokenContainer}>
+                <Text style={styles.tokenTitle}>Access Token:</Text>
+                <Text style={{ marginTop: 20 }} numberOfLines={5}>{accessToken}</Text>
+              </View>
+            }
+          </View>
         </SafeAreaView>
       </>
     );
@@ -118,14 +145,12 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     backgroundColor: '#FFFFFF',
-    alignItems: 'center',
   },
   titleHello: {
     fontSize: 20,
     fontWeight: 'bold',
     color: '#0066cc',
-    paddingTop: 40,
-    textAlign: 'center',
+    paddingTop: 40
   },
   titleDetails: {
     fontSize: 15,
@@ -134,10 +159,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   tokenContainer: {
-    marginTop: 60, 
-    marginLeft: 20, 
-    marginRight: 20, 
-    height: 140
+    marginTop: 20
   },
   tokenTitle: {
     fontSize: 16,
