@@ -19,6 +19,7 @@ npm ci
 ```
 
 ### Install CocoaPods dependencies
+CocoaPods dependencies are needed for ios development
 ```bash
 cd ios && pod install && cd ..
 ```
