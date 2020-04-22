@@ -12,7 +12,7 @@
 
 import React from 'react';
 import App from '../App';
-import { shallow, render } from 'enzyme';
+import { shallow, render, mount } from 'enzyme';
 import renderer from 'react-test-renderer';
 import { waitForState } from 'enzyme-async-helpers';
 
@@ -176,6 +176,8 @@ describe('authentication flow', () => {
   });
 
   it('should return user profile information from getUser method' , async () => {
+    const mockGetUser = require('react-native').NativeModules.OktaSdkBridge.getUser;
+    mockGetUser.mockResolvedValue({ "name": "fake name" });
     const wrapper = shallow(<App />);
     wrapper.setState({authenticated: true});
     const profileButton = wrapper.find('Button').get(2);

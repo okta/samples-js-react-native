@@ -5,7 +5,7 @@
   "scripts": {
     "banners": "node tools/maintain-banners.js {okta-hosted-login,tools,scripts}/{*js,!node_modules/,**/*{js,jsx,css}}",
     "test": "npm test --prefix browser-sign-in/",
-    "postinstall": "cd browser-sign-in && yarn install"
+    "postinstall": "cd browser-sign-in && npm ci"
   },
   "author": "",
   "license": "Apache-2.0",
