@@ -28,7 +28,6 @@ const App = () => {
   useEffect(() => {
     const checkAuthStatus = async () => {
       const { authenticated } = await isAuthenticated();
-      console.log(authenticated);
       setAuthenticated(authenticated);
       setProgress(false);
     }
@@ -51,14 +50,14 @@ const App = () => {
     <NavigationContainer>
       <Stack.Navigator initialRouteName={authenticated ? 'Profile' : 'Login'}>
         <Stack.Screen 
+          name="Login" 
+          component={LoginScreen} 
+          options={{ title: 'Login', headerLeft: null }} 
+        />
+        <Stack.Screen 
           name="Profile" 
           component={ProfileScreen} 
           options={{ title: 'User Profile'}} 
-        />
-        <Stack.Screen 
-          name="Login" 
-          component={LoginScreen} 
-          options={{ title: 'Login' }} 
         />
       </Stack.Navigator>
     </NavigationContainer>

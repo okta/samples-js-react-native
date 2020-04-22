@@ -48,19 +48,19 @@ export default class App extends React.Component {
 
   async componentDidMount() {
     let that = this;
-    EventEmitter.addListener('signInSuccess', function(e: Event) {
+    EventEmitter.addListener('signInSuccess', function(e) {
       that.setState({authenticated: true});
       that.setContext('Logged in!');
     });
-    EventEmitter.addListener('signOutSuccess', function(e: Event) {
+    EventEmitter.addListener('signOutSuccess', function(e) {
       that.setState({authenticated: false});
       that.setContext('Logged out!');
     });
-    EventEmitter.addListener('onError', function(e: Event) {
+    EventEmitter.addListener('onError', function(e) {
       console.warn(e);
       that.setContext(e.error_message);
     });
-    EventEmitter.addListener('onCancelled', function(e: Event) {
+    EventEmitter.addListener('onCancelled', function(e) {
       console.warn(e);
     });
     await createConfig({

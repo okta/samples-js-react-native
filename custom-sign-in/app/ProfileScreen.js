@@ -39,7 +39,8 @@ export default class ProfileScreen extends React.Component {
 
   componentDidMount() {
     this.props.navigation.setOptions({
-      headerLeft: () => <Button onPress={this.logout} title="Logout" />,
+      headerLeft: () => 
+        <Text onPress={this.logout} style={styles.logoutButton}>Logout</Text>
     });
 
     Promise.all([getUser(), getAccessToken()])
@@ -107,6 +108,11 @@ const styles = StyleSheet.create({
     marginTop: 40,
     marginBottom: 10,
     marginHorizontal: 10,
+  },
+  logoutButton: {
+    paddingLeft: 10,
+    fontSize: 16,
+    color: '#0066cc'
   },
   container: {
     flex: 1,
