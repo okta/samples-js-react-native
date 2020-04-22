@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React, {Fragment} from 'react';
+import React from 'react';
 import {
   SafeAreaView,
   Button,
@@ -22,14 +22,12 @@ import {
 } from 'react-native';
 import { signIn } from '@okta/okta-react-native';
 import Spinner from 'react-native-loading-spinner-overlay';
+import Error from './components/Error';
 
 export default class LoginScreen extends React.Component {
-  static navigationOptions = {
-    title: 'Login',
-  };
-
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    
     this.state = {
       username: '',
       password: '',
@@ -47,20 +45,17 @@ export default class LoginScreen extends React.Component {
     const { navigation } = this.props;
     signIn({ username, password })
       .then(token => {
-        console.log('accessToken ', token);
         this.setState({ progress: false, error: '' }, () => navigation.navigate('Profile'));
       })
       .catch(e => {
-        console.log(e);
         this.setState({ progress: false, error: e.message });
       });
   }
 
   render() {
     const { progress, error } = this.state;
-
     return (
-      <Fragment>
+      <>
         <StatusBar barStyle="dark-content" />
         <SafeAreaView style={styles.container}>
           <Spinner
@@ -69,7 +64,7 @@ export default class LoginScreen extends React.Component {
             textStyle={styles.spinnerTextStyle}
           />
           <Text style={styles.title}>Native Sign-In</Text>
-          { !!error && <Text style={styles.error}>{error}</Text> }
+          <Error error={error} />
           <View style={styles.buttonContainer}>
             <View style={styles.button}>
               <TextInput
@@ -93,7 +88,7 @@ export default class LoginScreen extends React.Component {
             </View>
           </View>
         </SafeAreaView>
-      </Fragment>
+      </>
     );
   }
 }
@@ -133,8 +128,5 @@ const styles = StyleSheet.create({
     color: '#0066cc',
     paddingTop: 40,
     textAlign: 'center',
-  },
-  error: {
-    color: 'red'
-  },
+  }
 });

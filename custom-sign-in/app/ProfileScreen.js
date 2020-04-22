@@ -21,36 +21,39 @@ import {
 } from 'react-native';
 import { getAccessToken, getUser, clearTokens } from '@okta/okta-react-native';
 import Spinner from 'react-native-loading-spinner-overlay';
+import Error from './components/Error';
 
 export default class ProfileScreen extends React.Component {
-  static navigationOptions = {
-    title: 'User Profile',
-  };
-
   constructor(props) {
     super(props);
+
     this.state = {
       accessToken: null,
       user: null,
       progress: true,
       error: ''
     };
+
+    this.logout = this.logout.bind(this);
   }
 
-  async componentDidMount() {
-    try {
-      const user = await getUser();
-      const token = await getAccessToken();
-  
-      this.setState({
-        progress: false,
-        user,
-        accessToken: token.access_token
+  componentDidMount() {
+    this.props.navigation.setOptions({
+      headerLeft: () => <Button onPress={this.logout} title="Logout" />,
+    });
+
+    Promise.all([getUser(), getAccessToken()])
+      .then(([user, token]) => {
+        this.setState({
+          progress: false,
+          user,
+          accessToken: token.access_token
+        });
+      })
+      .catch(e => {
+        console.log(e.code, e.message);
+        this.setState({ progress: false, error: e.message });
       });
-    } catch (e) {
-      console.log(e.code, e.message);
-      this.setState({ progress: false, error: e.message });
-    }
   }
 
   logout() {
@@ -59,7 +62,6 @@ export default class ProfileScreen extends React.Component {
         this.props.navigation.navigate('Login');
       })
       .catch(e => {
-        console.log(e.code, e.message);
         this.setState({ error: e.message })
       });
   }
@@ -76,22 +78,15 @@ export default class ProfileScreen extends React.Component {
             textContent={'Loading...'}
             textStyle={styles.spinnerTextStyle}
           />
-          <View style={{ marginTop: 10 }}>
-            <Button
-              testID="logoutButton"
-              onPress={this.logout.bind(this)}
-              title="Logout"
-            />
-          </View>
-          { !!error && <Text style={styles.error}>{error}</Text> }
+          <Error error={error} />
           { user && 
             <Text style={styles.titleHello}>
               Hello {user.name}
             </Text> 
           }
           { accessToken &&
-            <View style={{ marginTop: 60, height: 140 }}>
-              <Text>Access Token:</Text>
+            <View style={styles.tokenContainer}>
+              <Text style={styles.tokenTitle}>Access Token:</Text>
               <Text style={{ marginTop: 20 }}>{accessToken}</Text>
             </View>
           }
@@ -132,7 +127,14 @@ const styles = StyleSheet.create({
     paddingTop: 15,
     textAlign: 'center',
   },
-  error: {
-    color: 'red'
+  tokenContainer: {
+    marginTop: 60, 
+    marginLeft: 20, 
+    marginRight: 20, 
+    height: 140
   },
+  tokenTitle: {
+    fontSize: 16,
+    fontWeight: 'bold'
+  }
 });
