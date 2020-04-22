@@ -45,7 +45,12 @@ export default class LoginScreen extends React.Component {
     const { navigation } = this.props;
     signIn({ username, password })
       .then(token => {
-        this.setState({ progress: false, error: '' }, () => navigation.navigate('Profile'));
+        this.setState({ 
+          progress: false, 
+          username: '', 
+          password: '', 
+          error: '' 
+        }, () => navigation.navigate('Profile'));
       })
       .catch(e => {
         this.setState({ progress: false, error: e.message });

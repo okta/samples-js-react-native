@@ -47,7 +47,6 @@ export default class ProfileScreen extends React.Component {
     this.setState({ progress: true });
     getUser()
       .then(user => {
-        console.log(user);
         this.setState({ progress: false, user });
       })
       .catch(e => {
