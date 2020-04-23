@@ -13,9 +13,9 @@ Before running the samples, you will need the following:
   * **Application Name** 
     * Native OpenId Connect App (must be unique)
   * **Login redirect URIs**
-    * `com.sampleapplication:/`
+    * `com.okta.example:/callback`
   * **Logout redirect URIs**
-    * `com.sampleapplication:/`
+    * `com.okta.example:/logoutCallback`
   * **Grant type allowed**
     * Authorization Code
     * Refresh Token
@@ -28,15 +28,15 @@ For each sample, you will need to gather the following information from the Okta
 * **Client Id** - The client ID of the Native application that you created earlier. This can be found on the "General" tab of an application, or the list of applications.  This identifies the application that tokens will be minted for.
 * **Issuer/Discovery Uri** - This is the URL of the authorization server that will perform authentication.  All Developer Accounts have a "default" authorization server.  The issuer is a combination of your Org URL (found in the upper right of the console home page) and `/oauth2/default`. For example, `https://dev-1234.oktapreview.com/oauth2/default`.
 
-Now place these values into the file `samples.config.js` located under each sample folder:
+Now place these values into the file `samples.config.js` located under each sample folder, here let's use `dev-1234.oktapreview.com` as the okta domain:
 
 ```javascript
 export default {
   oidc: {
     clientId: '{clientId}',
-    discoveryUri: 'https://{yourOktaDomain}.com/oauth2/default',
-    redirectUri: 'com.sampleapplication:/',
-    endSessionRedirectUri: 'com.sampleapplication:/',
+    discoveryUri: 'https://{yourOktaDomain}/oauth2/default', // https://dev-1234.oktapreview.com/oauth2/default
+    redirectUri: 'com.okta.{example}:/callback', // com.oktapreview.dev-1234:/callback
+    endSessionRedirectUri: 'com.okta.{example}:/logoutCallback', // com.oktapreview.dev-1234:/logoutCallback
     scope: ["openid", "profile", "offline_access"],
     requireHardwareBackedKeyStore: false
   }
