@@ -10,7 +10,7 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React, {Fragment} from 'react';
+import React from 'react';
 import {
   SafeAreaView,
   Button,
@@ -20,89 +20,80 @@ import {
   StatusBar,
   TextInput,
 } from 'react-native';
+import { signIn } from '@okta/okta-react-native';
 import Spinner from 'react-native-loading-spinner-overlay';
+import Error from './components/Error';
 
 export default class LoginScreen extends React.Component {
-  static navigationOptions = {
-    title: 'Login',
-  };
-
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    
     this.state = {
-      userName: '',
+      username: '',
       password: '',
       progress: false,
-    };
-    var OktaAuth = require('@okta/okta-auth-js');
-    var config = {
-      url: 'https://{yourOktaDomain}',
+      error: '',
     };
 
-    this.authClient = new OktaAuth(config);
+    this.login = this.login.bind(this);
   }
 
-  async login() {
-    let self = this;
-    this.setState({progress: true});
-    this.authClient
-      .signIn({
-        username: this.state.userName,
-        password: this.state.password,
+  login() {
+    this.setState({ progress: true });
+
+    const { username, password } = this.state;
+    const { navigation } = this.props;
+    signIn({ username, password })
+      .then(token => {
+        this.setState({ 
+          progress: false, 
+          username: '', 
+          password: '', 
+          error: '' 
+        }, () => navigation.navigate('Profile'));
       })
-      .then(function(transaction) {
-        self.setState({progress: false});
-        if (transaction.status === 'SUCCESS') {
-          const {navigate} = self.props.navigation;
-          navigate('Profile', {transaction: transaction});
-        } else {
-          throw 'We cannot handle the ' + transaction.status + ' status';
-        }
-      })
-      .fail(function(err) {
-        console.error(err);
-        self.setState({progress: false});
+      .catch(e => {
+        this.setState({ progress: false, error: e.message });
       });
   }
 
   render() {
+    const { progress, error } = this.state;
     return (
-      <Fragment>
+      <>
         <StatusBar barStyle="dark-content" />
         <SafeAreaView style={styles.container}>
           <Spinner
-            visible={this.state.progress}
+            visible={progress}
             textContent={'Loading...'}
             textStyle={styles.spinnerTextStyle}
           />
           <Text style={styles.title}>Native Sign-In</Text>
+          <Error error={error} />
           <View style={styles.buttonContainer}>
             <View style={styles.button}>
               <TextInput
                 style={styles.textInput}
-                placeholder="Login"
-                onChangeText={text => (this.state.userName = text)}
+                placeholder="User Name"
+                onChangeText={username => this.setState({ username })}
               />
               <TextInput
                 style={styles.textInput}
                 placeholder="Password"
                 secureTextEntry={true}
-                onChangeText={text => (this.state.password = text)}
+                onChangeText={password => this.setState({ password })}
               />
               <View style={{marginTop: 40, height: 40}}>
                 <Button
                   testID="loginButton"
-                  onPress={async () => {
-                    this.state.progress = true;
-                    this.login();
-                  }}
+                  onPress={this.login}
                   title="Login"
                 />
               </View>
             </View>
           </View>
         </SafeAreaView>
-      </Fragment>
+      </>
     );
   }
 }
@@ -142,5 +133,5 @@ const styles = StyleSheet.create({
     color: '#0066cc',
     paddingTop: 40,
     textAlign: 'center',
-  },
+  }
 });

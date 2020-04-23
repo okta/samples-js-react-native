@@ -1,14 +1,17 @@
 {
-  "name": "browserSignIn",
+  "name": "browser-sign-in",
   "version": "0.0.1",
   "private": true,
   "scripts": {
     "start": "react-native start",
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
     "test": "jest __tests__/App-test.js",
     "lint": "eslint ."
   },
   "dependencies": {
-    "@okta/okta-react-native": "^1.2.1",
+    "@okta/okta-react-native": "^1.4.0",
+    "events": "^3.1.0",
     "react": "16.8.6",
     "react-native": "^0.60.0"
   },

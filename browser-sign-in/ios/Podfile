@@ -29,6 +29,5 @@ target 'browserSignIn' do
 
 
   use_native_modules!
-  pod 'OktaSdkBridgeReactNative', :path => '../node_modules/@okta/okta-react-native'
 
 end

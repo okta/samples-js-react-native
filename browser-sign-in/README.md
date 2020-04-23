@@ -2,23 +2,6 @@
 
 This example shows you how to use the [Okta React Native Library](https://github.com/okta/okta-oidc-js/tree/master/packages/okta-react-native) to login a user to a React Native application.  The login is achieved through the Auth Code Flow + PKCE, where the user is redirected to the Okta browser login page. After the user authenticates they are redirected back to the application with an Authorization Code, which is exchanged for an ID token and access token.
 
-## Prerequisites
-
-Before running this sample, you will need the following:
-
-* An Okta Developer Account, you can sign up for one at <https://developer.okta.com/signup/>.
-* An Okta Application, configured for Native mode. This is done from the Okta Developer Console. After login, from the Admin dashboard, navigate to `Applications → Add Application`. Choose Native as the platform. Populate your new Native OpenID Connect application with values similar to:
-  * **Application Name** 
-    * Native OpenId Connect App (must be unique)
-  * **Login redirect URIs**
-    * `com.sampleapplication:/`
-  * **Logout redirect URIs**
-    * `com.sampleapplication:/`
-  * **Grant type allowed**
-    * Authorization Code
-    * Refresh Token
-* If you are developing with an Android device emulator, make sure to check out the [React Native - Android Development](https://facebook.github.io/react-native/docs/getting-started.html#android-development-environment) setup instructions.
-
 ## Running This Example
 
 To run this application, you first need to clone this repo and then enter into this directory:
@@ -31,13 +14,7 @@ cd samples-js-react-native/browser-sign-in
 Then install dependencies:
 
 ```bash
-npm install
-```
-
-After that, you will need to link the native modules. If you're still in the ios folder, return to the root folder.
-
-```bash
-react-native link @okta/okta-react-native
+npm ci
 ```
 
 Install dependecies for iOS.
@@ -47,42 +24,22 @@ cd ios
 pod install
 ```
 
-Now you need to gather the following information from the Okta Developer Console:
-
-* **Client Id** - The client ID of the Native application that you created earlier. This can be found on the "General" tab of an application, or the list of applications.  This identifies the application that tokens will be minted for.
-* **Issuer/Discovery Uri** - This is the URL of the authorization server that will perform authentication.  All Developer Accounts have a "default" authorization server.  The issuer is a combination of your Org URL (found in the upper right of the console home page) and `/oauth2/default`. For example, `https://dev-1234.oktapreview.com/oauth2/default`.
-
-Now place these values into the file `samples.config.js` that was created for you in this project:
-
-```javascript
-export default {
-  oidc: {
-    clientId: '{clientId}',
-    discoveryUri: 'https://{yourOktaDomain}.com/oauth2/default',
-    redirectUri: 'com.sampleapplication:/',
-    endSessionRedirectUri: 'com.sampleapplication:/',
-    scope: ["openid", "profile", "offline_access"],
-    requireHardwareBackedKeyStore: false
-  }
-};
-```
-
 For **Android** development, please make sure `redirect schema` is properly added by following [Add redirect schema](https://github.com/okta/okta-oidc-js/tree/master/packages/okta-react-native#add-redirect-scheme) section from [Okta React Native](https://github.com/okta/okta-oidc-js/tree/master/packages/okta-react-native#okta-react-native) README.
 
 Now start the app server:
 
 ```bash
-react-native start
+npm start
 ```
 
 As an alternative, you can launch an Android Emulator or iOS Simulator:
 
 ```bash
 # Android
-react-native run-android
+npm run android
 
 # iOS
-react-native run-ios
+npm run ios
 ```
 
 If you see a home page that prompts you to login, then things are working!  Clicking the **Log in** button will redirect you to the Okta browser sign-in page.

@@ -10,126 +10,115 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
-import React, {Fragment} from 'react';
+import React from 'react';
 import {
   SafeAreaView,
-  Button,
   StyleSheet,
   Text,
   View,
   StatusBar,
+  Button
 } from 'react-native';
-import {
-  createConfig,
-  authenticate,
-  getAccessToken,
-  EventEmitter,
-} from '@okta/okta-react-native';
+import { getAccessToken, getUser, clearTokens } from '@okta/okta-react-native';
 import Spinner from 'react-native-loading-spinner-overlay';
-import configFile from './../samples.config';
+import Error from './components/Error';
 
 export default class ProfileScreen extends React.Component {
-  static navigationOptions = {
-    title: 'User Profile',
-  };
+  constructor(props) {
+    super(props);
 
-  constructor() {
-    super();
     this.state = {
-      authenticated: false,
       accessToken: null,
-      progress: false,
+      user: null,
+      progress: true,
+      error: ''
     };
+
+    this.logout = this.logout.bind(this);
+    this.getAccessToken = this.getAccessToken.bind(this);
   }
 
-  async componentDidMount() {
-    let self = this;
-    EventEmitter.addListener('signInSuccess', function(e: Event) {
-      self.getAccessToken();
+  componentDidMount() {
+    this.props.navigation.setOptions({
+      headerLeft: () => 
+        <Text onPress={this.logout} style={styles.logoutButton}>Logout</Text>
     });
-    EventEmitter.addListener('onError', function(e: Event) {
-      console.warn(e);
-      self.setState({progress: false});
-    });
-    EventEmitter.addListener('onCancelled', function(e: Event) {
-      console.warn(e);
-      self.setState({progress: false});
-    });
-    await createConfig({
-      clientId: configFile.oidc.clientId,
-      redirectUri: configFile.oidc.redirectUri,
-      endSessionRedirectUri: configFile.oidc.endSessionRedirectUri,
-      discoveryUri: configFile.oidc.discoveryUri,
-      scopes: configFile.oidc.scopes,
-      requireHardwareBackedKeyStore:
-        configFile.oidc.requireHardwareBackedKeyStore,
-    });
+
+    this.setState({ progress: true });
+    getUser()
+      .then(user => {
+        this.setState({ progress: false, user });
+      })
+      .catch(e => {
+        this.setState({ progress: false, error: e.message });
+      });
   }
 
-  componentWillUnmount() {
-    EventEmitter.removeAllListeners('signInSuccess');
-    EventEmitter.removeAllListeners('onError');
-    EventEmitter.removeAllListeners('onCancelled');
+  getAccessToken() {
+    this.setState({ progress: false });
+    getAccessToken()
+      .then(token => {
+        this.setState({
+          progress: false,
+          accessToken: token.access_token
+        });
+      })
+      .catch(e => {
+        this.setState({ progress: false, error: e.message });
+      })
   }
 
-  async getAccessToken() {
-    const promise = await getAccessToken();
-    this.setState({accessToken: promise.access_token});
-    this.setState({authenticated: true});
-    this.setState({progress: false});
-  }
-
-  async exchangeSessionToken({sessionToken}) {
-    this.setState({progress: true});
-    authenticate({sessionToken});
+  logout() {
+    clearTokens()
+      .then(() => {
+        this.props.navigation.navigate('Login');
+      })
+      .catch(e => {
+        this.setState({ error: e.message })
+      });
   }
 
   render() {
-    const {navigation} = this.props;
-    const transaction = navigation.getParam('transaction', 'NO-ID');
-    const userProfile = transaction.data._embedded.user.profile;
-    let accessTokenArea;
-    if (this.state.authenticated) {
-      accessTokenArea = (
-        <View style={{marginTop: 60, height: 140}}>
-          <Text>Access Token:</Text>
-          <Text style={{marginTop: 20}}>{this.state.accessToken}</Text>
-        </View>
-      );
-    } else {
-      accessTokenArea = (
-        <View style={{marginTop: 60, height: 40}}>
-          <Button
-            testID="getAccessTokenButton"
-            onPress={async () => {
-              this.exchangeSessionToken({
-                sessionToken: transaction.sessionToken,
-              });
-            }}
-            title="Get Access Token"
-          />
-        </View>
-      );
-    }
+    const { user, accessToken, error, progress } = this.state;
+
     return (
-      <Fragment>
+      <>
         <StatusBar barStyle="dark-content" />
         <SafeAreaView style={styles.container}>
           <Spinner
-            visible={this.state.progress}
+            visible={progress}
             textContent={'Loading...'}
             textStyle={styles.spinnerTextStyle}
           />
-          <Text style={styles.titleHello}>
-            Hello {userProfile.firstName} {userProfile.lastName}
-          </Text>
-          <Text style={styles.titleDetails}>Login: {userProfile.login}</Text>
-          <Text style={styles.titleDetails}>
-            Session expires: {transaction.expiresAt}
-          </Text>
-          {accessTokenArea}
+          <Error error={error} />
+          { user && (
+            <View style={{ paddingLeft: 20, paddingTop: 20 }}>
+              <Text style={styles.titleHello}>Hello {user.name}</Text>
+              <View style={{ flexDirection: 'row' }}>
+                <Text>Name: </Text>
+                <Text>{user.name}</Text>
+              </View>
+              <View style={{ flexDirection: 'row' }}>
+                <Text>Locale: </Text>
+                <Text>{user.locale}</Text>
+              </View>
+              <View style={{ flexDirection: 'row' }}>
+                <Text>Zone Info: </Text>
+                <Text>{user.zoneinfo}</Text>
+              </View>
+            </View>
+          )}
+          <View style={{ flexDirection: 'column', marginTop: 20, paddingLeft: 20, width: 300 }}>
+            <Button style={{ marginTop:40 }} title="Get access token" onPress={this.getAccessToken} />
+            { accessToken &&
+              <View style={styles.tokenContainer}>
+                <Text style={styles.tokenTitle}>Access Token:</Text>
+                <Text style={{ marginTop: 20 }} numberOfLines={5}>{accessToken}</Text>
+              </View>
+            }
+          </View>
         </SafeAreaView>
-      </Fragment>
+      </>
     );
   }
 }
@@ -146,18 +135,21 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     marginHorizontal: 10,
   },
+  logoutButton: {
+    paddingLeft: 10,
+    fontSize: 16,
+    color: '#0066cc'
+  },
   container: {
     flex: 1,
     flexDirection: 'column',
     backgroundColor: '#FFFFFF',
-    alignItems: 'center',
   },
   titleHello: {
     fontSize: 20,
     fontWeight: 'bold',
     color: '#0066cc',
-    paddingTop: 40,
-    textAlign: 'center',
+    paddingTop: 40
   },
   titleDetails: {
     fontSize: 15,
@@ -165,4 +157,11 @@ const styles = StyleSheet.create({
     paddingTop: 15,
     textAlign: 'center',
   },
+  tokenContainer: {
+    marginTop: 20
+  },
+  tokenTitle: {
+    fontSize: 16,
+    fontWeight: 'bold'
+  }
 });

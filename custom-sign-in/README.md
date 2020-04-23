@@ -1,15 +1,8 @@
 # Okta iOS Custom Sign In Example
 
-This example shows you how to use the [Okta Auth JS](https://github.com/okta/okta-auth-js) to adopt Okta Authentication flow in your app.
+This example shows you how to use the [Okta React Native SDK](https://github.com/okta/okta-oidc-js/tree/master/packages/okta-react-native) to adopt Okta Authentication flow in your app.
 
-## Prerequisites
-
-Before running this sample, you will need the following:
-
-* An Okta Developer Account, you can sign up for one at https://developer.okta.com/signup/.
-
-## Running This Example
-
+## Clone repo
 To run this application, you first need to clone this repo and then enter into this directory:
 
 ```bash
@@ -17,15 +10,35 @@ git clone git@github.com:okta/samples-js-react-native.git
 cd samples-js-react-native/custom-sign-in
 ```
 
-Assign your Org URL to `url` parameter in `app/LoginScreen.js` file (line #37):
+## Install dependencies
 
-```javascript
-var config = {
-  url: 'https://{yourOktaDomain}',
-};
+### Install JS dependencies
+Install dependencies based on package-lock.json
+```bash
+npm ci
 ```
 
-Now complete instructions from [Browser Sign In Example](https://github.com/okta/samples-js-react-native/tree/master/browser-sign-in) page.
+### Install CocoaPods dependencies
+CocoaPods dependencies are needed for ios development
+```bash
+cd ios && pod install && cd ..
+```
+
+## Run sample
+
+Start app server:
+```bash
+npm start
+```
+
+Launch an Android Emulator or iOS Simulator, then
+```bash
+# Android
+npm run android
+
+# iOS
+npm run ios
+```
 
 ## Using This Example
 
