@@ -9,13 +9,13 @@
  *
  * See the License for the specific language governing permissions and limitations under the License.
  */
- 
+
 export default {
   oidc: {
     clientId: '{clientId}',
-    redirectUri: '{redirectUri}',
-    endSessionRedirectUri: '{endSessionRedirectUri}',
-    discoveryUri: 'https://{yourOktaDomain}',
+    redirectUri: '{customUriSchema}:/loginCallback',
+    endSessionRedirectUri: '{customUriSchema}:/logoutCallback',
+    discoveryUri: 'https://{youOktaDomain}/oauth2/default',
     scopes: ['openid', 'profile', 'offline_access'],
     requireHardwareBackedKeyStore: false,
   }
