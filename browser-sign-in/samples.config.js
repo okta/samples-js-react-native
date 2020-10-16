@@ -15,7 +15,7 @@ export default {
     clientId: '{clientId}',
     redirectUri: '{customUriSchema}:/loginCallback',
     endSessionRedirectUri: '{customUriSchema}:/logoutCallback',
-    discoveryUri: 'https://{youOktaDomain}/oauth2/default',
+    discoveryUri: 'https://{yourOktaDomain}/oauth2/default',
     scopes: ["openid", "profile", "offline_access"],
     requireHardwareBackedKeyStore: false,
   }
