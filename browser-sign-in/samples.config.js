@@ -13,8 +13,8 @@
 export default {
   oidc: {
     clientId: '{clientId}',
-    redirectUri: '{customUriSchema}:/loginCallback',
-    endSessionRedirectUri: '{customUriSchema}:/logoutCallback',
+    redirectUri: '{customUriScheme}:/loginCallback',
+    endSessionRedirectUri: '{customUriScheme}:/logoutCallback',
     discoveryUri: 'https://{yourOktaDomain}/oauth2/default',
     scopes: ["openid", "profile", "offline_access"],
     requireHardwareBackedKeyStore: false,
