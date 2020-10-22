@@ -26,7 +26,7 @@
     "enzyme-async-helpers": "^0.9.1",
     "eslint": "^6.8.0",
     "jest": "^24.9.0",
-    "metro": "^0.63.0",
+    "metro": "^0.54.1",
     "metro-react-native-babel-preset": "^0.55.0",
     "react-dom": "16.13.1",
     "react-test-renderer": "16.8.6"
