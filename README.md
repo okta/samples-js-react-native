@@ -4,6 +4,10 @@ This repository contains several sample applications that demonstrate various Ok
 
 Each sample makes use of the [Okta React Native Library](https://github.com/okta/okta-oidc-js/tree/master/packages/okta-react-native).
 
+## Supported Platforms
+- iOS 11+ [Okta OIDC iOS Supported Platforms](https://github.com/okta/okta-oidc-ios#supported-platforms)
+- Android API 21+ [Okta OIDC Android MinSDK Requirements](https://github.com/okta/okta-oidc-android#requirements)
+
 ## Prerequisites
 
 Before running the samples, you will need the following:
