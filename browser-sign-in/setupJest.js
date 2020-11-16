@@ -24,12 +24,3 @@ if (typeof window !== 'object') {
   global.window = global;
   global.window.navigator = {};
 }
-
-const EventEmitter = require('EventEmitter');
-const RCTDeviceEventEmitter = require('RCTDeviceEventEmitter');
-
-class NativeEventEmitter extends EventEmitter {
-  constructor() {
-    super(RCTDeviceEventEmitter.sharedSubscriber);
-  }
-}
