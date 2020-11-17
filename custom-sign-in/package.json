@@ -10,29 +10,29 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@okta/configuration-validation": "^0.4.1",
-    "@okta/okta-react-native": "^1.4.0",
-    "@react-native-community/masked-view": "^0.1.9",
-    "@react-navigation/native": "^5.1.6",
-    "@react-navigation/stack": "^5.2.12",
-    "events": "^3.1.0",
-    "react": "16.8.6",
-    "react-native": "0.60.5",
-    "react-native-gesture-handler": "^1.6.1",
-    "react-native-loading-spinner-overlay": "^1.0.1",
-    "react-native-reanimated": "^1.8.0",
-    "react-native-safe-area-context": "^0.7.3",
-    "react-native-screens": "^2.5.0"
+    "@okta/configuration-validation": "^1.0.0",
+    "@okta/okta-react-native": "^1.4.4",
+    "@react-native-community/masked-view": "^0.1.10",
+    "@react-navigation/native": "^5.8.9",
+    "@react-navigation/stack": "^5.12.6",
+    "events": "^3.2.0",
+    "react": "17.0.1",
+    "react-native": "0.63.3",
+    "react-native-gesture-handler": "^1.8.0",
+    "react-native-loading-spinner-overlay": "^2.0.0",
+    "react-native-reanimated": "^1.13.1",
+    "react-native-safe-area-context": "^3.1.9",
+    "react-native-screens": "^2.14.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.9.0",
-    "@babel/runtime": "^7.9.2",
-    "@react-native-community/eslint-config": "^0.0.5",
-    "babel-jest": "^24.9.0",
-    "eslint": "^6.4.0",
-    "jest": "^24.9.0",
-    "metro-react-native-babel-preset": "^0.56.0",
-    "react-test-renderer": "16.8.6"
+    "@babel/core": "^7.12.3",
+    "@babel/runtime": "^7.12.5",
+    "@react-native-community/eslint-config": "^2.0.0",
+    "babel-jest": "^26.6.3",
+    "eslint": "^7.13.0",
+    "jest": "^26.6.3",
+    "metro-react-native-babel-preset": "^0.58.0",
+    "react-test-renderer": "17.0.1"
   },
   "jest": {
     "preset": "react-native"

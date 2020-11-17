@@ -52,10 +52,9 @@ Array [
       >
         <View
           accessibilityRole="button"
-          accessibilityStates={Array []}
+          accessibilityState={Object {}}
           accessible={true}
-          clickable={true}
-          isTVSelectable={true}
+          focusable={true}
           onClick={[Function]}
           onResponderGrant={[Function]}
           onResponderMove={[Function]}
@@ -83,7 +82,7 @@ Array [
                   Object {
                     "color": "#007AFF",
                     "fontSize": 18,
-                    "padding": 8,
+                    "margin": 8,
                     "textAlign": "center",
                   },
                 ]
