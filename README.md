@@ -57,3 +57,4 @@ Please find the sample that fits your use-case from the table below.
 | [Custom Sign In](/custom-sign-in) | A React Native application that adopts native authorization to take control over authorization flow and/or provide custom UI. |
 
 [Okta React Native Library]: https://github.com/okta/okta-oidc-js/tree/master/packages/okta-react-native
+
