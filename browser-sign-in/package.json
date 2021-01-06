@@ -10,7 +10,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@okta/okta-react-native": "^1.4.4",
+    "@okta/okta-react-native": "^1.5.0",
     "events": "^3.2.0",
     "react": "17.0.1",
     "react-native": "^0.63.3"
