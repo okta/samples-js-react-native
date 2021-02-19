@@ -1,6 +1,6 @@
 # Okta React Native + Browser Sign In Example
 
-This example shows you how to use the [Okta React Native Library](https://github.com/okta/okta-oidc-js/tree/master/packages/okta-react-native) to login a user to a React Native application.  The login is achieved through the Auth Code Flow + PKCE, where the user is redirected to the Okta browser login page. After the user authenticates they are redirected back to the application with an Authorization Code, which is exchanged for an ID token and access token.
+This example shows you how to use the [Okta React Native Library](https://github.com/okta/okta-react-native) to login a user to a React Native application.  The login is achieved through the Auth Code Flow + PKCE, where the user is redirected to the Okta browser login page. After the user authenticates they are redirected back to the application with an Authorization Code, which is exchanged for an ID token and access token.
 
 ## Running This Example
 

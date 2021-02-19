@@ -1,6 +1,6 @@
 # Okta React Native Custom Sign In Example
 
-This example shows you how to use the [Okta React Native SDK](https://github.com/okta/okta-oidc-js/tree/master/packages/okta-react-native) to adopt Okta Authentication flow in your app.
+This example shows you how to use the [Okta React Native SDK](https://github.com/okta/okta-react-native) to adopt Okta Authentication flow in your app.
 
 ## Clone repo
 To run this application, you first need to clone this repo and then enter into this directory:
