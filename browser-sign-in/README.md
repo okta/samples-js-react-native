@@ -24,7 +24,7 @@ cd ios
 pod install
 ```
 
-For **Android** development, please make sure `redirect schema` is properly added by following [Add redirect schema](https://github.com/okta/okta-oidc-js/tree/master/packages/okta-react-native#add-redirect-scheme) section from [Okta React Native](https://github.com/okta/okta-oidc-js/tree/master/packages/okta-react-native#okta-react-native) README.
+For **Android** development, please make sure `redirect schema` is properly added by following [Add redirect schema](https://github.com/okta/okta-react-native#add-redirect-scheme) section from [Okta React Native](https://github.com/okta/okta-react-native#okta-react-native) README.
 
 Now start the app server:
 
