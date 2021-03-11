@@ -12,7 +12,7 @@
 
 import React from 'react';
 import App from '../App';
-import { shallow, render, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import renderer from 'react-test-renderer';
 import { waitForState } from 'enzyme-async-helpers';
 
@@ -34,15 +34,16 @@ jest
     () => 'ScrollView',
   );
 
+// eslint-disable-next-line no-undef
 global.fetch = jest
   .fn()
   .mockImplementation(() => {
-    const promise = new Promise((resolve, reject) => {
+    const promise = new Promise((resolve, _reject) => {
       resolve({
         json: () => {
           return {
             user: [{ foo: 'foo', bar: 'bar' }],
-          }
+          };
         },
         ok: true,
       });
@@ -50,12 +51,13 @@ global.fetch = jest
     return promise;
   })
   .mockImplementationOnce(() => {
-    const promise = new Promise((resolve, reject) => {
+    const promise = new Promise((resolve, _reject) => {
       resolve({
         json: () => {
           return {
+            // eslint-disable-next-line camelcase
             userinfo_endpoint: 'dummy_endpoint',
-          }
+          };
         },
         ok: true,
       });
@@ -158,7 +160,7 @@ describe('authentication flow', () => {
 
   it('should return user profile information from getUser method' , async () => {
     const mockGetUser = require('react-native').NativeModules.OktaSdkBridge.getUser;
-    mockGetUser.mockResolvedValue({ "name": "fake name" });
+    mockGetUser.mockResolvedValue({ 'name': 'fake name' });
     const wrapper = shallow(<App />);
     wrapper.setState({authenticated: true});
     const profileButton = wrapper.find('Button').get(2);

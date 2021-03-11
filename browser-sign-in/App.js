@@ -31,6 +31,7 @@ import {
   getUserFromIdToken,
   EventEmitter,
 } from '@okta/okta-react-native';
+
 import configFile from './samples.config';
 
 export default class App extends React.Component {
@@ -48,21 +49,37 @@ export default class App extends React.Component {
 
   async componentDidMount() {
     let that = this;
-    EventEmitter.addListener('signInSuccess', function (e) {
+    EventEmitter.addListener('signInSuccess', function (error) {
+      if (error) {
+        console.warn(error);
+        that.setContext(error.error_message);
+        return;
+      }
+
       that.setState({authenticated: true});
       that.setContext('Logged in!');
     });
-    EventEmitter.addListener('signOutSuccess', function (e) {
+    
+    EventEmitter.addListener('signOutSuccess', function (error) {
+      if (error) {
+        console.warn(error);
+        that.setContext(error.error_message);
+        return; 
+      }
+
       that.setState({authenticated: false});
       that.setContext('Logged out!');
     });
-    EventEmitter.addListener('onError', function (e) {
-      console.warn(e);
-      that.setContext(e.error_message);
+
+    EventEmitter.addListener('onError', function (error) {
+      console.warn(error);
+      that.setContext(error.error_message);
     });
-    EventEmitter.addListener('onCancelled', function (e) {
-      console.warn(e);
+
+    EventEmitter.addListener('onCancelled', function (error) {
+      console.warn(error);
     });
+
     await createConfig({
       clientId: configFile.oidc.clientId,
       redirectUri: configFile.oidc.redirectUri,

@@ -1,22 +1,31 @@
 module.exports = {
-  ignorePatterns: ['node_modules/', 'dist/'],
+  ignorePatterns: [
+    'node_modules/', 
+    'dist/', 
+    'metro.config.js', 
+    '.eslintrc.js'
+  ],
   extends: [
     'eslint:recommended',
-    'plugin:node/recommended-script',
-    'plugin:jest/recommended',
+    'plugin:react/recommended',
   ],
   rules: {
-    semi: ['error', 'always'],
-    indent: ['error', 2],
+    'jest/no-disabled-tests': 'warn',
+    'jest/no-focused-tests': 'error',
+    'jest/no-identical-title': 'error',
+    'jest/prefer-to-have-length': 'warn',
+    'jest/valid-expect': 'error',
+    'semi': ['error', 'always'],
+    'indent': ['error', 2],
     'no-var': 0,
     'prefer-rest-params': 0,
     'prefer-spread': 0,
     'prefer-const': 0,
     'node/no-unpublished-require': 0,
     'node/no-unpublished-import': 0,
-    camelcase: 2,
-    complexity: [2, 7],
-    curly: 2,
+    'camelcase': 2,
+    'complexity': [2, 7],
+    'curly': 2,
     'dot-notation': 0,
     'guard-for-in': 2,
     'new-cap': [2, {properties: false}],
@@ -29,51 +38,35 @@ module.exports = {
     'no-plusplus': 0,
     'no-undef': 2,
     'no-unused-expressions': [2, {allowShortCircuit: true, allowTernary: true}],
-    'no-unused-vars': 2,
+    'no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
     'max-depth': [2, 3],
     'max-len': [2, 150],
     'max-params': [2, 5],
     'max-statements': [2, 25],
-    quotes: [2, 'single', {allowTemplateLiterals: true}],
-    strict: 0,
+    'quotes': [2, 'single', {allowTemplateLiterals: true}],
+    'strict': 0,
     'wrap-iife': [2, 'any'],
+    'no-console': 'off',
+  },
+  globals: { 
+    fetch: false 
   },
   overrides: [
     {
-      files: ['*.ts', '*.tsx'],
-      extends: [
-        'plugin:@typescript-eslint/eslint-recommended',
-        'plugin:@typescript-eslint/recommended',
-      ],
-      parser: '@typescript-eslint/parser',
-      parserOptions: {
-        ecmaVersion: 2020,
-        ecmaFeatures: {jsx: true},
-        sourceType: 'module',
-        project: 'types/tsconfig.json',
-      },
-      env: {
-        es6: true,
-        node: false,
-      },
-      plugins: ['@typescript-eslint'],
-      rules: {
-        'node/no-unsupported-features/es-syntax': 0,
-        'node/no-unsupported-features/node-builtins': 0,
-      },
-    },
-    {
       // ES6 processed by Babel
-      files: ['*.js', '*.test.js'],
-      plugins: ['node', 'jest'],
+      files: ['*.js'],
+      plugins: ['jest', 'react'],
       parser: '@babel/eslint-parser',
       parserOptions: {
+        ecmaFeatures: {
+          jsx: true
+        },
         ecmaVersion: 2020,
         sourceType: 'module',
       },
       env: {
         es6: true,
-        node: false,
+        node: true,
       },
       rules: {
         'node/no-unsupported-features/es-syntax': 0,

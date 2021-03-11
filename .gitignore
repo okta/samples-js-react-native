@@ -3,8 +3,11 @@ node_modules
 dist
 npm-debug.log
 travis_phantomjs
-.vscode
-.samples.config.js
+test-reports
+
+### VisualStudioCode ###
+.vscode/*
+!.vscode/launch.json
 
 # OSX
 #
