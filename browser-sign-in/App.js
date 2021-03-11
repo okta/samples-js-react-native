@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2019-Present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -48,19 +48,19 @@ export default class App extends React.Component {
 
   async componentDidMount() {
     let that = this;
-    EventEmitter.addListener('signInSuccess', function(e) {
+    EventEmitter.addListener('signInSuccess', function (e) {
       that.setState({authenticated: true});
       that.setContext('Logged in!');
     });
-    EventEmitter.addListener('signOutSuccess', function(e) {
+    EventEmitter.addListener('signOutSuccess', function (e) {
       that.setState({authenticated: false});
       that.setContext('Logged out!');
     });
-    EventEmitter.addListener('onError', function(e) {
+    EventEmitter.addListener('onError', function (e) {
       console.warn(e);
       that.setContext(e.error_message);
     });
-    EventEmitter.addListener('onCancelled', function(e) {
+    EventEmitter.addListener('onCancelled', function (e) {
       console.warn(e);
     });
     await createConfig({
@@ -162,7 +162,7 @@ export default class App extends React.Component {
     }
   }
 
-  setContext = message => {
+  setContext = (message) => {
     this.setState({
       context: message,
     });
