@@ -24,6 +24,7 @@ import {
 import {
   createConfig,
   signIn,
+  signInWithBrowser,
   signOut,
   getAccessToken,
   isAuthenticated,
@@ -111,7 +112,7 @@ export default class App extends React.Component {
   }
 
   async login() {
-    signIn();
+    signInWithBrowser();
   }
 
   async logout() {
@@ -191,6 +192,7 @@ export default class App extends React.Component {
         <View style={styles.buttonContainer}>
           <View style={styles.button}>
             <Button
+              testID="getUserFromIdToken"
               onPress={async () => {
                 this.getUserIdToken();
               }}
@@ -199,6 +201,7 @@ export default class App extends React.Component {
           </View>
           <View style={styles.button}>
             <Button
+              testID="getUserFromRequest"
               onPress={async () => {
                 this.getMyUser();
               }}
@@ -207,10 +210,20 @@ export default class App extends React.Component {
           </View>
           <View style={styles.button}>
             <Button
+              testID="getMyUserFromAccessToken"
               onPress={async () => {
                 this.getMyUserThroughAccessToken();
               }}
               title="Get User From Access Token"
+            />
+          </View>
+          <View style={styles.button}>
+            <Button
+              testID="clearButton"
+              onPress={async () => {
+                this.setContext('');
+              }}
+              title="Clear Text"
             />
           </View>
         </View>
@@ -223,7 +236,7 @@ export default class App extends React.Component {
       <Fragment>
         <StatusBar barStyle="dark-content" />
         <SafeAreaView style={styles.container}>
-          <Text style={styles.title}>Okta + React Native</Text>
+          <Text testID="titleLabel" style={styles.title}>Okta + React Native</Text>
           <View style={styles.buttonContainer}>
             <View style={styles.button}>
               {this.state.authenticated ? (
@@ -251,7 +264,7 @@ export default class App extends React.Component {
           <ScrollView
             contentInsetAdjustmentBehavior="automatic"
             style={styles.context}>
-            <Text>{this.state.context}</Text>
+            <Text testID="descriptionBox">{this.state.context}</Text>
           </ScrollView>
         </SafeAreaView>
       </Fragment>
@@ -267,7 +280,6 @@ const styles = StyleSheet.create({
   },
   button: {
     borderRadius: 40,
-    width: 200,
     height: 40,
     marginTop: 10,
     marginBottom: 10,

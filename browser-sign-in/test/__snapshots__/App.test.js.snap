@@ -26,6 +26,7 @@ Array [
           "textAlign": "center",
         }
       }
+      testID="titleLabel"
     >
       Okta + React Native
     </Text>
@@ -46,7 +47,6 @@ Array [
             "marginBottom": 10,
             "marginHorizontal": 10,
             "marginTop": 10,
-            "width": 200,
           }
         }
       >
@@ -102,7 +102,9 @@ Array [
         }
       }
     >
-      <Text />
+      <Text
+        testID="descriptionBox"
+      />
     </ScrollView>
   </RCTSafeAreaView>,
 ]
