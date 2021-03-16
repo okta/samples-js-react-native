@@ -1,0 +1,47 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug iOS",
+            "request": "launch",
+            "type": "reactnative",
+            "cwd": "${workspaceFolder}",
+            "platform": "ios"
+        },
+        {
+            "type": "node",
+            "name": "Run Tests",
+            "request": "launch",
+            "program": "${workspaceFolder}/node_modules/jest/bin/jest",
+            "args": [
+                "--runInBand"
+            ],
+            "cwd": "${workspaceFolder}",
+            "console": "integratedTerminal",
+            "internalConsoleOptions": "neverOpen",
+            "disableOptimisticBPs": true
+        },
+        {
+            "name": "Run iOS",
+            "request": "launch",
+            "type": "reactnative",
+            "cwd": "${workspaceFolder}",
+            "enableDebug": false,
+            "platform": "ios"
+        },
+        {
+            "name": "Run Android",
+            "request": "launch",
+            "type": "reactnative",
+            "cwd": "${workspaceFolder}",
+            "enableDebug": false,
+            "platform": "android"
+        },
+        {
+            "name": "Attach to packager",
+            "request": "attach",
+            "type": "reactnative",
+            "cwd": "${workspaceFolder}"
+        }
+    ]
+}

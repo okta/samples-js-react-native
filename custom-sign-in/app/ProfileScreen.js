@@ -1,5 +1,5 @@
 ﻿/*
- * Copyright (c) 2019, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2019-Present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -65,7 +65,7 @@ export default class ProfileScreen extends React.Component {
       })
       .catch(e => {
         this.setState({ progress: false, error: e.message });
-      })
+      });
   }
 
   logout() {
@@ -74,7 +74,7 @@ export default class ProfileScreen extends React.Component {
         this.props.navigation.navigate('Login');
       })
       .catch(e => {
-        this.setState({ error: e.message })
+        this.setState({ error: e.message });
       });
   }
 
