@@ -16,10 +16,6 @@ final class BrowserSignInUITests: XCTestCase {
   
   private var username = ProcessInfo.processInfo.environment["USERNAME"]!
   private var password = ProcessInfo.processInfo.environment["PASSWORD"]!
-  private var issuer = ProcessInfo.processInfo.environment["ISSUER"]!
-  private var redirectURI = ProcessInfo.processInfo.environment["REDIRECT_URI"]!
-  private var logoutRedirectURI = ProcessInfo.processInfo.environment["LOGOUT_REDIRECT_URI"]!
-  private var clientID = ProcessInfo.processInfo.environment["CLIENT_ID"]!
   
   private var app: XCUIApplication!
   private let springboard = XCUIApplication(bundleIdentifier: "com.apple.springboard")
@@ -84,6 +80,7 @@ final class BrowserSignInUITests: XCTestCase {
     let passwordField = webView.secureTextFields.allElementsBoundByIndex.first(where: { $0.frame.width >= usernameField.frame.width })!
     passwordField.tap()
 
+    // `typeText` works weird. Sometimes it doesn't type correct text.
     UIPasteboard.general.string = password
     passwordField.doubleTap()
     app.menuItems["Paste"].tap()

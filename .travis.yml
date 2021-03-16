@@ -4,6 +4,7 @@ install:
   - npm install -g yarn --ignore-dependencies
   - npm install -g react-native-cli
   - yarn install --frozen-lockfile
+  - echo CLIENT_ID=${CLIENT_ID}\\nISSUER=${ISSUER}\\nREDIRECT_URI=${REDIRECT_URI}\\nLOGOUT_REDIRECT_URI=${LOGOUT_REDIRECT_URI} > browser-sign-in/.env
 
 jobs:
   include:
