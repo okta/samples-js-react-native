@@ -3,7 +3,8 @@ cache: false
 install:
   - npm install -g yarn --ignore-dependencies
   - npm install -g react-native-cli
-  - yarn install --frozen-lockfile
+  - yarn --cwd browser-sign-in/ --frozen-lockfile
+  - yarn --cwd custom-sign-in/ --frozen-lockfile
   - echo CLIENT_ID=${CLIENT_ID}\\nISSUER=${ISSUER}\\nREDIRECT_URI=${REDIRECT_URI}\\nLOGOUT_REDIRECT_URI=${LOGOUT_REDIRECT_URI} > browser-sign-in/.env
 
 jobs:
@@ -14,15 +15,19 @@ jobs:
       stage: Unit tests
       name: React Native
       script:
-      - yarn test
+      - yarn test:browser
+      - yarn test:custom
 
     - language: objective-c
       os: osx
       osx_image: xcode12.2
-      node_js: 14.15
-      stage: UI tests Browser Sign-In 
-      name: React Native
+      stage: UI tests
+      name: Browser Sign In
+      install:
+        - cd browser-sign-in/ios
+        - pod install
+        - cd ../../
       script:
-      - xcodebuild -workspace ios/browserSignIn.xcworkspace -scheme browserSignIn -configuration Debug -destination 'platform=iOS Simulator,OS=latest,name=iPhone 11' -sdk iphonesimulator clean test
+        - xcodebuild -workspace ios/browserSignIn.xcworkspace -scheme browserSignIn -configuration Debug -destination 'platform=iOS Simulator,OS=latest,name=iPhone 11' -sdk iphonesimulator clean test
 
 

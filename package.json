@@ -4,8 +4,8 @@
   "description": "React Sample Applications for Okta",
   "scripts": {
     "banners": "node tools/maintain-banners.js {okta-hosted-login,tools,scripts}/{*js,!node_modules/,**/*{js,jsx,css}}",
-    "test": "npm test --prefix browser-sign-in/",
-    "postinstall": "cd browser-sign-in && npm install"
+    "test:browser": "yarn test --cwd browser-sign-in/",
+    "test:custom": "yarn test --cwd custom-sign-in/"
   },
   "author": "",
   "license": "Apache-2.0",

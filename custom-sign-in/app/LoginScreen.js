@@ -29,9 +29,9 @@ export default class LoginScreen extends React.Component {
     super(props);
     
     this.state = {
+      progress: false,
       username: '',
       password: '',
-      progress: false,
       error: '',
     };
 
@@ -48,36 +48,44 @@ export default class LoginScreen extends React.Component {
       .then(_token => {
         this.setState({ 
           progress: false, 
+          username: '', 
+          password: '',
           error: '' 
         }, () => navigation.navigate('Profile'));
       })
-      .catch(e => {
-        this.setState({ progress: false, error: e.message });
+      .catch(error => {
+        this.setState({
+          progress: false,
+          username: '', 
+          password: '', 
+          error: error.message 
+        });
       });
   }
 
   render() {
-    const { progress, error } = this.state;
     return (
       <>
         <StatusBar barStyle="dark-content" />
         <SafeAreaView style={styles.container}>
           <Spinner
-            visible={progress}
+            visible={this.state.progress}
             textContent={'Loading...'}
             textStyle={styles.spinnerTextStyle}
           />
           <Text style={styles.title}>Native Sign-In</Text>
-          <Error error={error} />
+          <Error error={this.state.error} />
           <View style={styles.buttonContainer}>
             <View style={styles.button}>
               <TextInput
+                value={this.state.username}
                 style={styles.textInput}
                 placeholder="User Name"
                 onChangeText={username => this.setState({ username })}
               />
               <TextInput
                 style={styles.textInput}
+                value={this.state.password}
                 placeholder="Password"
                 secureTextEntry={true}
                 onChangeText={password => this.setState({ password })}
