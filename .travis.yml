@@ -19,10 +19,12 @@ jobs:
     - language: objective-c
       os: osx
       osx_image: xcode12.2
-      stage: UI tests
+      stage: Browser UI tests
       name: Browser Sign In      
       install:
         - echo CLIENT_ID=${CLIENT_ID}\\nISSUER=${ISSUER}\\nREDIRECT_URI=${REDIRECT_URI}\\nLOGOUT_REDIRECT_URI=${LOGOUT_REDIRECT_URI} > browser-sign-in/.env
+        - grep "ISSUER" ./browser-sign-in/.env
+        - grep "REDIRECT_URI" ./browser-sign-in/.env
         - cd browser-sign-in/ios
         - pod install
         - cd ../../
@@ -32,10 +34,12 @@ jobs:
     - language: objective-c
       os: osx
       osx_image: xcode12.2
-      stage: UI tests
+      stage: Custom UI tests
       name: Custom Sign In      
       install:
         - echo CLIENT_ID=${CLIENT_ID}\\nISSUER=${ISSUER}\\nREDIRECT_URI=${REDIRECT_URI}\\nLOGOUT_REDIRECT_URI=${LOGOUT_REDIRECT_URI} > custom-sign-in/.env
+        - grep "ISSUER" ./custom-sign-in/.env
+        - grep "REDIRECT_URI" ./custombrowser-sign-in/.env
         - cd custom-sign-in/ios
         - pod install
         - cd ../../

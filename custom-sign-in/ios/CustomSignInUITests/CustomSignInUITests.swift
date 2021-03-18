@@ -139,7 +139,7 @@ final class CustomSignInUITests: XCTestCase {
   }
   
   private func logoutIfPossible() {
-    guard logoutButton.waitForExistence(timeout: 5) else {
+    guard logoutButton.waitForExistence(timeout: 10) else {
       return
     }
     
@@ -167,6 +167,6 @@ private extension XCUIElement {
 
 private extension TimeInterval {
   
-  static let testing: TimeInterval = 20
+  static let testing: TimeInterval = 60
 }
 

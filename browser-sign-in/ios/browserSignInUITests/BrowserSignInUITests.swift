@@ -177,7 +177,7 @@ final class BrowserSignInUITests: XCTestCase {
   }
   
   private func logoutIfPossible(throwError: Bool = false) {
-    guard logoutButton.waitForExistence(timeout: 5) else {
+    guard logoutButton.waitForExistence(timeout: 10) else {
       XCTAssertFalse(throwError)
       return
     }
@@ -193,6 +193,6 @@ final class BrowserSignInUITests: XCTestCase {
 
 private extension TimeInterval {
   
-  static let testing: TimeInterval = 20
+  static let testing: TimeInterval = 60
 }
 
