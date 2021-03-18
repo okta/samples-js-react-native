@@ -1,7 +1,7 @@
 {
   "name": "@okta/samples-js-react-native",
   "version": "0.1.0",
-  "description": "React Sample Applications for Okta",
+  "description": "React Native Sample Applications for Okta",
   "scripts": {
     "banners": "node tools/maintain-banners.js {okta-hosted-login,tools,scripts}/{*js,!node_modules/,**/*{js,jsx,css}}",
     "test:browser": "yarn --cwd browser-sign-in/ test",

@@ -32,6 +32,10 @@ final class BrowserSignInUITests: XCTestCase {
     springboard.buttons["Continue"]
   }
   
+  private var signInButton: XCUIElement {
+    app.buttons["Sign In"]
+  }
+  
   override func setUpWithError() throws {
     continueAfterFailure = false
     
@@ -47,28 +51,32 @@ final class BrowserSignInUITests: XCTestCase {
   
   func testRootScreen() throws {
     // then
-    XCTAssertTrue(app.staticTexts["titleLabel"].exists)
-    XCTAssertTrue(loginButton.exists)
+    XCTAssertTrue(app.staticTexts["titleLabel"].waitForExistence(timeout: .testing))
+    XCTAssertTrue(loginButton.waitForExistence(timeout: .testing))
   }
   
   func testCancelLoginFlow() throws {
+    // given
+    XCTAssertTrue(loginButton.waitForExistence(timeout: .testing))
     // when
     loginButton.tap()
     // then
-    XCTAssertTrue(springboard.buttons["Cancel"].waitForExistence(timeout: 5))
+    XCTAssertTrue(springboard.buttons["Cancel"].waitForExistence(timeout: .testing))
   }
   
   func testLoginFlow() throws {
+    // given
+    XCTAssertTrue(loginButton.waitForExistence(timeout: .testing))
     // when
     loginButton.tap()
     // then
-    XCTAssertTrue(springboardContinueButton.waitForExistence(timeout: 5))
+    XCTAssertTrue(springboardContinueButton.waitForExistence(timeout: .testing))
     springboardContinueButton.tap()
     
     let webView = app.webViews
     
     let usernameField = webView.textFields.element(boundBy: .zero)
-    XCTAssertTrue(usernameField.waitForExistence(timeout: 5))
+    XCTAssertTrue(usernameField.waitForExistence(timeout: .testing))
     usernameField.tap()
     usernameField.typeText(username)
     
@@ -89,22 +97,24 @@ final class BrowserSignInUITests: XCTestCase {
     rememberMeCheckbox.tap()
     rememberMeCheckbox.tap()
     
-    app.buttons["Sign In"].tap()
+    signInButton.tap()
     
-    XCTAssertTrue(logoutButton.waitForExistence(timeout: 5))
+    XCTAssertTrue(logoutButton.waitForExistence(timeout: .testing))
   }
   
   func testIncorrectLoginFlow() throws {
+    // given
+    XCTAssertTrue(loginButton.waitForExistence(timeout: .testing))
     // when
     loginButton.tap()
     // then
-    XCTAssertTrue(springboardContinueButton.waitForExistence(timeout: 5))
+    XCTAssertTrue(springboardContinueButton.waitForExistence(timeout: .testing))
     springboardContinueButton.tap()
     
     let webView = app.webViews
     
     let usernameField = webView.textFields.element(boundBy: .zero)
-    XCTAssertTrue(usernameField.waitForExistence(timeout: 5))
+    XCTAssertTrue(usernameField.waitForExistence(timeout: .testing))
     usernameField.tap()
     usernameField.typeText(username)
     
@@ -120,12 +130,12 @@ final class BrowserSignInUITests: XCTestCase {
     passwordField.doubleTap()
     app.menuItems["Paste"].tap()
     
-    app.buttons["Sign In"].tap()
+    signInButton.tap()
     
     app.buttons["Cancel"].tap()
     
-    XCTAssertFalse(logoutButton.waitForExistence(timeout: 2))
-    XCTAssertTrue(loginButton.exists)
+    XCTAssertFalse(logoutButton.waitForExistence(timeout: .testing))
+    XCTAssertTrue(loginButton.waitForExistence(timeout: .testing))
   }
   
   func testGetUserFromTokens() throws {
@@ -137,10 +147,10 @@ final class BrowserSignInUITests: XCTestCase {
     let accessTokenButton = app.buttons["getMyUserFromAccessToken"]
     let clearButton = app.buttons["clearButton"]
     // then
-    XCTAssertTrue(idTokenButton.waitForExistence(timeout: 2) && idTokenButton.isHittable)
-    XCTAssertTrue(requestButton.exists && requestButton.isHittable)
-    XCTAssertTrue(accessTokenButton.exists && accessTokenButton.isHittable)
-    XCTAssertTrue(clearButton.exists && clearButton.isHittable)
+    XCTAssertTrue(idTokenButton.waitForExistence(timeout: .testing) && idTokenButton.isHittable)
+    XCTAssertTrue(requestButton.waitForExistence(timeout: .testing) && requestButton.isHittable)
+    XCTAssertTrue(accessTokenButton.waitForExistence(timeout: .testing) && accessTokenButton.isHittable)
+    XCTAssertTrue(clearButton.waitForExistence(timeout: .testing) && clearButton.isHittable)
     
     let descriptionBox = app.staticTexts["descriptionBox"]
 
@@ -167,16 +177,22 @@ final class BrowserSignInUITests: XCTestCase {
   }
   
   private func logoutIfPossible(throwError: Bool = false) {
-    guard logoutButton.waitForExistence(timeout: 2) else {
+    guard logoutButton.waitForExistence(timeout: 5) else {
       XCTAssertFalse(throwError)
       return
     }
     
     logoutButton.tap()
     
-    XCTAssertTrue(springboardContinueButton.waitForExistence(timeout: 5))
+    XCTAssertTrue(springboardContinueButton.waitForExistence(timeout: .testing))
     springboardContinueButton.tap()
     
-    XCTAssertTrue(loginButton.waitForExistence(timeout: 5))
+    XCTAssertTrue(loginButton.waitForExistence(timeout: .testing))
   }
 }
+
+private extension TimeInterval {
+  
+  static let testing: TimeInterval = 20
+}
+

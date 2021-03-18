@@ -167,6 +167,6 @@ private extension XCUIElement {
 
 private extension TimeInterval {
   
-  static let testing: TimeInterval = 10
+  static let testing: TimeInterval = 20
 }
 
