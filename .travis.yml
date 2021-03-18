@@ -22,7 +22,7 @@ jobs:
       stage: Browser UI tests
       name: Browser Sign In      
       install:
-        - echo CLIENT_ID=${CLIENT_ID}\\nISSUER=${ISSUER}\\nREDIRECT_URI=${REDIRECT_URI}\\nLOGOUT_REDIRECT_URI=${LOGOUT_REDIRECT_URI} > browser-sign-in/.env
+        - echo -e "CLIENT_ID=${CLIENT_ID}\nISSUER=${ISSUER}\nREDIRECT_URI=${REDIRECT_URI}\nLOGOUT_REDIRECT_URI=${LOGOUT_REDIRECT_URI}" > browser-sign-in/.env
         - grep "ISSUER" ./browser-sign-in/.env
         - grep "REDIRECT_URI" ./browser-sign-in/.env
         - cd browser-sign-in/ios
@@ -37,9 +37,9 @@ jobs:
       stage: Custom UI tests
       name: Custom Sign In      
       install:
-        - echo CLIENT_ID=${CLIENT_ID}\\nISSUER=${ISSUER}\\nREDIRECT_URI=${REDIRECT_URI}\\nLOGOUT_REDIRECT_URI=${LOGOUT_REDIRECT_URI} > custom-sign-in/.env
+        - echo -e "CLIENT_ID=${CLIENT_ID}\nISSUER=${ISSUER}\nREDIRECT_URI=${REDIRECT_URI}\nLOGOUT_REDIRECT_URI=${LOGOUT_REDIRECT_URI}" > custom-sign-in/.env
         - grep "ISSUER" ./custom-sign-in/.env
-        - grep "REDIRECT_URI" ./custombrowser-sign-in/.env
+        - grep "REDIRECT_URI" ./custom-sign-in/.env
         - cd custom-sign-in/ios
         - pod install
         - cd ../../
