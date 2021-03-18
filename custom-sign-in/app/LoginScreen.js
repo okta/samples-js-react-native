@@ -36,9 +36,23 @@ export default class LoginScreen extends React.Component {
     };
 
     this.login = this.login.bind(this);
+    this.reset = this.reset.bind(this);
+  }
+
+  reset() {
+    this.setState({ 
+      progress: false, 
+      username: '', 
+      password: '',
+      error: '' 
+    });
   }
 
   login() {
+    if (this.state.progress == true) {
+      return;
+    }
+
     this.setState({ progress: true });
 
     const { username, password } = this.state;
@@ -69,11 +83,12 @@ export default class LoginScreen extends React.Component {
         <StatusBar barStyle="dark-content" />
         <SafeAreaView style={styles.container}>
           <Spinner
+            testID="spinner"
             visible={this.state.progress}
             textContent={'Loading...'}
             textStyle={styles.spinnerTextStyle}
           />
-          <Text style={styles.title}>Native Sign-In</Text>
+          <Text style={styles.title} testID="titleBox">Native Sign-In</Text>
           <Error error={this.state.error} />
           <View style={styles.buttonContainer}>
             <View style={styles.button}>
@@ -81,20 +96,29 @@ export default class LoginScreen extends React.Component {
                 value={this.state.username}
                 style={styles.textInput}
                 placeholder="User Name"
-                onChangeText={username => this.setState({ username })}
+                onChangeText={username => this.setState({ username: username })}
+                testID="usernameTextInput"
               />
               <TextInput
                 style={styles.textInput}
                 value={this.state.password}
                 placeholder="Password"
                 secureTextEntry={true}
-                onChangeText={password => this.setState({ password })}
+                onChangeText={password => this.setState({ password: password })}
+                testID="passwordTextInput"
               />
               <View style={{marginTop: 40, height: 40}}>
                 <Button
-                  testID="loginButton"
                   onPress={this.login}
                   title="Login"
+                  testID="loginButton"
+                />
+              </View>
+              <View style={{marginTop: 40, height: 40}}>
+                <Button
+                  onPress={this.reset}
+                  title="Reset"
+                  testID="resetButton"
                 />
               </View>
             </View>

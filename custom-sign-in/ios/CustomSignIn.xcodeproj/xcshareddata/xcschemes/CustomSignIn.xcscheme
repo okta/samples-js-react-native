@@ -54,7 +54,10 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      language = "en"
+      region = "US"
+      codeCoverageEnabled = "YES">
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
@@ -69,9 +72,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "CustomSignInTests.xctest"
-               BlueprintName = "CustomSignInTests"
+               BlueprintIdentifier = "9229C54A26021620008CF691"
+               BuildableName = "CustomSignInUITests.xctest"
+               BlueprintName = "CustomSignInUITests"
                ReferencedContainer = "container:CustomSignIn.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -97,6 +100,18 @@
             ReferencedContainer = "container:CustomSignIn.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
+      <EnvironmentVariables>
+         <EnvironmentVariable
+            key = "USERNAME"
+            value = "${OKTA_USERNAME}"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+         <EnvironmentVariable
+            key = "PASSWORD"
+            value = "${OKTA_PASSWORD}"
+            isEnabled = "YES">
+         </EnvironmentVariable>
+      </EnvironmentVariables>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"

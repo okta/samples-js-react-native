@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 53;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -12,8 +12,19 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		650A900828F38BCD64023FA5 /* libPods-CustomSignIn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E08F55C8B33F16517269B33 /* libPods-CustomSignIn.a */; };
+		9229C54E26021620008CF691 /* CustomSignInUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9229C54D26021620008CF691 /* CustomSignInUITests.swift */; };
 		A1450A34233944F100FF45BC /* DummySwiftFileForOidc.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1450A33233944F100FF45BC /* DummySwiftFileForOidc.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		9229C55026021620008CF691 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
+			remoteInfo = CustomSignIn;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
@@ -27,7 +38,9 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = CustomSignIn/main.m; sourceTree = "<group>"; };
 		81B626B3CB0D982A0584763E /* Pods-CustomSignIn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CustomSignIn.release.xcconfig"; path = "Target Support Files/Pods-CustomSignIn/Pods-CustomSignIn.release.xcconfig"; sourceTree = "<group>"; };
 		8E08F55C8B33F16517269B33 /* libPods-CustomSignIn.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CustomSignIn.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		A1450A32233944F100FF45BC /* CustomSignIn-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CustomSignIn-Bridging-Header.h"; sourceTree = "<group>"; };
+		9229C54B26021620008CF691 /* CustomSignInUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CustomSignInUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9229C54D26021620008CF691 /* CustomSignInUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSignInUITests.swift; sourceTree = "<group>"; };
+		9229C54F26021620008CF691 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A1450A33233944F100FF45BC /* DummySwiftFileForOidc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummySwiftFileForOidc.swift; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
@@ -39,6 +52,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				650A900828F38BCD64023FA5 /* libPods-CustomSignIn.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9229C54826021620008CF691 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -56,7 +76,6 @@
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
 				A1450A33233944F100FF45BC /* DummySwiftFileForOidc.swift */,
-				A1450A32233944F100FF45BC /* CustomSignIn-Bridging-Header.h */,
 			);
 			name = CustomSignIn;
 			sourceTree = "<group>";
@@ -83,6 +102,7 @@
 			children = (
 				13B07FAE1A68108700A75B9A /* CustomSignIn */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
+				9229C54C26021620008CF691 /* CustomSignInUITests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				F037BA0D6E959AA6B30E33A8 /* Pods */,
@@ -96,8 +116,18 @@
 			isa = PBXGroup;
 			children = (
 				13B07F961A680F5B00A75B9A /* CustomSignIn.app */,
+				9229C54B26021620008CF691 /* CustomSignInUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		9229C54C26021620008CF691 /* CustomSignInUITests */ = {
+			isa = PBXGroup;
+			children = (
+				9229C54D26021620008CF691 /* CustomSignInUITests.swift */,
+				9229C54F26021620008CF691 /* Info.plist */,
+			);
+			path = CustomSignInUITests;
 			sourceTree = "<group>";
 		};
 		F037BA0D6E959AA6B30E33A8 /* Pods */ = {
@@ -133,22 +163,45 @@
 			productReference = 13B07F961A680F5B00A75B9A /* CustomSignIn.app */;
 			productType = "com.apple.product-type.application";
 		};
+		9229C54A26021620008CF691 /* CustomSignInUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9229C55426021620008CF691 /* Build configuration list for PBXNativeTarget "CustomSignInUITests" */;
+			buildPhases = (
+				9229C54726021620008CF691 /* Sources */,
+				9229C54826021620008CF691 /* Frameworks */,
+				9229C54926021620008CF691 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9229C55126021620008CF691 /* PBXTargetDependency */,
+			);
+			name = CustomSignInUITests;
+			productName = CustomSignInUITests;
+			productReference = 9229C54B26021620008CF691 /* CustomSignInUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 1240;
 				LastUpgradeCheck = 1240;
-				ORGANIZATIONNAME = Facebook;
+				ORGANIZATIONNAME = Okta;
 				TargetAttributes = {
 					13B07F861A680F5B00A75B9A = {
 						LastSwiftMigration = 1100;
 					};
+					9229C54A26021620008CF691 = {
+						CreatedOnToolsVersion = 12.4;
+						TestTargetID = 13B07F861A680F5B00A75B9A;
+					};
 				};
 			};
 			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "CustomSignIn" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 11.4";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -161,6 +214,7 @@
 			projectRoot = "";
 			targets = (
 				13B07F861A680F5B00A75B9A /* CustomSignIn */,
+				9229C54A26021620008CF691 /* CustomSignInUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -172,6 +226,13 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9229C54926021620008CF691 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -264,7 +325,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9229C54726021620008CF691 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9229C54E26021620008CF691 /* CustomSignInUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		9229C55126021620008CF691 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 13B07F861A680F5B00A75B9A /* CustomSignIn */;
+			targetProxy = 9229C55026021620008CF691 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		13B07FB11A68108700A75B9A /* LaunchScreen.xib */ = {
@@ -289,7 +366,10 @@
 				DEAD_CODE_STRIPPING = NO;
 				INFOPLIST_FILE = CustomSignIn/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -297,7 +377,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = CustomSignIn;
-				SWIFT_OBJC_BRIDGING_HEADER = "CustomSignIn-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -313,7 +393,10 @@
 				CURRENT_PROJECT_VERSION = 1;
 				INFOPLIST_FILE = CustomSignIn/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -321,7 +404,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = CustomSignIn;
-				SWIFT_OBJC_BRIDGING_HEADER = "CustomSignIn-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -431,6 +514,67 @@
 			};
 			name = Release;
 		};
+		9229C55226021620008CF691 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = CustomSignInUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = okta.com.CustomSignInUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = CustomSignIn;
+			};
+			name = Debug;
+		};
+		9229C55326021620008CF691 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = CustomSignInUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = okta.com.CustomSignInUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = CustomSignIn;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -448,6 +592,15 @@
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,
 				83CBBA211A601CBA00E9B192 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9229C55426021620008CF691 /* Build configuration list for PBXNativeTarget "CustomSignInUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9229C55226021620008CF691 /* Debug */,
+				9229C55326021620008CF691 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -12,7 +12,7 @@
 
 import 'react-native-gesture-handler';
 import React from 'react';
-import { View, Text, SafeAreaView } from 'react-native';
+import { SafeAreaView } from 'react-native';
 import { isAuthenticated } from '@okta/okta-react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -20,6 +20,7 @@ import LoginScreen from './app/LoginScreen.js';
 import ProfileScreen from './app/ProfileScreen.js';
 import { createConfig } from '@okta/okta-react-native';
 import configFile from './samples.config';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 const Stack = createStackNavigator();
 
@@ -29,7 +30,7 @@ export default class App extends React.Component {
     super();
 
     this.state = {
-      progress: false,
+      progress: true,
       authenticated: false,
     };
     
@@ -39,12 +40,10 @@ export default class App extends React.Component {
   async checkAuthentication() {
     const result = await isAuthenticated();
 
-    if (result.authenticated !== this.state.authenticated) {
-      this.setState({
-        authenticated: result.authenticated, 
-        progress: false
-      });
-    }
+    this.setState({
+      authenticated: result.authenticated, 
+      progress: false
+    });
   }
 
   async componentDidMount() {
@@ -59,20 +58,14 @@ export default class App extends React.Component {
     });
     
 
-    this.checkAuthentication();
-  }
-
-  async componentDidUpdate() {
-    this.checkAuthentication();
+    await this.checkAuthentication();
   }
 
   render() {
     if (this.state.progress) {
       return (
         <SafeAreaView>
-          <View>
-            <Text>Loading...</Text>
-          </View>
+          <Spinner visible={true} />
         </SafeAreaView>
       );
     }

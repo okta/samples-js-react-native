@@ -27,6 +27,19 @@ jobs:
         - pod install
         - cd ../../
       script:
+        - defaults write com.apple.iphonesimulator ConnectHardwareKeyboard 0
         - xcodebuild -workspace browser-sign-in/ios/browserSignIn.xcworkspace -scheme browserSignIn -configuration Debug -destination 'platform=iOS Simulator,OS=latest,name=iPhone 11' -sdk iphonesimulator clean test
-
+    - language: objective-c
+      os: osx
+      osx_image: xcode12.2
+      stage: UI tests
+      name: Custom Sign In      
+      install:
+        - echo CLIENT_ID=${CLIENT_ID}\\nISSUER=${ISSUER}\\nREDIRECT_URI=${REDIRECT_URI}\\nLOGOUT_REDIRECT_URI=${LOGOUT_REDIRECT_URI} > custom-sign-in/.env
+        - cd custom-sign-in/ios
+        - pod install
+        - cd ../../
+      script:
+        - defaults write com.apple.iphonesimulator ConnectHardwareKeyboard 0
+        - xcodebuild -workspace custom-sign-in/ios/CustomSignIn.xcworkspace -scheme CustomSignIn -configuration Debug -destination 'platform=iOS Simulator,OS=latest,name=iPhone 11' -sdk iphonesimulator clean test
 

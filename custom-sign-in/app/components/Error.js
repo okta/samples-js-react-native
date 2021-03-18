@@ -14,11 +14,11 @@ import React from 'react';
 import { StyleSheet, Text } from 'react-native';
 
 const Error = ({ error }) => {
-  if (!error) {
+  if (!error || error == '') {
     return null;
   }
 
-  return <Text style={styles.error}>{error}</Text>;
+  return <Text testID="errorBox" style={styles.error}>Error: {error}</Text>;
 };
 
 const styles = StyleSheet.create({

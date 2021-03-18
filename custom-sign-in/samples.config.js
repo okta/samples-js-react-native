@@ -10,13 +10,15 @@
  * See the License for the specific language governing permissions and limitations under the License.
  */
 
+import { CLIENT_ID, REDIRECT_URI, LOGOUT_REDIRECT_URI, ISSUER } from '@env';
+
 export default {
   oidc: {
-    clientId: '{clientId}',
-    redirectUri: '{customUriScheme}:/loginCallback',
-    endSessionRedirectUri: '{customUriScheme}:/logoutCallback',
-    discoveryUri: 'https://{yourOktaDomain}/oauth2/default',
+    clientId: CLIENT_ID,
+    redirectUri: REDIRECT_URI,
+    endSessionRedirectUri: LOGOUT_REDIRECT_URI,
+    discoveryUri: ISSUER,
     scopes: ['openid', 'profile', 'offline_access'],
     requireHardwareBackedKeyStore: false,
-  }
+  },
 };
