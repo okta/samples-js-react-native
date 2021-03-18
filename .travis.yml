@@ -30,7 +30,7 @@ jobs:
         - cd ../../
       script:
         - defaults write com.apple.iphonesimulator ConnectHardwareKeyboard 0
-        - xcodebuild -workspace browser-sign-in/ios/browserSignIn.xcworkspace -scheme browserSignIn -destination 'platform=iOS Simulator,OS=latest,name=iPhone 11' -sdk iphonesimulator clean test
+        - xcodebuild -workspace browser-sign-in/ios/browserSignIn.xcworkspace -scheme browserSignIn -destination 'platform=iOS Simulator,OS=latest,name=iPhone 11' -sdk iphonesimulator -quiet clean test
     - language: objective-c
       os: osx
       osx_image: xcode12.2
@@ -45,5 +45,5 @@ jobs:
         - cd ../../
       script:
         - defaults write com.apple.iphonesimulator ConnectHardwareKeyboard 0
-        - xcodebuild -workspace custom-sign-in/ios/CustomSignIn.xcworkspace -scheme CustomSignIn -destination 'platform=iOS Simulator,OS=latest,name=iPhone 11' -sdk iphonesimulator clean test
+        - xcodebuild -workspace custom-sign-in/ios/CustomSignIn.xcworkspace -scheme CustomSignIn -destination 'platform=iOS Simulator,OS=latest,name=iPhone 11' -sdk iphonesimulator -quiet clean test
 
