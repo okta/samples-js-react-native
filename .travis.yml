@@ -22,6 +22,7 @@ jobs:
       stage: Browser UI tests
       name: Browser Sign In      
       install:
+        - gem install xcpretty
         - echo -e "CLIENT_ID=${CLIENT_ID}\nISSUER=${ISSUER}\nREDIRECT_URI=${REDIRECT_URI}\nLOGOUT_REDIRECT_URI=${LOGOUT_REDIRECT_URI}" > browser-sign-in/.env
         - grep "ISSUER" ./browser-sign-in/.env
         - grep "REDIRECT_URI" ./browser-sign-in/.env
@@ -30,13 +31,14 @@ jobs:
         - cd ../../
       script:
         - defaults write com.apple.iphonesimulator ConnectHardwareKeyboard 0
-        - xcodebuild -workspace browser-sign-in/ios/browserSignIn.xcworkspace -scheme browserSignIn -destination 'platform=iOS Simulator,OS=latest,name=iPhone 11' -sdk iphonesimulator clean test
+        - xcodebuild -workspace browser-sign-in/ios/browserSignIn.xcworkspace -scheme browserSignIn -destination 'platform=iOS Simulator,OS=latest,name=iPhone 11' -sdk iphonesimulator clean test | xcpretty
     - language: objective-c
       os: osx
       osx_image: xcode12.2
       stage: Custom UI tests
       name: Custom Sign In      
       install:
+        - gem install xcpretty
         - echo -e "CLIENT_ID=${CLIENT_ID}\nISSUER=${ISSUER}\nREDIRECT_URI=${REDIRECT_URI}\nLOGOUT_REDIRECT_URI=${LOGOUT_REDIRECT_URI}" > custom-sign-in/.env
         - grep "ISSUER" ./custom-sign-in/.env
         - grep "REDIRECT_URI" ./custom-sign-in/.env
