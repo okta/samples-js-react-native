@@ -3,6 +3,7 @@ cache: false
 before_install:
   - npm install -g yarn --ignore-dependencies
   - npm install -g react-native-cli
+  - gem install cocoapods
   - yarn --cwd browser-sign-in/ --frozen-lockfile
   - yarn --cwd custom-sign-in/ --frozen-lockfile
 
@@ -15,7 +16,6 @@ jobs:
       name: React Native
       script:
       - yarn test:browser
-
     - language: objective-c
       os: osx
       osx_image: xcode12.2
