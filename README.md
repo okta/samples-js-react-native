@@ -1,3 +1,5 @@
+[![CI Status](https://travis-ci.com/okta/samples-js-react-native.svg?branch=master)](https://travis-ci.com/github/okta/samples-js-react-native)
+
 # React Native Sample Applications for Okta
 
 This repository contains several sample applications that demonstrate various Okta use-cases in your React Native application.
