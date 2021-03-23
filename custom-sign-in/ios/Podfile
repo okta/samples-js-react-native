@@ -1,4 +1,6 @@
 platform :ios, '11.0'
+inhibit_all_warnings!
+
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 require_relative '../node_modules/react-native/scripts/react_native_pods'
 
@@ -6,20 +8,6 @@ target 'CustomSignIn' do
   config = use_native_modules!
   use_react_native!(:path => config["reactNativePath"])
 
-  target 'CustomSignInTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
-
   use_native_modules!
-end
-
-target 'CustomSignIn-tvOS' do
-  # Pods for CustomSignIn-tvOS
-
-  target 'CustomSignIn-tvOSTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
 
 end

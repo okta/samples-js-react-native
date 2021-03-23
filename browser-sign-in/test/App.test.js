@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2019-Present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -12,7 +12,7 @@
 
 import React from 'react';
 import App from '../App';
-import { shallow, render, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import renderer from 'react-test-renderer';
 import { waitForState } from 'enzyme-async-helpers';
 
@@ -37,12 +37,12 @@ jest
 global.fetch = jest
   .fn()
   .mockImplementation(() => {
-    const promise = new Promise((resolve, reject) => {
+    const promise = new Promise((resolve, _reject) => {
       resolve({
         json: () => {
           return {
             user: [{ foo: 'foo', bar: 'bar' }],
-          }
+          };
         },
         ok: true,
       });
@@ -50,12 +50,13 @@ global.fetch = jest
     return promise;
   })
   .mockImplementationOnce(() => {
-    const promise = new Promise((resolve, reject) => {
+    const promise = new Promise((resolve, _reject) => {
       resolve({
         json: () => {
           return {
+            // eslint-disable-next-line camelcase
             userinfo_endpoint: 'dummy_endpoint',
-          }
+          };
         },
         ok: true,
       });
@@ -158,7 +159,7 @@ describe('authentication flow', () => {
 
   it('should return user profile information from getUser method' , async () => {
     const mockGetUser = require('react-native').NativeModules.OktaSdkBridge.getUser;
-    mockGetUser.mockResolvedValue({ "name": "fake name" });
+    mockGetUser.mockResolvedValue({ 'name': 'fake name' });
     const wrapper = shallow(<App />);
     wrapper.setState({authenticated: true});
     const profileButton = wrapper.find('Button').get(2);

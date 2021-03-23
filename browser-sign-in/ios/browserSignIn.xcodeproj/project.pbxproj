@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 53;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -11,10 +11,21 @@
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		51F56741FB745F97ED11FFBB /* libPods-browserSignIn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 83A6B6FD7E562823E3F5381B /* libPods-browserSignIn.a */; };
+		5F98E1997EA41FF3C3E50C08 /* libPods-browserSignIn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 83A6B6FD7E562823E3F5381B /* libPods-browserSignIn.a */; };
+		924C9B7225FBB56D00EAB250 /* BrowserSignInUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924C9B7125FBB56D00EAB250 /* BrowserSignInUITests.swift */; };
 		A9545F2B22E0E91D00BD587B /* dummySwiftFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9545F2A22E0E91D00BD587B /* dummySwiftFile.swift */; };
 		ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED297162215061F000B7C4FE /* JavaScriptCore.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		924C9B7425FBB56D00EAB250 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
+			remoteInfo = browserSignIn;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
@@ -28,6 +39,9 @@
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		62A6D61ABA1851DF3C7C2078 /* Pods-browserSignIn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-browserSignIn.release.xcconfig"; path = "Target Support Files/Pods-browserSignIn/Pods-browserSignIn.release.xcconfig"; sourceTree = "<group>"; };
 		83A6B6FD7E562823E3F5381B /* libPods-browserSignIn.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-browserSignIn.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		924C9B6F25FBB56D00EAB250 /* browserSignInUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = browserSignInUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		924C9B7125FBB56D00EAB250 /* BrowserSignInUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BrowserSignInUITests.swift; sourceTree = "<group>"; };
+		924C9B7325FBB56D00EAB250 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A9545F2A22E0E91D00BD587B /* dummySwiftFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dummySwiftFile.swift; sourceTree = "<group>"; };
 		B9048823F543DBD9AA8D88E1 /* Pods-browserSignIn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-browserSignIn.debug.xcconfig"; path = "Target Support Files/Pods-browserSignIn/Pods-browserSignIn.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
@@ -40,7 +54,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */,
-				51F56741FB745F97ED11FFBB /* libPods-browserSignIn.a in Frameworks */,
+				5F98E1997EA41FF3C3E50C08 /* libPods-browserSignIn.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		924C9B6C25FBB56C00EAB250 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -86,6 +107,7 @@
 			children = (
 				A9545F2A22E0E91D00BD587B /* dummySwiftFile.swift */,
 				13B07FAE1A68108700A75B9A /* browserSignIn */,
+				924C9B7025FBB56D00EAB250 /* browserSignInUITests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				A99CCA9322D52810009BEACC /* Recovered References */,
@@ -100,8 +122,18 @@
 			isa = PBXGroup;
 			children = (
 				13B07F961A680F5B00A75B9A /* browserSignIn.app */,
+				924C9B6F25FBB56D00EAB250 /* browserSignInUITests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		924C9B7025FBB56D00EAB250 /* browserSignInUITests */ = {
+			isa = PBXGroup;
+			children = (
+				924C9B7125FBB56D00EAB250 /* BrowserSignInUITests.swift */,
+				924C9B7325FBB56D00EAB250 /* Info.plist */,
+			);
+			path = browserSignInUITests;
 			sourceTree = "<group>";
 		};
 		A99CCA9322D52810009BEACC /* Recovered References */ = {
@@ -135,22 +167,46 @@
 			productReference = 13B07F961A680F5B00A75B9A /* browserSignIn.app */;
 			productType = "com.apple.product-type.application";
 		};
+		924C9B6E25FBB56C00EAB250 /* browserSignInUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 924C9B7825FBB56D00EAB250 /* Build configuration list for PBXNativeTarget "browserSignInUITests" */;
+			buildPhases = (
+				924C9B6B25FBB56C00EAB250 /* Sources */,
+				924C9B6C25FBB56C00EAB250 /* Frameworks */,
+				924C9B6D25FBB56C00EAB250 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				924C9B7525FBB56D00EAB250 /* PBXTargetDependency */,
+			);
+			name = browserSignInUITests;
+			productName = browserSignInUITests;
+			productReference = 924C9B6F25FBB56D00EAB250 /* browserSignInUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 940;
-				ORGANIZATIONNAME = Facebook;
+				LastSwiftUpdateCheck = 1240;
+				LastUpgradeCheck = 1240;
+				ORGANIZATIONNAME = Okta;
 				TargetAttributes = {
 					13B07F861A680F5B00A75B9A = {
 						LastSwiftMigration = 1020;
 					};
+					924C9B6E25FBB56C00EAB250 = {
+						CreatedOnToolsVersion = 12.4;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 13B07F861A680F5B00A75B9A;
+					};
 				};
 			};
 			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "browserSignIn" */;
-			compatibilityVersion = "Xcode 3.2";
+			compatibilityVersion = "Xcode 11.4";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -164,6 +220,7 @@
 			projectRoot = "";
 			targets = (
 				13B07F861A680F5B00A75B9A /* browserSignIn */,
+				924C9B6E25FBB56C00EAB250 /* browserSignInUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -175,6 +232,13 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		924C9B6D25FBB56C00EAB250 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -193,20 +257,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
+			shellScript = "if [ \"${CONFIGURATION}\" == \"Debug\" ]; then\n  export SKIP_BUNDLING=true\nfi\n\nexport NODE_BINARY=$(which node)\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
 		6FE9BACD808EAE394DB1A467 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-browserSignIn/Pods-browserSignIn-resources.sh",
-				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-browserSignIn/Pods-browserSignIn-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AccessibilityResources.bundle",
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-browserSignIn/Pods-browserSignIn-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -267,7 +330,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		924C9B6B25FBB56C00EAB250 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				924C9B7225FBB56D00EAB250 /* BrowserSignInUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		924C9B7525FBB56D00EAB250 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 13B07F861A680F5B00A75B9A /* browserSignIn */;
+			targetProxy = 924C9B7425FBB56D00EAB250 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		13B07FB11A68108700A75B9A /* LaunchScreen.xib */ = {
@@ -289,11 +368,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEAD_CODE_STRIPPING = NO;
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = browserSignIn/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -302,8 +382,6 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = browserSignIn;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -317,8 +395,10 @@
 				CURRENT_PROJECT_VERSION = 1;
 				HEADER_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = browserSignIn/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -327,7 +407,6 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = browserSignIn;
-				SWIFT_VERSION = 4.2;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
@@ -336,6 +415,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -354,6 +434,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -361,6 +442,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -382,7 +464,8 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
-				SWIFT_VERSION = 4.2;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -390,6 +473,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -408,6 +492,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -428,8 +513,61 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_VERSION = 4.2;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_VERSION = 5.0;
 				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		924C9B7625FBB56D00EAB250 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = browserSignInUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = okta.com.browserSignInUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				TEST_TARGET_NAME = browserSignIn;
+			};
+			name = Debug;
+		};
+		924C9B7725FBB56D00EAB250 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = browserSignInUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = okta.com.browserSignInUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = browserSignIn;
 			};
 			name = Release;
 		};
@@ -450,6 +588,15 @@
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,
 				83CBBA211A601CBA00E9B192 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		924C9B7825FBB56D00EAB250 /* Build configuration list for PBXNativeTarget "browserSignInUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				924C9B7625FBB56D00EAB250 /* Debug */,
+				924C9B7725FBB56D00EAB250 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2018-Present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -24,10 +24,10 @@ globs.forEach(glob => {
 });
 
 const bannerSource = fs.readFileSync(bannerSourcePath).toString();
-const copyrightRegex = /(Copyright \(c\) )([0-9]+)-?([0-9]+)?/;
+const copyrightRegex = /(Copyright \(c\) )([0-9]+)-?([A-Za-z0-9]+)?/;
 const match = bannerSource.match(copyrightRegex);
 const firstYear = match[2];
-const currentYear = new Date().getFullYear().toString();
+const currentYear = 'Present'; // According to requirements it should be `Present` not `new Date().getFullYear().toString()`;
 
 if (firstYear !== currentYear) {
   fs.writeFileSync(bannerSourcePath, bannerSource.replace(copyrightRegex, `$1$2-${currentYear}`));

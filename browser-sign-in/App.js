@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2019, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2019-Present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -23,7 +23,7 @@ import {
 } from 'react-native';
 import {
   createConfig,
-  signIn,
+  signInWithBrowser,
   signOut,
   getAccessToken,
   isAuthenticated,
@@ -31,6 +31,7 @@ import {
   getUserFromIdToken,
   EventEmitter,
 } from '@okta/okta-react-native';
+
 import configFile from './samples.config';
 
 export default class App extends React.Component {
@@ -48,21 +49,37 @@ export default class App extends React.Component {
 
   async componentDidMount() {
     let that = this;
-    EventEmitter.addListener('signInSuccess', function(e) {
+    EventEmitter.addListener('signInSuccess', function (error) {
+      if (error) {
+        console.warn(error);
+        that.setContext(error.error_message);
+        return;
+      }
+
       that.setState({authenticated: true});
       that.setContext('Logged in!');
     });
-    EventEmitter.addListener('signOutSuccess', function(e) {
+    
+    EventEmitter.addListener('signOutSuccess', function (error) {
+      if (error) {
+        console.warn(error);
+        that.setContext(error.error_message);
+        return; 
+      }
+
       that.setState({authenticated: false});
       that.setContext('Logged out!');
     });
-    EventEmitter.addListener('onError', function(e) {
-      console.warn(e);
-      that.setContext(e.error_message);
+
+    EventEmitter.addListener('onError', function (error) {
+      console.warn(error);
+      that.setContext(error.error_message);
     });
-    EventEmitter.addListener('onCancelled', function(e) {
-      console.warn(e);
+
+    EventEmitter.addListener('onCancelled', function (error) {
+      console.warn(error);
     });
+
     await createConfig({
       clientId: configFile.oidc.clientId,
       redirectUri: configFile.oidc.redirectUri,
@@ -94,7 +111,7 @@ export default class App extends React.Component {
   }
 
   async login() {
-    signIn();
+    signInWithBrowser();
   }
 
   async logout() {
@@ -162,7 +179,7 @@ export default class App extends React.Component {
     }
   }
 
-  setContext = message => {
+  setContext = (message) => {
     this.setState({
       context: message,
     });
@@ -174,6 +191,7 @@ export default class App extends React.Component {
         <View style={styles.buttonContainer}>
           <View style={styles.button}>
             <Button
+              testID="getUserFromIdToken"
               onPress={async () => {
                 this.getUserIdToken();
               }}
@@ -182,6 +200,7 @@ export default class App extends React.Component {
           </View>
           <View style={styles.button}>
             <Button
+              testID="getUserFromRequest"
               onPress={async () => {
                 this.getMyUser();
               }}
@@ -190,10 +209,20 @@ export default class App extends React.Component {
           </View>
           <View style={styles.button}>
             <Button
+              testID="getMyUserFromAccessToken"
               onPress={async () => {
                 this.getMyUserThroughAccessToken();
               }}
               title="Get User From Access Token"
+            />
+          </View>
+          <View style={styles.button}>
+            <Button
+              testID="clearButton"
+              onPress={async () => {
+                this.setContext('');
+              }}
+              title="Clear Text"
             />
           </View>
         </View>
@@ -206,7 +235,7 @@ export default class App extends React.Component {
       <Fragment>
         <StatusBar barStyle="dark-content" />
         <SafeAreaView style={styles.container}>
-          <Text style={styles.title}>Okta + React Native</Text>
+          <Text testID="titleLabel" style={styles.title}>Okta + React Native</Text>
           <View style={styles.buttonContainer}>
             <View style={styles.button}>
               {this.state.authenticated ? (
@@ -234,7 +263,7 @@ export default class App extends React.Component {
           <ScrollView
             contentInsetAdjustmentBehavior="automatic"
             style={styles.context}>
-            <Text>{this.state.context}</Text>
+            <Text testID="descriptionBox">{this.state.context}</Text>
           </ScrollView>
         </SafeAreaView>
       </Fragment>
@@ -250,7 +279,6 @@ const styles = StyleSheet.create({
   },
   button: {
     borderRadius: 40,
-    width: 200,
     height: 40,
     marginTop: 10,
     marginBottom: 10,

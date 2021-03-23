@@ -6,25 +6,29 @@
     "start": "react-native start",
     "android": "react-native run-android",
     "ios": "react-native run-ios",
-    "test": "jest __tests__/App-test.js",
+    "test": "jest",
     "lint": "eslint ."
   },
   "dependencies": {
     "@okta/okta-react-native": "^1.9.1",
     "events": "^3.2.0",
     "react": "17.0.1",
-    "react-native": "^0.63.3"
+    "react-native": "^0.63.3",
+    "react-native-dotenv": "^2.5.3"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.3",
+    "@babel/core": "^7.13.10",
+    "@babel/eslint-parser": "^7.13.10",
     "@babel/runtime": "^7.12.5",
     "@react-native-community/eslint-config": "^2.0.0",
     "babel-jest": "^26.6.3",
-    "detox": "^17.11.4",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.5",
     "enzyme-async-helpers": "^0.9.1",
-    "eslint": "^7.13.0",
+    "eslint": "^7.21.0",
+    "eslint-plugin-jest": "^24.2.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-react": "^7.22.0",
     "jest": "^26.6.3",
     "metro": "^0.58.0",
     "metro-react-native-babel-preset": "^0.58.0",
@@ -40,16 +44,5 @@
     "setupFiles": [
       "./setupJest.js"
     ]
-  },
-  "detox": {
-    "configurations": {
-      "ios.sim.debug": {
-        "binaryPath": "ios/build/Build/Products/Debug-iphonesimulator/browserSignIn.app",
-        "build": "xcodebuild -workspace ios/browserSignIn.xcworkspace -scheme browserSignIn -configuration Debug -sdk iphonesimulator -derivedDataPath ios/build",
-        "type": "ios.simulator",
-        "name": "iPhone X"
-      }
-    },
-    "test-runner": "jest"
   }
 }

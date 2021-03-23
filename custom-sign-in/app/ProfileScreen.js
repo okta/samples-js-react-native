@@ -1,5 +1,5 @@
 ﻿/*
- * Copyright (c) 2019, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2019-Present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -65,7 +65,7 @@ export default class ProfileScreen extends React.Component {
       })
       .catch(e => {
         this.setState({ progress: false, error: e.message });
-      })
+      });
   }
 
   logout() {
@@ -74,7 +74,7 @@ export default class ProfileScreen extends React.Component {
         this.props.navigation.navigate('Login');
       })
       .catch(e => {
-        this.setState({ error: e.message })
+        this.setState({ error: e.message });
       });
   }
 
@@ -95,21 +95,21 @@ export default class ProfileScreen extends React.Component {
             <View style={{ paddingLeft: 20, paddingTop: 20 }}>
               <Text style={styles.titleHello}>Hello {user.name}</Text>
               <View style={{ flexDirection: 'row' }}>
-                <Text>Name: </Text>
+                <Text testID="nameTitleLabel">Name: </Text>
                 <Text>{user.name}</Text>
               </View>
               <View style={{ flexDirection: 'row' }}>
-                <Text>Locale: </Text>
+                <Text testID="localeTitleLabel">Locale: </Text>
                 <Text>{user.locale}</Text>
               </View>
               <View style={{ flexDirection: 'row' }}>
-                <Text>Zone Info: </Text>
+                <Text testID="timeZoneTitleLabel">Zone Info: </Text>
                 <Text>{user.zoneinfo}</Text>
               </View>
             </View>
           )}
           <View style={{ flexDirection: 'column', marginTop: 20, paddingLeft: 20, width: 300 }}>
-            <Button style={{ marginTop:40 }} title="Get access token" onPress={this.getAccessToken} />
+            <Button testID="accessButton" style={{ marginTop:40 }} title="Get access token" onPress={this.getAccessToken} />
             { accessToken &&
               <View style={styles.tokenContainer}>
                 <Text style={styles.tokenTitle}>Access Token:</Text>

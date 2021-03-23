@@ -1,5 +1,5 @@
 ﻿/*
- * Copyright (c) 2019, Okta, Inc. and/or its affiliates. All rights reserved.
+ * Copyright (c) 2019-Present, Okta, Inc. and/or its affiliates. All rights reserved.
  * The Okta software accompanied by this notice is provided pursuant to the Apache License, Version 2.0 (the "License.")
  *
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
@@ -29,65 +29,96 @@ export default class LoginScreen extends React.Component {
     super(props);
     
     this.state = {
+      progress: false,
       username: '',
       password: '',
-      progress: false,
       error: '',
     };
 
     this.login = this.login.bind(this);
+    this.reset = this.reset.bind(this);
+  }
+
+  reset() {
+    this.setState({ 
+      progress: false, 
+      username: '', 
+      password: '',
+      error: '' 
+    });
   }
 
   login() {
+    if (this.state.progress == true) {
+      return;
+    }
+
     this.setState({ progress: true });
 
     const { username, password } = this.state;
     const { navigation } = this.props;
+    
     signIn({ username, password })
-      .then(token => {
+      .then(_token => {
         this.setState({ 
           progress: false, 
           username: '', 
-          password: '', 
+          password: '',
           error: '' 
         }, () => navigation.navigate('Profile'));
       })
-      .catch(e => {
-        this.setState({ progress: false, error: e.message });
+      .catch(error => {
+        this.setState({
+          progress: false,
+          username: '', 
+          password: '', 
+          error: error.message 
+        });
       });
   }
 
   render() {
-    const { progress, error } = this.state;
     return (
       <>
         <StatusBar barStyle="dark-content" />
         <SafeAreaView style={styles.container}>
           <Spinner
-            visible={progress}
+            testID="spinner"
+            visible={this.state.progress}
             textContent={'Loading...'}
             textStyle={styles.spinnerTextStyle}
           />
-          <Text style={styles.title}>Native Sign-In</Text>
-          <Error error={error} />
+          <Text style={styles.title} testID="titleBox">Native Sign-In</Text>
+          <Error error={this.state.error} />
           <View style={styles.buttonContainer}>
             <View style={styles.button}>
               <TextInput
+                value={this.state.username}
                 style={styles.textInput}
                 placeholder="User Name"
-                onChangeText={username => this.setState({ username })}
+                onChangeText={username => this.setState({ username: username })}
+                testID="usernameTextInput"
               />
               <TextInput
                 style={styles.textInput}
+                value={this.state.password}
                 placeholder="Password"
                 secureTextEntry={true}
-                onChangeText={password => this.setState({ password })}
+                onChangeText={password => this.setState({ password: password })}
+                testID="passwordTextInput"
               />
               <View style={{marginTop: 40, height: 40}}>
                 <Button
-                  testID="loginButton"
                   onPress={this.login}
                   title="Login"
+                  testID="loginButton"
+                />
+              </View>
+              <View style={{marginTop: 40, height: 40}}>
+                <Button
+                  onPress={this.reset}
+                  title="Reset"
+                  testID="resetButton"
                 />
               </View>
             </View>
