@@ -24,10 +24,10 @@ globs.forEach(glob => {
 });
 
 const bannerSource = fs.readFileSync(bannerSourcePath).toString();
-const copyrightRegex = /(Copyright \(c\) )([0-9]+)-?([0-9]+)?/;
+const copyrightRegex = /(Copyright \(c\) )([0-9]+)-?([A-Za-z0-9]+)?/;
 const match = bannerSource.match(copyrightRegex);
 const firstYear = match[2];
-const currentYear = new Date().getFullYear().toString();
+const currentYear = 'Present'; // According to requirements it should be `Present` not `new Date().getFullYear().toString()`;
 
 if (firstYear !== currentYear) {
   fs.writeFileSync(bannerSourcePath, bannerSource.replace(copyrightRegex, `$1$2-${currentYear}`));

@@ -3,7 +3,6 @@ module.exports = {
     'node_modules/',
     'dist/',
     'metro.config.js',
-    '.eslintrc.js',
     '*.e2e.js',
   ],
   extends: ['eslint:recommended', 'plugin:react/recommended'],

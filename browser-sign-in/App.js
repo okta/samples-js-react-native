@@ -23,7 +23,6 @@ import {
 } from 'react-native';
 import {
   createConfig,
-  signIn,
   signInWithBrowser,
   signOut,
   getAccessToken,

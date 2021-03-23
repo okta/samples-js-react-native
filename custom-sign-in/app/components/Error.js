@@ -14,7 +14,7 @@ import React from 'react';
 import { StyleSheet, Text } from 'react-native';
 
 const Error = ({ error }) => {
-  if (!error || error == '') {
+  if (!error) {
     return null;
   }
 

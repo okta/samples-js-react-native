@@ -12,13 +12,20 @@
 
 import { CLIENT_ID, REDIRECT_URI, LOGOUT_REDIRECT_URI, ISSUER } from '@env';
 
+/* 
+  clientId, redirectUri, endSessionRedirectUri - these values can be found on the "General" tab of the application that you created earlier in Admin Console.
+  discoveryUri - this is the URL of the authorization server that will perform authentication.
+
+  For more details, https://developer.okta.com/docs/guides/sign-into-mobile-app/create-okta-application/
+*/ 
+
 export default {
   oidc: {
-    clientId: CLIENT_ID,
-    redirectUri: REDIRECT_URI,
-    endSessionRedirectUri: LOGOUT_REDIRECT_URI,
-    discoveryUri: ISSUER,
-    scopes: ['openid', 'profile', 'offline_access'],
+    clientId: CLIENT_ID, // e.g.: `a0abcEf0gH123ssJS4o5`
+    redirectUri: REDIRECT_URI, // e.g.: `com.okta.example:/callback`
+    endSessionRedirectUri: LOGOUT_REDIRECT_URI, // e.g.: com.okta.example:/logout
+    discoveryUri: ISSUER, // e.g.: https://dev-1234.okta.com/oauth2/default
+    scopes: ['openid', 'profile', 'offline_access'], 
     requireHardwareBackedKeyStore: false,
   },
 };
