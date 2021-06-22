@@ -4,8 +4,8 @@
   "description": "React Native Sample Applications for Okta",
   "scripts": {
     "banners": "node tools/maintain-banners.js {browser-sign-in,custom-sign-in,tools,scripts}/{*js,!node_modules/,**/*{js,jsx,css}}",
-    "test:browser": "yarn --cwd browser-sign-in/ test",
-    "test:custom": "yarn --cwd custom-sign-in/ test"
+    "test:browser": "npm -C browser-sign-in/ test",
+    "test:custom": "npm -C custom-sign-in/ test"
   },
   "author": "",
   "license": "Apache-2.0",
