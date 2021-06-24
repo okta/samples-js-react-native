@@ -4,8 +4,8 @@ before_install:
   - npm install -g yarn --ignore-dependencies
   - npm install -g react-native-cli
   - gem install cocoapods
-  - yarn --cwd browser-sign-in/ --frozen-lockfile
-  - yarn --cwd custom-sign-in/ --frozen-lockfile
+  - npm install -C browser-sign-in/
+  - npm install -C custom-sign-in/
 
 jobs:
   include:
@@ -15,10 +15,10 @@ jobs:
       stage: Unit tests
       name: React Native
       script:
-      - yarn test:browser
+      - npm run test:browser
     - language: objective-c
       os: osx
-      osx_image: xcode12.2
+      osx_image: xcode12.5
       stage: UI tests
       name: Browser Sign In      
       install:
@@ -31,7 +31,7 @@ jobs:
         - xcodebuild -workspace browser-sign-in/ios/browserSignIn.xcworkspace -scheme browserSignIn -destination 'platform=iOS Simulator,OS=latest,name=iPhone 11' -sdk iphonesimulator clean test | xcpretty
     - language: objective-c
       os: osx
-      osx_image: xcode12.2
+      osx_image: xcode12.5
       stage: UI tests
       name: Custom Sign In      
       install:
