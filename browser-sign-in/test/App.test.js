@@ -94,10 +94,12 @@ describe('app setup', () => {
     const getUserFromIdButton = wrapper.find('Button').get(1);
     const getUserButton = wrapper.find('Button').get(2);
     const getUserFromTokenButton = wrapper.find('Button').get(3);
+    const refreshMyTokensButton = wrapper.find('Button').get(4);
     expect(logoutButton.props.title).toBe('Logout');
     expect(getUserFromIdButton.props.title).toBe('Get User From Id Token');
     expect(getUserButton.props.title).toBe('Get User From Request');
     expect(getUserFromTokenButton.props.title).toBe('Get User From Access Token');
+    expect(refreshMyTokensButton.props.title).toBe('Refresh Tokens');
   });
 
   it('should not render login button if authenticated', () => {
@@ -113,10 +115,12 @@ describe('app setup', () => {
     const getUserFromIdButton = wrapper.find('Button').get(1);
     const getUserButton = wrapper.find('Button').get(2);
     const getUserFromTokenButton = wrapper.find('Button').get(3);
+    const refreshMyTokensButton = wrapper.find('Button').get(4);
     expect(logoutButton.props.title).not.toBe('Logout');
     expect(getUserFromIdButton).toBe(undefined);
     expect(getUserButton).toBe(undefined);
     expect(getUserFromTokenButton).toBe(undefined);
+    expect(refreshMyTokensButton).toBe(undefined);
   });
 });
 
@@ -181,5 +185,21 @@ describe('authentication flow', () => {
     await waitForState(wrapper, state => state.context !== null);
     expect(profileButton.props.title).toBe('Get User From Access Token');
     expect(wrapper.state().context).toContain('foo');
+  });
+
+  it('should return new accessToken, idToken and refreshToken' , async () => {
+    const mockRefreshTokens = require('react-native').NativeModules.OktaSdkBridge.refreshTokens;
+    mockRefreshTokens.mockImplementation(() => {
+      return {'access_token': 'dummy_accessToken',
+              'id_token': 'dummy_idToken',
+            'refresh_token': 'dummy_refreshToken'};
+    });
+    const wrapper = shallow(<App />);
+    wrapper.setState({authenticated: true});
+    const profileButton = wrapper.find('Button').get(4);
+    await profileButton.props.onPress();
+    await waitForState(wrapper, state => state.context !== null);
+    expect(profileButton.props.title).toBe('Refresh Tokens');
+    expect(wrapper.state().context).toContain('Successfully refreshed tokens: ');
   });
 });
