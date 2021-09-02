@@ -3,7 +3,6 @@ cache: false
 before_install:
   - npm install -g yarn --ignore-dependencies
   - npm install -g react-native-cli
-  - gem install cocoapods
   - npm install -C browser-sign-in/
   - npm install -C custom-sign-in/
 
@@ -22,6 +21,7 @@ jobs:
       stage: UI tests
       name: Browser Sign In      
       install:
+        - gem install cocoapods
         - gem install xcpretty
         - echo -e "CLIENT_ID=${CLIENT_ID}\nISSUER=${ISSUER}\nREDIRECT_URI=${REDIRECT_URI}\nLOGOUT_REDIRECT_URI=${LOGOUT_REDIRECT_URI}" > browser-sign-in/.env
         - cd browser-sign-in/ios
@@ -35,6 +35,7 @@ jobs:
       stage: UI tests
       name: Custom Sign In      
       install:
+        - gem install cocoapods      
         - gem install xcpretty
         - echo -e "CLIENT_ID=${CLIENT_ID}\nISSUER=${ISSUER}\nREDIRECT_URI=${REDIRECT_URI}\nLOGOUT_REDIRECT_URI=${LOGOUT_REDIRECT_URI}" > custom-sign-in/.env
         - cd custom-sign-in/ios
