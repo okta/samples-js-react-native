@@ -112,7 +112,7 @@ export default class App extends React.Component {
   }
 
   async login() {
-    signInWithBrowser().then(result => {
+    signInWithBrowser().then(_ => {
       console.log('Sign In succeeded.');
     }).catch(error => {
       console.warn(error.error);
@@ -120,11 +120,11 @@ export default class App extends React.Component {
   }
 
   async logout() {
-    signOut().then(result => {
+    signOut().then(_ => {
       console.log('Sign Out succeeded.');
     }).catch(error => {
       console.warn(error.error);
-    });;
+    });
   }
 
   async getUserIdToken() {
