@@ -113,14 +113,18 @@ export default class App extends React.Component {
 
   async login() {
     signInWithBrowser().then(result => {
-      console.warn(result);
+      console.log('Sign In succeeded.');
     }).catch(error => {
       console.warn(error.error);
     });
   }
 
   async logout() {
-    signOut();
+    signOut().then(result => {
+      console.log('Sign Out succeeded.');
+    }).catch(error => {
+      console.warn(error.error);
+    });;
   }
 
   async getUserIdToken() {
