@@ -92,11 +92,7 @@ final class BrowserSignInUITests: XCTestCase {
     UIPasteboard.general.string = password
     passwordField.doubleTap()
     app.menuItems["Paste"].tap()
-    
-    let rememberMeCheckbox = webView.switches.firstMatch
-    rememberMeCheckbox.tap()
-    rememberMeCheckbox.tap()
-    
+  
     signInButton.tap()
     
     XCTAssertTrue(logoutButton.waitForExistence(timeout: .testing))

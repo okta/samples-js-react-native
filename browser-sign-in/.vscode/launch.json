@@ -1,6 +1,14 @@
 {
     "version": "0.2.0",
     "configurations": [
+    
+        {
+            "name": "Debug iOS",
+            "request": "launch",
+            "type": "reactnative",
+            "cwd": "${workspaceFolder}",
+            "platform": "ios"
+        },
         {
             "type": "node",
             "name": "Run Tests",
@@ -30,7 +38,6 @@
             "enableDebug": false,
             "platform": "android"
         },
-        
         {
             "name": "Attach to packager",
             "request": "attach",
