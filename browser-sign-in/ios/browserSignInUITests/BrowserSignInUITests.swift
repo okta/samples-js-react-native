@@ -151,7 +151,7 @@ final class BrowserSignInUITests: XCTestCase {
     let descriptionBox = app.staticTexts["descriptionBox"]
 
     idTokenButton.tap()
-    XCTAssertFalse(descriptionBox.label.isEmpty)
+    XCTAssertFalse(descriptionBox.label.contains(username))
     clearButton.tap()
     
     XCTAssertFalse(descriptionBox.exists)
