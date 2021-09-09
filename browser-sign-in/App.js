@@ -89,12 +89,7 @@ export default class App extends React.Component {
       discoveryUri: configFile.oidc.discoveryUri,
       scopes: configFile.oidc.scopes,
       requireHardwareBackedKeyStore:
-        configFile.oidc.requireHardwareBackedKeyStore,
-      oktaAuthConfig: { 
-        cookies: { 
-          secure: false 
-        } 
-      }
+        configFile.oidc.requireHardwareBackedKeyStore
     });
     this.checkAuthentication();
   }
@@ -118,7 +113,7 @@ export default class App extends React.Component {
   }
 
   async login() {
-    signInWithBrowser();
+    await signInWithBrowser();
   }
 
   async logout() {
