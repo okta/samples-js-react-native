@@ -31,7 +31,6 @@ import {
   getUserFromIdToken,
   refreshTokens,
   EventEmitter,
-  clearTokens
 } from '@okta/okta-react-native';
 
 import configFile from './samples.config';

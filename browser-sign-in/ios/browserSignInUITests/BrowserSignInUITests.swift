@@ -151,7 +151,8 @@ final class BrowserSignInUITests: XCTestCase {
     let descriptionBox = app.staticTexts["descriptionBox"]
 
     idTokenButton.tap()
-    XCTAssertFalse(descriptionBox.label.contains(username))
+    XCTAssertTrue(descriptionBox.waitForExistence(timeout: .testing))
+    XCTAssertTrue(descriptionBox.label.contains(username))
     clearButton.tap()
     
     XCTAssertFalse(descriptionBox.exists)
@@ -189,6 +190,6 @@ final class BrowserSignInUITests: XCTestCase {
 
 private extension TimeInterval {
   
-  static let testing: TimeInterval = 30
+  static let testing: TimeInterval = 20
 }
 
