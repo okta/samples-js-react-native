@@ -88,7 +88,7 @@ export default class App extends React.Component {
       discoveryUri: configFile.oidc.discoveryUri,
       scopes: configFile.oidc.scopes,
       requireHardwareBackedKeyStore:
-        configFile.oidc.requireHardwareBackedKeyStore,
+        configFile.oidc.requireHardwareBackedKeyStore
     });
     this.checkAuthentication();
   }
@@ -112,11 +112,11 @@ export default class App extends React.Component {
   }
 
   async login() {
-    signInWithBrowser();
+    await signInWithBrowser();
   }
 
   async logout() {
-    signOut();
+    await signOut();
   }
 
   async getUserIdToken() {
@@ -181,15 +181,15 @@ export default class App extends React.Component {
   }
 
   async refreshMyTokens() {
-    let newTokens = await refreshTokens().catch(e => {console.log(e)});
+    let newTokens = await refreshTokens().catch(e => {console.log(e);});
     if (newTokens) {
-    const message = ("Successfully refreshed tokens: " + JSON.stringify(newTokens));
-    console.log(message);
-    this.setContext(message);
+      const message = ('Successfully refreshed tokens: ' + JSON.stringify(newTokens));
+      console.log(message);
+      this.setContext(message);
     } 
     else {
-     const message = ("Failed to refresh tokens: Be sure Refresh Token grant type is enabled in your app in Okta, as well as the offline_access scope in samples.config.js")
-     this.setContext(message)
+      const message = ('Failed to refresh tokens: Be sure Refresh Token grant type is enabled in your app in Okta, as well as the offline_access scope in samples.config.js');
+      this.setContext(message);
     }
   }
 
