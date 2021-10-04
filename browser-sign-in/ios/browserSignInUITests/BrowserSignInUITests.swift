@@ -41,12 +41,6 @@ final class BrowserSignInUITests: XCTestCase {
     
     app = XCUIApplication()
     app.launch()
-    
-    logoutIfPossible()
-  }
-  
-  override func tearDownWithError() throws {
-  
   }
   
   func testRootScreen() throws {
@@ -65,37 +59,10 @@ final class BrowserSignInUITests: XCTestCase {
   }
   
   func testLoginFlow() throws {
-    // given
-    XCTAssertTrue(loginButton.waitForExistence(timeout: .testing))
-    // when
-    loginButton.tap()
-    // then
-    XCTAssertTrue(springboardContinueButton.waitForExistence(timeout: .testing))
-    springboardContinueButton.tap()
+    signIn()
     
-    let webView = app.webViews
-    
-    let usernameField = webView.textFields.element(boundBy: .zero)
-    XCTAssertTrue(usernameField.waitForExistence(timeout: .testing))
-    usernameField.tap()
-    usernameField.typeText(username)
-    
-    let doneButton = app.toolbars.buttons["Done"]
-    if doneButton.exists {
-      doneButton.tap()
-    }
-    
-    let passwordField = webView.secureTextFields.allElementsBoundByIndex.first(where: { $0.frame.width >= usernameField.frame.width })!
-    passwordField.tap()
-
-    // `typeText` works weird. Sometimes it doesn't type correct text.
-    UIPasteboard.general.string = password
-    passwordField.doubleTap()
-    app.menuItems["Paste"].tap()
-  
-    signInButton.tap()
-    
-    XCTAssertTrue(logoutButton.waitForExistence(timeout: .testing))
+    // Tear down
+    logoutIfPossible(throwError: true)
   }
   
   func testIncorrectLoginFlow() throws {
@@ -115,7 +82,7 @@ final class BrowserSignInUITests: XCTestCase {
     usernameField.typeText(username)
     
     let doneButton = app.toolbars.buttons["Done"]
-    if doneButton.exists {
+    if doneButton.exists && doneButton.isHittable {
       doneButton.tap()
     }
     
@@ -136,7 +103,7 @@ final class BrowserSignInUITests: XCTestCase {
   
   func testGetUserFromTokens() throws {
     // given
-    try testLoginFlow()
+    signIn()
     // when
     let idTokenButton = app.buttons["getUserFromIdToken"]
     let requestButton = app.buttons["getUserFromRequest"]
@@ -164,13 +131,43 @@ final class BrowserSignInUITests: XCTestCase {
     accessTokenButton.tap()
     XCTAssertFalse(descriptionBox.label.isEmpty)
     clearButton.tap()
+    
+    // Tear down
+    logoutIfPossible(throwError: true)
   }
   
-  func testLogoutFlow() throws {
+  private func signIn() {
     // given
-    try testLoginFlow()
+    XCTAssertTrue(loginButton.waitForExistence(timeout: .testing))
+    // when
+    loginButton.tap()
     // then
-    logoutIfPossible(throwError: true)
+    XCTAssertTrue(springboardContinueButton.waitForExistence(timeout: .testing))
+    springboardContinueButton.tap()
+    
+    let webView = app.webViews
+    
+    let usernameField = webView.textFields.element(boundBy: .zero)
+    XCTAssertTrue(usernameField.waitForExistence(timeout: .testing))
+    usernameField.tap()
+    usernameField.typeText(username)
+    
+    let doneButton = app.toolbars.buttons["Done"]
+    if doneButton.exists && doneButton.isHittable {
+      doneButton.tap()
+    }
+    
+    let passwordField = webView.secureTextFields.allElementsBoundByIndex.first(where: { $0.frame.width >= usernameField.frame.width })!
+    passwordField.tap()
+
+    // `typeText` works weird. Sometimes it doesn't type correct text.
+    UIPasteboard.general.string = password
+    passwordField.doubleTap()
+    app.menuItems["Paste"].tap()
+  
+    signInButton.tap()
+    
+    XCTAssertTrue(logoutButton.waitForExistence(timeout: .testing))
   }
   
   private func logoutIfPossible(throwError: Bool = false) {
