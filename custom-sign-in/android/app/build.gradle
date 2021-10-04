@@ -136,7 +136,7 @@ android {
         versionCode 1
         versionName "1.0"
         manifestPlaceholders = [
-                appAuthRedirectScheme: '{customUriScheme}'
+                appAuthRedirectScheme: 'com.okta.dev-4073768'
         ]
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         testInstrumentationRunnerArguments clearPackageData: 'true'
