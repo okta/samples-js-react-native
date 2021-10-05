@@ -28,7 +28,7 @@ jobs:
         - pod install --repo-update
         - cd ../../
       script:
-        - xcodebuild -workspace browser-sign-in/ios/browserSignIn.xcworkspace -scheme browserSignIn -destination 'platform=iOS Simulator,OS=latest,name=iPhone 11' -sdk iphonesimulator clean test | xcpretty
+        - set -o pipefail && xcodebuild -workspace browser-sign-in/ios/browserSignIn.xcworkspace -scheme browserSignIn -destination 'platform=iOS Simulator,OS=latest,name=iPhone 11' -sdk iphonesimulator clean test | xcpretty
     - language: objective-c
       os: osx
       osx_image: xcode12.5
@@ -42,5 +42,5 @@ jobs:
         - pod install --repo-update
         - cd ../../
       script:
-        - xcodebuild -workspace custom-sign-in/ios/CustomSignIn.xcworkspace -scheme CustomSignIn -destination 'platform=iOS Simulator,OS=latest,name=iPhone 11' -sdk iphonesimulator clean test | xcpretty
+        - set -o pipefail && xcodebuild -workspace custom-sign-in/ios/CustomSignIn.xcworkspace -scheme CustomSignIn -destination 'platform=iOS Simulator,OS=latest,name=iPhone 11' -sdk iphonesimulator clean test | xcpretty
 
