@@ -1,46 +1,62 @@
-cache: false
+language: android
+dist: trusty
+services: 
+  - xvfb
+android:
+  components:
+    - tools
+    - platform-tools
+    # Tools appears twice on purpose as it’s required to get the newest Android SDK tools
+    - tools
 
+    # The BuildTools version used by this project
+    - build-tools-29.0.3
+    # The SDK version used to compile this project
+    - android-29
+    - android-22
+    - extra-google-google_play_services
+
+    # Additional components
+    - extra-android-support
+    - extra-google-m2repository
+    - extra-android-m2repository
+
+    # Emulator to use for UI tests
+    - sys-img-armeabi-v7a-android-22
+jdk:
+  - openjdk8
 before_install:
-  - npm install -g yarn --ignore-dependencies
-  - npm install -g react-native-cli
-  - npm install -C browser-sign-in/
-  - npm install -C custom-sign-in/
-
-jobs:
-  include:
-    - language: node_js
-      os: linux
-      node_js: 14.15
-      stage: Unit tests
-      name: React Native
-      script:
-      - npm run test:browser
-    - language: objective-c
-      os: osx
-      osx_image: xcode12.5
-      stage: UI tests
-      name: Browser Sign In      
-      install:
-        - gem install xcpretty
-        - gem install cocoapods
-        - echo -e "CLIENT_ID=${CLIENT_ID}\nISSUER=${ISSUER}\nREDIRECT_URI=${REDIRECT_URI}\nLOGOUT_REDIRECT_URI=${LOGOUT_REDIRECT_URI}" > browser-sign-in/.env
-        - cd browser-sign-in/ios
-        - pod install --repo-update
-        - cd ../../
-      script:
-        - set -o pipefail && xcodebuild -workspace browser-sign-in/ios/browserSignIn.xcworkspace -scheme browserSignIn -destination 'platform=iOS Simulator,OS=latest,name=iPhone 11' -sdk iphonesimulator clean test | xcpretty
-    - language: objective-c
-      os: osx
-      osx_image: xcode12.5
-      stage: UI tests
-      name: Custom Sign In      
-      install:
-        - gem install xcpretty
-        - gem install cocoapods
-        - echo -e "CLIENT_ID=${CLIENT_ID}\nISSUER=${ISSUER}\nREDIRECT_URI=${REDIRECT_URI}\nLOGOUT_REDIRECT_URI=${LOGOUT_REDIRECT_URI}" > custom-sign-in/.env
-        - cd custom-sign-in/ios
-        - pod install --repo-update
-        - cd ../../
-      script:
-        - set -o pipefail && xcodebuild -workspace custom-sign-in/ios/CustomSignIn.xcworkspace -scheme CustomSignIn -destination 'platform=iOS Simulator,OS=latest,name=iPhone 11' -sdk iphonesimulator clean test | xcpretty
-
+  - sudo apt-get update
+  - sudo apt-get install gnome-terminal
+  - sudo apt install at-spi2-core
+  - sudo apt install fluxbox xinit xterm
+  - sudo apt-get install xvfb
+  - yes | sdkmanager "build-tools;28.0.3"
+  - yes | sdkmanager "platforms;android-28"
+  - nvm install 14
+install:
+  - "pushd ."
+  - "cd ./custom-sign-in"
+  - "/sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -ac -screen 0 1280x1024x16"
+  - npm install
+before_script:
+  - "export DISPLAY=:99.0"
+  ## - "sh -e /etc/init.d/xvfb start"
+  - sleep 3
+  - echo no | android create avd --force -n test -t android-22 --abi armeabi-v7a
+  - emulator -avd test -no-skin -no-audio -no-window &
+  - gsettings set org.gnome.desktop.interface monospace-font-name 'Ubuntu Mono 13'
+  - android-wait-for-emulator
+  - adb shell input keyevent 82 &
+before_cache:
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
+    - $HOME/.android/build-cache
+script:
+  - "pushd ."
+  - gnome-terminal -x ./node_modules/react-native/scripts/launchPackager.command
+  - cd ./android && ./gradlew connectedAndroidTest

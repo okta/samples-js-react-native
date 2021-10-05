@@ -21,11 +21,11 @@ import { CLIENT_ID, REDIRECT_URI, LOGOUT_REDIRECT_URI, ISSUER } from '@env';
 
 export default {
   oidc: {
-    clientId: CLIENT_ID, // e.g.: `a0abcEf0gH123ssJS4o5`
-    redirectUri: REDIRECT_URI, // e.g.: `com.okta.example:/callback`
-    endSessionRedirectUri: LOGOUT_REDIRECT_URI, // e.g.: com.okta.example:/logout
-    discoveryUri: ISSUER, // e.g.: https://dev-1234.okta.com/oauth2/default
-    scopes: ['openid', 'profile', 'offline_access'], 
-    requireHardwareBackedKeyStore: false,
+  clientId: '0oa3ro0fafc5rj9FJ5d6',
+  redirectUri: 'com.okta.dev-4073768:/callback',
+  endSessionRedirectUri: 'com.okta.dev-4073768:/logout',
+  discoveryUri: 'https://dev-4073768.okta.com/oauth2/default',
+  scopes: ["openid", "profile", "offline_access"],
+  requireHardwareBackedKeyStore: false,
   },
-};
+ };

@@ -20,7 +20,7 @@ class CustomSignInTest {
     @get:Rule
     val activityRule = ActivityScenarioRule(MainActivity::class.java)
 
-    @Test
+    /*@Test
     fun verifyCommonSignInFlow() {
         val testUsername = BuildConfig.USERNAME
         val testPassword = BuildConfig.PASSWORD
@@ -38,7 +38,7 @@ class CustomSignInTest {
 
         await()
         onView(withTagValue(`is`("nameTitleLabel"))).check(matches(isDisplayed()))
-    }
+    }*/
 
     @Test
     fun verifyInvalidCredentialsSignInFlow() {
@@ -64,7 +64,7 @@ class CustomSignInTest {
     @Deprecated("temporary")
     private fun await() {
         try {
-            Thread.sleep(5000)
+            Thread.sleep(120000)
         } catch (e: InterruptedException) {
             e.printStackTrace()
         }
