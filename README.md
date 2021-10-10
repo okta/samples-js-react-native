@@ -32,6 +32,7 @@ Before running the samples, you will need the following:
 For each sample, you will need to gather the following information from the Okta Developer Console:
 
 * **Client ID** - The client ID of the Native application that you created earlier. This can be found on the "General" tab of an application, or the list of applications.  This identifies the application that tokens will be minted for.
+* **Redirect URI** This _must not be the same as_ **End Session Redirect URI**, otherwise Android will throw an error on `signOut`.
 * **Issuer/Discovery URI** - This is the URL of the authorization server that will perform authentication.  All Developer Accounts have a "default" authorization server.  The issuer is a combination of your Org URL (found in the upper right of the console home page) and `/oauth2/default`. For example, `https://dev-1234.oktapreview.com/oauth2/default`.
 
 Now place these values into the file `samples.config.js` located under each sample folder, here let's use `dev-1234.oktapreview.com` as the okta domain:
