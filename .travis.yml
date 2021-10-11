@@ -21,8 +21,6 @@ jobs:
       stage: UI tests
       name: Browser Sign In      
       install:
-        - gem install xcpretty
-        - gem install cocoapods
         - echo -e "CLIENT_ID=${CLIENT_ID}\nISSUER=${ISSUER}\nREDIRECT_URI=${REDIRECT_URI}\nLOGOUT_REDIRECT_URI=${LOGOUT_REDIRECT_URI}" > browser-sign-in/.env
         - cd browser-sign-in/ios
         - pod install --repo-update
@@ -35,8 +33,6 @@ jobs:
       stage: UI tests
       name: Custom Sign In      
       install:
-        - gem install xcpretty
-        - gem install cocoapods
         - echo -e "CLIENT_ID=${CLIENT_ID}\nISSUER=${ISSUER}\nREDIRECT_URI=${REDIRECT_URI}\nLOGOUT_REDIRECT_URI=${LOGOUT_REDIRECT_URI}" > custom-sign-in/.env
         - cd custom-sign-in/ios
         - pod install --repo-update
