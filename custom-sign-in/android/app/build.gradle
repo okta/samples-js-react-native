@@ -79,6 +79,7 @@ import com.android.build.OutputFile
 project.ext.react = [
     entryFile: "index.js",
     enableHermes: false,  // clean and rebuild if changing
+    bundleInDebug: true
 ]
 
 apply from: "../../node_modules/react-native/react.gradle"
@@ -126,7 +127,7 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
-
+        coreLibraryDesugaringEnabled true
     }
 
     defaultConfig {
@@ -207,6 +208,8 @@ dependencies {
     } else {
       implementation jscFlavor
     }
+
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
 
     // tests
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'

@@ -1,5 +1,6 @@
 package com.customsignin
 
+import android.app.Activity
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.action.ViewActions.typeText
@@ -12,6 +13,10 @@ import org.hamcrest.CoreMatchers.`is`
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import android.content.Intent
+
+
+
 
 @RunWith(AndroidJUnit4::class)
 @LargeTest
@@ -45,26 +50,39 @@ class CustomSignInTest {
         val incorrectUsername = String(BuildConfig.USERNAME.map(Char::inc).toCharArray())
         val incorrectPassword = String(BuildConfig.PASSWORD.map(Char::inc).toCharArray())
 
-        await()
+        await(70000)
 
-        onView(withTagValue(`is`("usernameTextInput")))
+        onView(withTagValue(`is`("usernameTextInput"))).check(matches(isDisplayed()))
+
+        /*onView(withTagValue(`is`("usernameTextInput")))
                 .perform(click())
-                .perform(typeText(incorrectUsername))
+
+        println("clicked")
+
+        await(1000)
+        onView(withTagValue(`is`("usernameTextInput")))
+            .perform(typeText(incorrectUsername))
+
+        await(1000)
         onView(withTagValue(`is`("passwordTextInput")))
                 .perform(click())
-                .perform(typeText(incorrectPassword))
 
+        await(1000)
+        onView(withTagValue(`is`("passwordTextInput")))
+            .perform(typeText(incorrectPassword))
+
+        await(1000)
         onView(withTagValue(`is`("loginButton"))).perform(click())
         await()
 
         onView(withTagValue(`is`("errorBox"))).check(matches(isDisplayed()))
-        onView(withTagValue(`is`("loginButton"))).check(matches(isDisplayed()))
+        onView(withTagValue(`is`("loginButton"))).check(matches(isDisplayed()))*/
     }
 
     @Deprecated("temporary")
-    private fun await() {
+    private fun await(sleepTimeMillis: Int = 120000) {
         try {
-            Thread.sleep(120000)
+            Thread.sleep(10000)
         } catch (e: InterruptedException) {
             e.printStackTrace()
         }
