@@ -57,6 +57,7 @@ cache:
     - $HOME/.gradle/wrapper/
     - $HOME/.android/build-cache
 script:
+  - npm run android
   - "pushd ."
-  - gnome-terminal -x ./node_modules/react-native/scripts/launchPackager.command
+  # - gnome-terminal -x ./node_modules/react-native/scripts/launchPackager.command
   - cd ./android && ./gradlew connectedAndroidTest
