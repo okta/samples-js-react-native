@@ -14,6 +14,12 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import android.content.Intent
+import android.view.WindowManager
+
+import org.junit.Before
+
+
+
 
 @RunWith(AndroidJUnit4::class)
 @LargeTest
@@ -42,12 +48,26 @@ class CustomSignInTest {
         onView(withTagValue(`is`("nameTitleLabel"))).check(matches(isDisplayed()))
     }*/
 
+    fun unlockScreen() {
+        activityRule.scenario.onActivity {
+            it.runOnUiThread {
+                it.window.addFlags(
+                    WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON or
+                            WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED or
+                            WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
+                )
+            }
+        }
+    }
+
     @Test
     fun verifyInvalidCredentialsSignInFlow() {
         val incorrectUsername = String(BuildConfig.USERNAME.map(Char::inc).toCharArray())
         val incorrectPassword = String(BuildConfig.PASSWORD.map(Char::inc).toCharArray())
 
         await(1000)
+
+        unlockScreen()
 
         onView(withTagValue(`is`("usernameTextInput"))).check(matches(isDisplayed()))
 
