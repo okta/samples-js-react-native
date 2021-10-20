@@ -58,7 +58,7 @@ class CustomSignInTest {
         val incorrectUsername = String(BuildConfig.USERNAME.map(Char::inc).toCharArray())
         val incorrectPassword = String(BuildConfig.PASSWORD.map(Char::inc).toCharArray())
 
-        await(10000)
+        await(190000)
 
         onView(withTagValue(`is`("usernameTextInput")))
                 .perform(click())
