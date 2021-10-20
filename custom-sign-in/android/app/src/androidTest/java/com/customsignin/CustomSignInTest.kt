@@ -1,9 +1,6 @@
 package com.customsignin
 
-import android.app.Activity
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions.click
-import androidx.test.espresso.action.ViewActions.typeText
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.rules.ActivityScenarioRule
@@ -13,13 +10,7 @@ import org.hamcrest.CoreMatchers.`is`
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import android.content.Intent
 import android.view.WindowManager
-
-import org.junit.Before
-
-
-
 
 @RunWith(AndroidJUnit4::class)
 @LargeTest
