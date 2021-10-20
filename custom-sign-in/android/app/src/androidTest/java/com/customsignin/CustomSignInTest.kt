@@ -11,6 +11,8 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import android.view.WindowManager
+import androidx.test.espresso.action.ViewActions.click
+import androidx.test.espresso.action.ViewActions.typeText
 
 @RunWith(AndroidJUnit4::class)
 @LargeTest
@@ -56,35 +58,27 @@ class CustomSignInTest {
         val incorrectUsername = String(BuildConfig.USERNAME.map(Char::inc).toCharArray())
         val incorrectPassword = String(BuildConfig.PASSWORD.map(Char::inc).toCharArray())
 
-        await(1000)
+        await(10000)
 
-        unlockScreen()
-
-        onView(withTagValue(`is`("usernameTextInput"))).check(matches(isDisplayed()))
-
-        /*onView(withTagValue(`is`("usernameTextInput")))
+        onView(withTagValue(`is`("usernameTextInput")))
                 .perform(click())
 
         println("clicked")
 
-        await(1000)
         onView(withTagValue(`is`("usernameTextInput")))
             .perform(typeText(incorrectUsername))
 
-        await(1000)
         onView(withTagValue(`is`("passwordTextInput")))
                 .perform(click())
 
-        await(1000)
         onView(withTagValue(`is`("passwordTextInput")))
             .perform(typeText(incorrectPassword))
 
-        await(1000)
         onView(withTagValue(`is`("loginButton"))).perform(click())
         await()
 
         onView(withTagValue(`is`("errorBox"))).check(matches(isDisplayed()))
-        onView(withTagValue(`is`("loginButton"))).check(matches(isDisplayed()))*/
+        onView(withTagValue(`is`("loginButton"))).check(matches(isDisplayed()))
     }
 
     @Deprecated("temporary")
