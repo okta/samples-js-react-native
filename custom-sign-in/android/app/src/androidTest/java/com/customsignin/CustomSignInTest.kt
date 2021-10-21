@@ -11,6 +11,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import android.view.WindowManager
+import androidx.test.espresso.Espresso
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.action.ViewActions.typeText
 
@@ -41,18 +42,6 @@ class CustomSignInTest {
         onView(withTagValue(`is`("nameTitleLabel"))).check(matches(isDisplayed()))
     }*/
 
-    fun unlockScreen() {
-        activityRule.scenario.onActivity {
-            it.runOnUiThread {
-                it.window.addFlags(
-                    WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON or
-                            WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED or
-                            WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON
-                )
-            }
-        }
-    }
-
     @Test
     fun verifyInvalidCredentialsSignInFlow() {
         val incorrectUsername = String(BuildConfig.USERNAME.map(Char::inc).toCharArray())
@@ -73,6 +62,8 @@ class CustomSignInTest {
 
         onView(withTagValue(`is`("passwordTextInput")))
             .perform(typeText(incorrectPassword))
+
+        Espresso.closeSoftKeyboard()
 
         onView(withTagValue(`is`("loginButton"))).perform(click())
         await()
