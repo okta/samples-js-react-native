@@ -72,6 +72,16 @@ class CustomSignInTest {
         onView(withTagValue(`is`("loginButton"))).check(matches(isDisplayed()))
     }
 
+    @Test
+    fun verifyBasic() {
+        val incorrectUsername = String(BuildConfig.USERNAME.map(Char::inc).toCharArray())
+        val incorrectPassword = String(BuildConfig.PASSWORD.map(Char::inc).toCharArray())
+
+        await()
+
+        onView(withTagValue(`is`("usernameTextInput"))).check(matches(isDisplayed()))
+    }
+
     @Deprecated("temporary")
     private fun await(sleepTimeMillis: Int = 120000) {
         try {
