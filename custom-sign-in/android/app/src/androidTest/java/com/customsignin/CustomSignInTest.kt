@@ -22,7 +22,7 @@ class CustomSignInTest {
     @get:Rule
     val activityRule = ActivityScenarioRule(MainActivity::class.java)
 
-    /*@Test
+    @Test
     fun verifyCommonSignInFlow() {
         val testUsername = BuildConfig.USERNAME
         val testPassword = BuildConfig.PASSWORD
@@ -40,14 +40,14 @@ class CustomSignInTest {
 
         await()
         onView(withTagValue(`is`("nameTitleLabel"))).check(matches(isDisplayed()))
-    }*/
+    }
 
     @Test
     fun verifyInvalidCredentialsSignInFlow() {
         val incorrectUsername = String(BuildConfig.USERNAME.map(Char::inc).toCharArray())
         val incorrectPassword = String(BuildConfig.PASSWORD.map(Char::inc).toCharArray())
 
-        await(190000)
+        await(300000)
 
         onView(withTagValue(`is`("usernameTextInput")))
                 .perform(click())
