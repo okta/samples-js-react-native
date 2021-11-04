@@ -25,7 +25,7 @@ Before running the samples, you will need the following:
   * **Grant type allowed**
     * Authorization Code
     * Refresh Token
-* If you are developing with an Android device emulator, make sure to check out the [React Native - Android Development](https://facebook.github.io/react-native/docs/getting-started.html#android-development-environment) setup instructions.
+* If you are developing with an Android device emulator, make sure to check out the [React Native - Android Development](https://reactnative.dev/docs/environment-setup) setup instructions.
 
 ## Configuration
 
