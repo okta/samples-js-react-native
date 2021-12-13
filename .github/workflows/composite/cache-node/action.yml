@@ -1,0 +1,35 @@
+name: 'Setup cache'
+description: 'Setup, retrieve cache'
+author: 'okta'
+
+inputs:
+  node-path:
+    description: 'Path to node_modules'
+    required: true
+  install-path:
+    description: 'npm install -C ${path}'
+    required: false
+    default: ./
+  lock-hash: 
+    # We should pass a full hash because `hashFiles('${{ inputs.lock-path }}/yarn.lock')` doesn't work
+    description: 'Hash of yarn.lock file'
+    required: true
+
+outputs:
+  cache-hit:
+    description: "Cache node_files succeeded"
+    value: ${{ steps.cache-node.outputs.cache-hit }}
+
+runs:
+  using: "composite"
+  steps:
+  - name: Retrieve/save cache node_modules
+    id: cache-node
+    uses: actions/cache@v2
+    with:
+      path: ${{ inputs.node-path }}
+      key: node-modules-${{ inputs.lock-hash }}
+  - name: Install deps
+    if: steps.cache-node.outputs.cache-hit != 'true'
+    run: npm ci -C ${{ inputs.install-path }}
+    shell: bash

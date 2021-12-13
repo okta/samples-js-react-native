@@ -4,6 +4,7 @@ dist
 npm-debug.log
 travis_phantomjs
 test-reports
+.env
 
 ### VisualStudioCode ###
 .vscode/*

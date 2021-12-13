@@ -1,0 +1,39 @@
+name: Okta React Native
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+
+
+jobs:
+    BrowserJSUnitTests:
+      runs-on: ubuntu-latest
+      steps:
+      - uses: actions/checkout@v2
+      - uses: ./.github/workflows/composite/configure-env
+      - uses: ./.github/workflows/composite/cache-node
+        with:
+          node-path: ./browser-sign-in/node_modules
+          lock-hash: ${{ hashFiles('browser-sign-in/package-lock.json') }}
+      - name: Test
+        run: nom run test:browser
+    # BrowseriOSUITests:
+    #   runs-on: macos-latest
+    #   steps: 
+    #   - uses: actions/checkout@v2 
+    #   - uses: ./.github/workflows/composite/configure-env
+    #   - uses: ./.github/workflows/composite/cache-node
+    #     with:
+    #       node-path: ./browser-sign-in/node_modules
+    #       lock-hash: ${{ hashFiles('browser-sign-in/package-lock.json') }}
+    #       install-path: ./browser-sign-in
+    #   - name: Manage Pods cache
+    #     uses: ./.github/workflows/composite/cache-pod    
+    #     with: 
+    #       pod-path: ./browser-sign-in/ios/Pods
+    #       lock-hash: ${{ hashFiles('yarn.lock') }}
+    #   - run: echo -e "CLIENT_ID=${{ secrets.CLIENT_ID }}\nISSUER=${{ secrets.ISSUER }}\nREDIRECT_URI=${{ secrets.REDIRECT_URI }}\nLOGOUT_REDIRECT_URI=${{secrets.LOGOUT_REDIRECT_URI}}" > .env
+    #   - name: iOS
+    #   - run: cd browser-sign-in/ios && pod install && cd ../
+    #   - run: set -o pipefail && xcodebuild -workspace browser-sign-in/ios/browserSignIn.xcworkspace -scheme browserSignIn -destination 'platform=iOS Simulator,OS=latest,name=iPhone 11' -sdk iphonesimulator clean test | xcpretty
