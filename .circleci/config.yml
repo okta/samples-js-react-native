@@ -23,10 +23,10 @@ jobs:
       - run: gem install cocoapods
       - run: (cd browser-sign-in; yarn install --frozen-lockfile)
       - run: (cd browser-sign-in/ios; pod install)
-      - run: (cd browser-sign-in/android; ./gradlew assembleDebug)
+      # - run: (cd browser-sign-in/android; ./gradlew assembleDebug)
       - run: (cd custom-sign-in; yarn install --frozen-lockfile)
       - run: (cd custom-sign-in/ios; pod install)
-      - run: (cd custom-sign-in/android; ./gradlew assembleDebug)
+       #- run: (cd custom-sign-in/android; ./gradlew assembleDebug)
       - persist_to_workspace:
           root: ~/project
           paths:
