@@ -1116,14 +1116,14 @@
 
 "@okta/configuration-validation@^1.1.0":
   version "1.1.0"
-  resolved "https://artifacts.aue1e.internal:443/artifactory/api/npm/npm-okta-all/@okta/configuration-validation/-/@okta/configuration-validation-1.1.0.tgz#722d5d5fe485f741348104731a9ff5571d7f301d"
+  resolved "https://registry.yarnpkg.com/@okta/configuration-validation/-/@okta/configuration-validation-1.1.0.tgz#722d5d5fe485f741348104731a9ff5571d7f301d"
   integrity sha1-ci1dX+SF90E0gQRzGp/1Vx1/MB0=
   dependencies:
     "@okta/okta-auth-js" "^6.1.0"
 
 "@okta/okta-auth-js@7.3.0":
   version "7.3.0"
-  resolved "https://artifacts.aue1e.internal:443/artifactory/api/npm/npm-okta-all/@okta/okta-auth-js/-/@okta/okta-auth-js-7.3.0.tgz#79a4392ab157960cf6d72811447279edd9f74589"
+  resolved "https://registry.yarnpkg.com/@okta/okta-auth-js/-/@okta/okta-auth-js-7.3.0.tgz#79a4392ab157960cf6d72811447279edd9f74589"
   integrity sha1-eaQ5KrFXlgz21ygRRHJ57dn3RYk=
   dependencies:
     "@babel/runtime" "^7.12.5"
@@ -1145,7 +1145,7 @@
 
 "@okta/okta-auth-js@^6.1.0":
   version "6.9.0"
-  resolved "https://artifacts.aue1e.internal:443/artifactory/api/npm/npm-okta-all/@okta/okta-auth-js/-/@okta/okta-auth-js-6.9.0.tgz#2b568234f1c2ef203160faa4f4697bb02038ab83"
+  resolved "https://registry.yarnpkg.com/@okta/okta-auth-js/-/@okta/okta-auth-js-6.9.0.tgz#2b568234f1c2ef203160faa4f4697bb02038ab83"
   integrity sha1-K1aCNPHC7yAxYPqk9Gl7sCA4q4M=
   dependencies:
     "@babel/runtime" "^7.12.5"
@@ -1168,7 +1168,7 @@
 
 "@okta/okta-react-native@~2.9.1":
   version "2.9.1"
-  resolved "https://artifacts.aue1e.internal:443/artifactory/api/npm/npm-okta-all/@okta/okta-react-native/-/@okta/okta-react-native-2.9.1.tgz#4dca6e5c0ec332871fc0be1df0d3c6c276ebc187"
+  resolved "https://registry.yarnpkg.com/@okta/okta-react-native/-/@okta/okta-react-native-2.9.1.tgz#4dca6e5c0ec332871fc0be1df0d3c6c276ebc187"
   integrity sha1-TcpuXA7DMocfwL4d8NPGwnbrwYc=
   dependencies:
     "@okta/configuration-validation" "^1.1.0"
