@@ -2,9 +2,9 @@ cache: false
 
 before_install:
   - npm install -g yarn --ignore-dependencies
-  - npm install -g react-native-cli
-  - npm install -C browser-sign-in/
-  - npm install -C custom-sign-in/
+  - yarn install -g react-native-cli
+  - yarn install -C browser-sign-in/
+  - yarn install -C custom-sign-in/
 
 jobs:
   include:
@@ -14,7 +14,7 @@ jobs:
       stage: Unit tests
       name: React Native
       script:
-      - npm run test:browser
+      - yarn run test:browser
     - language: objective-c
       os: osx
       osx_image: xcode12.5
