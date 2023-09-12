@@ -35,6 +35,9 @@
     "react-dom": "^17.0.1",
     "react-test-renderer": "17.0.1"
   },
+  "resolutions": {
+    "react-native/**/unset-value": "^2.0.1"
+  },
   "jest": {
     "preset": "react-native",
     "automock": false,
