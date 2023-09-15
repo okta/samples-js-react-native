@@ -36,7 +36,9 @@
     "react-test-renderer": "17.0.1"
   },
   "resolutions": {
-    "react-native/**/unset-value": "^2.0.1"
+    "react-native/**/unset-value": "^2.0.1",
+    "react-native/**/hermes-engine": "^0.8.0",
+    "react-native/**/shell-quote": "^1.7.3"
   },
   "jest": {
     "preset": "react-native",
