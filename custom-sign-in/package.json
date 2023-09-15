@@ -17,7 +17,7 @@
     "@react-navigation/stack": "^5.12.6",
     "events": "^3.2.0",
     "react": "17.0.1",
-    "react-native": "^0.64.1",
+    "react-native": "^0.70.1",
     "react-native-dotenv": "^2.6.2",
     "react-native-gesture-handler": "^1.8.0",
     "react-native-loading-spinner-overlay": "^2.0.0",
