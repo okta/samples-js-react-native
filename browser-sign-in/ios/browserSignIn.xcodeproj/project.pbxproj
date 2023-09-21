@@ -15,6 +15,7 @@
 		924C9B7225FBB56D00EAB250 /* BrowserSignInUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924C9B7125FBB56D00EAB250 /* BrowserSignInUITests.swift */; };
 		A9545F2B22E0E91D00BD587B /* dummySwiftFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9545F2A22E0E91D00BD587B /* dummySwiftFile.swift */; };
 		ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED297162215061F000B7C4FE /* JavaScriptCore.framework */; };
+		D5E4B495D47941E3B0B658C5 /* noop-file.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2862DA1224C648C48FB8B5FE /* noop-file.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,9 @@
 		B9048823F543DBD9AA8D88E1 /* Pods-browserSignIn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-browserSignIn.debug.xcconfig"; path = "Target Support Files/Pods-browserSignIn/Pods-browserSignIn.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
+		2862DA1224C648C48FB8B5FE /* noop-file.swift */ = {isa = PBXFileReference; name = "noop-file.swift"; path = "browserSignIn/noop-file.swift"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.swift; explicitFileType = undefined; includeInIndex = 0; };
+		20935143BA124BD3B0BCE37C /* browserSignIn-Bridging-Header.h */ = {isa = PBXFileReference; name = "browserSignIn-Bridging-Header.h"; path = "browserSignIn/browserSignIn-Bridging-Header.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
+		2F73A06376704632A1882D59 /* SplashScreen.storyboard */ = {isa = PBXFileReference; name = "SplashScreen.storyboard"; path = "browserSignIn/SplashScreen.storyboard"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +82,9 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				2862DA1224C648C48FB8B5FE /* noop-file.swift */,
+				20935143BA124BD3B0BCE37C /* browserSignIn-Bridging-Header.h */,
+				2F73A06376704632A1882D59 /* SplashScreen.storyboard */,
 			);
 			name = browserSignIn;
 			sourceTree = "<group>";
@@ -233,6 +240,8 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				6700305490A340B1A0378124 /* browserSignIn-Bridging-Header.h in Resources */,
+				3AE70D36E2F44CB5B7DD7F5D /* SplashScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -345,6 +354,7 @@
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 				A9545F2B22E0E91D00BD587B /* dummySwiftFile.swift in Sources */,
+				D5E4B495D47941E3B0B658C5 /* noop-file.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -398,9 +408,12 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = browserSignIn;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.browsersignin";
+				PRODUCT_NAME = "browserSignIn";
 				VERSIONING_SYSTEM = "apple-generic";
+				TARGETED_DEVICE_FAMILY = "1";
+				SWIFT_OBJC_BRIDGING_HEADER = browserSignIn/browserSignIn-Bridging-Header.h;
+				CODE_SIGN_ENTITLEMENTS = browserSignIn/browserSignIn.entitlements;
 			};
 			name = Debug;
 		};
@@ -423,9 +436,12 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = browserSignIn;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.browsersignin";
+				PRODUCT_NAME = "browserSignIn";
 				VERSIONING_SYSTEM = "apple-generic";
+				TARGETED_DEVICE_FAMILY = "1";
+				SWIFT_OBJC_BRIDGING_HEADER = browserSignIn/browserSignIn-Bridging-Header.h;
+				CODE_SIGN_ENTITLEMENTS = browserSignIn/browserSignIn.entitlements;
 			};
 			name = Release;
 		};
@@ -561,6 +577,8 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				TEST_TARGET_NAME = browserSignIn;
+				TARGETED_DEVICE_FAMILY = "1";
+				SWIFT_OBJC_BRIDGING_HEADER = browserSignIn/browserSignIn-Bridging-Header.h;
 			};
 			name = Debug;
 		};
@@ -586,6 +604,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = okta.com.browserSignInUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_TARGET_NAME = browserSignIn;
+				TARGETED_DEVICE_FAMILY = "1";
+				SWIFT_OBJC_BRIDGING_HEADER = browserSignIn/browserSignIn-Bridging-Header.h;
 			};
 			name = Release;
 		};

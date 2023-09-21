@@ -1,4 +1,10 @@
 {
   "name": "CustomSignIn",
-  "displayName": "CustomSignIn"
+  "displayName": "CustomSignIn",
+  "android": {
+    "package": "com.customsignin"
+  },
+  "ios": {
+    "bundleIdentifier": "com.customsignin"
+  }
 }
