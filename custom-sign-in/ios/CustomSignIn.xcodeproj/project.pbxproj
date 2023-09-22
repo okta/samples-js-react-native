@@ -14,6 +14,7 @@
 		650A900828F38BCD64023FA5 /* libPods-CustomSignIn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E08F55C8B33F16517269B33 /* libPods-CustomSignIn.a */; };
 		9229C54E26021620008CF691 /* CustomSignInUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9229C54D26021620008CF691 /* CustomSignInUITests.swift */; };
 		A1450A34233944F100FF45BC /* DummySwiftFileForOidc.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1450A33233944F100FF45BC /* DummySwiftFileForOidc.swift */; };
+		9AB6F25DFCC34E15AAF5A8C7 /* noop-file.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95B9A64E17064593A9E4F900 /* noop-file.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,8 @@
 		A1450A33233944F100FF45BC /* DummySwiftFileForOidc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummySwiftFileForOidc.swift; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
+		95B9A64E17064593A9E4F900 /* noop-file.swift */ = {isa = PBXFileReference; name = "noop-file.swift"; path = "CustomSignIn/noop-file.swift"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.swift; explicitFileType = undefined; includeInIndex = 0; };
+		C4C9C7B9C29948F09C015B5B /* SplashScreen.storyboard */ = {isa = PBXFileReference; name = "SplashScreen.storyboard"; path = "CustomSignIn/SplashScreen.storyboard"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +79,8 @@
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
 				A1450A33233944F100FF45BC /* DummySwiftFileForOidc.swift */,
+				95B9A64E17064593A9E4F900 /* noop-file.swift */,
+				C4C9C7B9C29948F09C015B5B /* SplashScreen.storyboard */,
 			);
 			name = CustomSignIn;
 			sourceTree = "<group>";
@@ -226,6 +231,7 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				89B687ADC0F34693989451AA /* SplashScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -321,6 +327,7 @@
 				A1450A34233944F100FF45BC /* DummySwiftFileForOidc.swift in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				9AB6F25DFCC34E15AAF5A8C7 /* noop-file.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -372,10 +379,12 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = CustomSignIn;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.customsignin";
+				PRODUCT_NAME = "CustomSignIn";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				VERSIONING_SYSTEM = "apple-generic";
+				TARGETED_DEVICE_FAMILY = "1";
+				CODE_SIGN_ENTITLEMENTS = CustomSignIn/CustomSignIn.entitlements;
 			};
 			name = Debug;
 		};
@@ -396,10 +405,12 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = CustomSignIn;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.customsignin";
+				PRODUCT_NAME = "CustomSignIn";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				VERSIONING_SYSTEM = "apple-generic";
+				TARGETED_DEVICE_FAMILY = "1";
+				CODE_SIGN_ENTITLEMENTS = CustomSignIn/CustomSignIn.entitlements;
 			};
 			name = Release;
 		};
@@ -534,6 +545,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				TEST_TARGET_NAME = CustomSignIn;
+				TARGETED_DEVICE_FAMILY = "1";
 			};
 			name = Debug;
 		};
@@ -558,6 +570,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = okta.com.CustomSignInUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_TARGET_NAME = CustomSignIn;
+				TARGETED_DEVICE_FAMILY = "1";
 			};
 			name = Release;
 		};

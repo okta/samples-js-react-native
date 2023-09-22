@@ -1,4 +1,10 @@
 {
   "name": "browserSignIn",
-  "displayName": "browserSignIn"
+  "displayName": "browserSignIn",
+  "android": {
+    "package": "com.browsersignin"
+  },
+  "ios": {
+    "bundleIdentifier": "com.browsersignin"
+  }
 }
