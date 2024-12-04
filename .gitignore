@@ -43,6 +43,7 @@ local.properties
 
 # node.js
 #
+.expo/
 node_modules/
 npm-debug.log
 yarn-error.log
