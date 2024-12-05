@@ -8,7 +8,7 @@ executors:
   apple-ci-arm-medium:
     macos:
       xcode: 15.4.0
-    resource_class: macos.m1.medium.gen1
+    resource_class: m2pro.large
 
 commands:
   install_android_sdk:
@@ -65,6 +65,7 @@ jobs:
           scan-all-projects: true
           skip-unresolved: false
           os: macos
+          additional-arguments: --prune-repeated-subdependencies
 
 workflows:
   semgrep:
