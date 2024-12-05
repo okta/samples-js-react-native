@@ -14,7 +14,8 @@ commands:
   install_android_sdk:
     description: "Install Android SDK in macOS machine"
     steps:
-      - run: brew install wget
+      - run: brew install wget openjdk@17
+      - run: sudo ln -sfn /opt/homebrew/opt/openjdk\@17/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.jdk
       - run: wget --quiet --output-document="$HOME/android-commandline.zip" https://dl.google.com/android/repository/commandlinetools-mac-10406996_latest.zip
       - run: (cp .circleci/android_sdk_checksum $HOME/checksum; cd $HOME; shasum -a256 -c checksum)
       - run: set +o pipefail
