@@ -2,20 +2,19 @@ version: 2.1
 
 orbs:
   general-platform-helpers: okta/general-platform-helpers@1.9
-  node: circleci/node@5.1.0
+  node: circleci/node@7.0.0
 
 executors:
   apple-ci-arm-medium:
     macos:
-      xcode: 15.4.0
+      xcode: 16.1.0
     resource_class: m2pro.large
 
 commands:
   install_android_sdk:
     description: "Install Android SDK in macOS machine"
     steps:
-      - run: brew install wget openjdk@17
-      - run: sudo ln -sfn /opt/homebrew/opt/openjdk\@17/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk.jdk
+      - run: brew install wget
       - run: wget --quiet --output-document="$HOME/android-commandline.zip" https://dl.google.com/android/repository/commandlinetools-mac-10406996_latest.zip
       - run: (cp .circleci/android_sdk_checksum $HOME/checksum; cd $HOME; shasum -a256 -c checksum)
       - run: set +o pipefail
@@ -65,7 +64,6 @@ jobs:
           scan-all-projects: true
           skip-unresolved: false
           os: macos
-          additional-arguments: --prune-repeated-subdependencies
 
 workflows:
   semgrep:
