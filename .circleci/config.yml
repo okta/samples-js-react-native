@@ -56,7 +56,7 @@ workflows:
           name: execute-snyk
           context:
             - static-analysis
-          #filters:
-          #  branches:
-          #    only:
-          #      - master
+          filters:
+           branches:
+             only:
+               - master
