@@ -5,65 +5,47 @@ orbs:
   node: circleci/node@7.0.0
 
 executors:
-  apple-ci-arm-medium:
-    macos:
-      xcode: 16.1.0
-    resource_class: m2pro.large
+  linux:
+    machine:
+      image: ubuntu-2404:current
 
 commands:
   install_android_sdk:
     description: "Install Android SDK in macOS machine"
     steps:
-      - run: brew install wget
-      - run: wget --quiet --output-document="$HOME/android-commandline.zip" https://dl.google.com/android/repository/commandlinetools-mac-10406996_latest.zip
+      - run: wget --quiet --output-document="$HOME/android-commandline.zip" https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip
       - run: (cp .circleci/android_sdk_checksum $HOME/checksum; cd $HOME; shasum -a256 -c checksum)
       - run: set +o pipefail
       - run: unzip "$HOME/android-commandline.zip" -d "$HOME"
       - run: mkdir "$HOME/android-sdk"
-      - run: echo y | $HOME/cmdline-tools/bin/sdkmanager --sdk_root="$HOME/android-sdk" "platforms;android-33" > /dev/null
+      - run: echo y | $HOME/cmdline-tools/bin/sdkmanager --sdk_root="$HOME/android-sdk" "platforms;android-35" > /dev/null
       - run: echo y | $HOME/cmdline-tools/bin/sdkmanager --sdk_root="$HOME/android-sdk" "platform-tools" > /dev/null
-      - run: echo y | $HOME/cmdline-tools/bin/sdkmanager --sdk_root="$HOME/android-sdk" "build-tools;33.0.2" > /dev/null
+      - run: echo y | $HOME/cmdline-tools/bin/sdkmanager --sdk_root="$HOME/android-sdk" "build-tools;35.0.0" > /dev/null
       - run: (yes || true) | $HOME/cmdline-tools/bin/sdkmanager --sdk_root="$HOME/android-sdk" --licenses
       - run: echo 'export ANDROID_HOME="$HOME/android-sdk"' >> "$BASH_ENV"
       - run: set -o pipefail
 
-jobs:
   setup:
-    executor: apple-ci-arm-medium
+    description: "Setup project for security scan"
     steps:
       - checkout
-      - node/install:
-          install-yarn: true
-          node-version: 'latest'
       - install_android_sdk
       - run: yarn install --frozen-lockfile
-      - run: gem install cocoapods
       - run: (cd browser-sign-in; yarn install --frozen-lockfile)
-      - run: (cd browser-sign-in/ios; pod install)
-      - run: (cd browser-sign-in/android; ./gradlew assembleDebug)
+      - run: (cd browser-sign-in/android; ./gradlew assembleDebug) # Avoid gradle build during snyk scan
       - run: (cd custom-sign-in; yarn install --frozen-lockfile)
-      - run: (cd custom-sign-in/ios; pod install)
-      - run: (cd custom-sign-in/android; ./gradlew assembleDebug)
-      - persist_to_workspace:
-          root: ~/project
-          paths:
-            - .
+      - run: (cd custom-sign-in/android; ./gradlew assembleDebug) # Avoid gradle build during snyk scan
 
+jobs:
   snyk-scan:
-    executor: apple-ci-arm-medium
+    executor: linux
     steps:
-      - attach_workspace:
-          at: ~/project
-      - run:
-          name: Install rosetta # Needed for snyk to work on M1 machines.
-          command: softwareupdate --install-rosetta --agree-to-license
-      - install_android_sdk
+      - setup
       - general-platform-helpers/step-load-dependencies
       - general-platform-helpers/step-run-snyk-monitor:
           run-on-non-main: true
           scan-all-projects: true
           skip-unresolved: false
-          os: macos
 
 workflows:
   semgrep:
@@ -78,11 +60,6 @@ workflows:
             - static-analysis
   security-scan:
     jobs:
-      - setup
-          #filters:
-          #  branches:
-          #    only:
-          #      - master
       - snyk-scan:
           name: execute-snyk
           #filters:
@@ -91,5 +68,3 @@ workflows:
           #      - master
           context:
             - static-analysis
-          requires:
-            - setup
