@@ -8,6 +8,7 @@ executors:
   linux:
     machine:
       image: ubuntu-2404:current
+    resource_class: xlarge
 
 commands:
   install_android_sdk:
