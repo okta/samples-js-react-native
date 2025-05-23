@@ -1,10 +1,32 @@
 {
-  "name": "CustomSignIn",
-  "displayName": "CustomSignIn",
-  "android": {
-    "package": "com.customsignin"
+  "expo": {
+    "name": "CustomSignIn",
+    "displayName": "CustomSignIn",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "icon": "./app_logo.png",
+    "android": {
+      "package": "com.customsignin"
+    },
+    "ios": {
+      "bundleIdentifier": "com.customsignin"
+    },
+    "plugins": [
+      [
+        "expo-splash-screen",
+        {
+          "backgroundColor": "#ffffff",
+          "image": "./app_logo.png",
+          "dark": {
+            "image": "./app_logo.png",
+            "backgroundColor": "#000000"
+          },
+          "imageWidth": 200
+        }
+      ]
+    ]
   },
-  "ios": {
-    "bundleIdentifier": "com.customsignin"
-  }
+  "name": "CustomSignIn"
 }

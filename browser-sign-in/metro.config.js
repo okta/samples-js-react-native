@@ -9,28 +9,11 @@
  *
  * See the License for the specific language governing permissions and limitations under the License.
  */
- 
-/**
- * Metro configuration for React Native
- * https://github.com/facebook/react-native
- *
- * @format
- */
 
-const blacklist = require('metro-config/src/defaults/exclusionList');
+// Learn more https://docs.expo.io/guides/customizing-metro
+const { getDefaultConfig } = require('expo/metro-config');
 
-module.exports = {
-  resolver: {
-    blacklistRE: blacklist([
-      /node_modules\/.*\/node_modules\/react-native\/.*/,
-    ]),
-  },
-  transformer: {
-    getTransformOptions: async () => ({
-      transform: {
-        experimentalImportSupport: false,
-        inlineRequires: false,
-      },
-    }),
-  },
-};
+/** @type {import('expo/metro-config').MetroConfig} */
+const config = getDefaultConfig(__dirname);
+
+module.exports = config;
