@@ -41,6 +41,7 @@ jobs:
     executor: linux
     steps:
       - setup
+      - run: pip install setuptools
       - general-platform-helpers/step-load-dependencies
       - general-platform-helpers/step-run-snyk-monitor:
           run-on-non-main: true
@@ -48,23 +49,13 @@ jobs:
           skip-unresolved: false
 
 workflows:
-  semgrep:
-    jobs:
-      - general-platform-helpers/job-semgrep-scan:
-          name: semgrep-scan
-          #filters:
-          #  branches:
-          #    only:
-          #      - master
-          context:
-            - static-analysis
   security-scan:
     jobs:
       - snyk-scan:
           name: execute-snyk
+          context:
+            - static-analysis
           #filters:
           #  branches:
           #    only:
           #      - master
-          context:
-            - static-analysis
