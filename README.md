@@ -52,11 +52,11 @@ export default {
 
 ### For Android
 
-* In `android/app/build.gradle` located under each sample folder change value of `appAuthRedirectScheme` from `customUriScheme` to `com.okta.example` (or your redirect scheme used in Okta app configuration above)
+* In `browser-sign-in/android/app/build.gradle` change value of `appAuthRedirectScheme` from `customUriScheme` to `com.okta.example` (or your redirect scheme used in Okta app configuration above)
 
 ### For iOS
 
-* In `custom-sign-in/ios/CustomSignIn/Info.plist` and `browser-sign-in/ios/browserSignIn/Info.plist` for key `CFBundleURLTypes` in `CFBundleURLSchemes` change string value from `com.customsignin` (`com.browsersignin`) to `com.okta.example` (or your redirect scheme used in Okta app configuration above)
+* In `browser-sign-in/ios/browserSignIn/Info.plist` for key `CFBundleURLTypes` in `CFBundleURLSchemes` change string value from `com.browsersignin` to `com.okta.example` (or your redirect scheme used in Okta app configuration above)
 
 ## Samples
 
