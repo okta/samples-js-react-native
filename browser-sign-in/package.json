@@ -8,8 +8,14 @@
     "ios": "expo run:ios",
     "test": "jest",
     "lint": "eslint .",
-    "clean:ios": "cd ios && pod deintegrate && cd .. && rm -rf ./ios/build && rm -rf ./ios/Pods && rm ./ios/Podfile.lock && rm -rf ./node_modules && rm -rf ./expo",
-    "clean:android": "cd android && ./gradlew clean && cd .. && rm -rf ./android/build && rm -rf ./android/.gradle && rm -rf ./android/.idea && rm -rf ./node_modules && rm -rf ./expo"
+    "doctor": "react-native doctor",
+    "build-ios": "react-native build-ios",
+    "build-android": "react-native build-android",
+    "run-ios": "react-native run-ios",
+    "run-android": "react-native run-android",
+    "clean": "react-native clean",
+    "clean-ios": "cd ios && pod deintegrate && cd .. && rm -rf ./ios/build && rm -rf ./ios/Pods && rm ./ios/Podfile.lock && rm -rf ./node_modules && rm -rf ./expo",
+    "clean-android": "cd android && ./gradlew clean && cd .. && rm -rf ./android/build && rm -rf ./android/.gradle && rm -rf ./android/.idea && rm -rf ./node_modules && rm -rf ./expo"
   },
   "dependencies": {
     "@okta/okta-react-native": "~2.17.0",
