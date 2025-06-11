@@ -7,7 +7,10 @@
     "android": "expo run:android",
     "ios": "expo run:ios",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "clean": "rm -rf ./expo && rm -rf ./node_modules && yarn clean-ios && yarn clean-android",
+    "clean-ios": "rm -rf ./ios/build && rm -rf ./ios/Pods && rm ./ios/Podfile.lock",
+    "clean-android": "rm -rf ./android/build && rm -rf ./android/.gradle && rm -rf ./android/.idea"
   },
   "dependencies": {
     "@okta/okta-react-native": "~2.17.0",
