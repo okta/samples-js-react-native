@@ -27,7 +27,7 @@
       <dict>
         <key>CFBundleURLSchemes</key>
         <array>
-          <string>com.browsersignin</string>
+          <string>com.okta.example</string>
         </array>
       </dict>
     </array>
