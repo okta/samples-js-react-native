@@ -13,7 +13,6 @@
 import React, {Fragment} from 'react';
 
 import {
-  SafeAreaView,
   ScrollView,
   Button,
   StyleSheet,
@@ -257,7 +256,7 @@ export default class App extends React.Component {
     return (
       <Fragment>
         <StatusBar barStyle="dark-content" />
-        <SafeAreaView style={styles.container}>
+        <View style={styles.container}>
           <Text testID="titleLabel" style={styles.title}>Okta + React Native</Text>
           <View style={styles.buttonContainer}>
             <View style={styles.button}>
@@ -284,11 +283,10 @@ export default class App extends React.Component {
           </View>
           {this.renderButtons()}
           <ScrollView
-            contentInsetAdjustmentBehavior="automatic"
             style={styles.context}>
             <Text testID="descriptionBox">{this.state.context}</Text>
           </ScrollView>
-        </SafeAreaView>
+        </View>
       </Fragment>
     );
   }
