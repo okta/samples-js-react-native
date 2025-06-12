@@ -22,8 +22,8 @@ import { CLIENT_ID, REDIRECT_URI, LOGOUT_REDIRECT_URI, ISSUER, DISCOVERY_URI } f
 export default {
   oidc: {
     clientId: '0oa2ewbmg0jeuzN1E0h8', // e.g.: `a0abcEf0gH123ssJS4o5`
-    redirectUri: 'com.oktapreview.qa-priya-op1-oie:/callback', // e.g.: `com.okta.example:/callback`
-    endSessionRedirectUri: 'com.oktapreview.qa-priya-op1-oie:/logoutCallback', // e.g.: com.okta.example:/logout
+    redirectUri: 'com.okta.example:/callback', // e.g.: `com.okta.example:/callback`
+    endSessionRedirectUri: 'com.okta.example:/logoutCallback', // e.g.: com.okta.example:/logout
     discoveryUri: 'https://qa-priya-op1-oie.oktapreview.com', // e.g.: https://dev-1234.okta.com/oauth2/default
     scopes: ['openid', 'profile', 'offline_access'], 
     requireHardwareBackedKeyStore: false,
