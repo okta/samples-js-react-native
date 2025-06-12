@@ -71,9 +71,10 @@ Open `./android/app/build.gradle` and add to `android.defaultConfig`:
     // after versionName "1.0.0"
 
     manifestPlaceholders = [
-            appAuthRedirectScheme: 'customUriScheme'
+            appAuthRedirectScheme: 'com.okta.example'
     ]
 ```
+(replace `com.okta.example` with your redirect scheme used in Okta app configuration if it differs)
 
 ```sh
 npx react-native build-android

@@ -52,7 +52,7 @@ export default {
 
 ### For Android
 
-* In `browser-sign-in/android/app/build.gradle` change value of `appAuthRedirectScheme` from `customUriScheme` to `com.okta.example` (or your redirect scheme used in Okta app configuration above)
+* In `browser-sign-in/android/app/build.gradle` change value of `appAuthRedirectScheme` from `com.okta.example` to your redirect scheme used in Okta app configuration above
 
 
 ## Samples
