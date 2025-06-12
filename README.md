@@ -54,26 +54,6 @@ export default {
 
 * In `browser-sign-in/android/app/build.gradle` change value of `appAuthRedirectScheme` from `customUriScheme` to `com.okta.example` (or your redirect scheme used in Okta app configuration above)
 
-### For iOS
-
-* In `browser-sign-in/ios/browserSignIn/Info.plist` for key `CFBundleURLTypes` add `CFBundleURLSchemes` with `com.okta.example` (or your redirect scheme used in Okta app configuration above) like this:
-```xml
-    <key>CFBundleURLTypes</key>
-    <array>
-      <dict>
-        <key>CFBundleURLSchemes</key>
-        <array>
-          <string>exp+browsersignin</string>
-        </array>
-      </dict>
-      <dict>
-        <key>CFBundleURLSchemes</key>
-        <array>
-          <string>com.okta.example</string>
-        </array>
-      </dict>
-    </array>
-```
 
 ## Samples
 
@@ -88,6 +68,8 @@ Please find the sample that fits your use-case from the table below.
 
 ### Troubleshooting
 
-* Please use redirect scheme (`com.okta.example` in examples above) other than `com.browsersignin` for `Browser Sign In` sample for Android
+* Please use redirect scheme (`com.okta.example` in examples above) other than `com.browsersignin` or `exp+browsersignin` for `Browser Sign In` sample for Android
+
+* Don't use `expo-dev-client` in `Custom Sign In` sample for iOS
 
 * If you run samples on Android emulator please use system images with `Google Play` services and not `Android Open Source` image. Virtual device should have Chrome browser.

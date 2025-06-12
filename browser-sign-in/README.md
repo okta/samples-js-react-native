@@ -57,3 +57,37 @@ This method calls `getUser()` to retrieve user info by passing in the access tok
 
 ### Get User From Access Token ###
 This method shows you how to use the access token from `getAccessToken()` to exchange user information. It shows how to make a fetch request to the user info endpoint with access token as the header.
+
+
+## Update react-native and expo
+
+Modify `package.json` with latest versions you want to use.
+
+```sh
+yarn clean
+yarn
+
+# optional
+yarn fix-deps
+yarn deduplicate
+yarn doctor
+yarn expo-doctor
+
+# regenerate native dirs
+rm -rf ./android && rm -rf ./ios
+npx expo prebuild
+```
+
+Open `./android/app/build.gradle` and add to `android.defaultConfig`:
+```
+    // after versionName "1.0.0"
+
+    manifestPlaceholders = [
+            appAuthRedirectScheme: 'customUriScheme'
+    ]
+```
+
+```sh
+npx react-native build-android
+npx react-native build-ios
+```

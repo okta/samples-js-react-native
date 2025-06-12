@@ -45,3 +45,37 @@ npm run ios
 Enter your credentials and tap the **Login** button. You can login with the same account that you created when signing up for your Developer Org, or you can use a known username and password from your Okta Directory.
 
 After you complete the login flow, you will be able to see the details of user's account. Tap **Get Access Token** button to excahnge session token to access token via OIDC SDK.
+
+
+## Update react-native and expo
+
+Modify `package.json` with latest versions you want to use.
+
+```sh
+yarn clean
+yarn
+
+# optional
+yarn fix-deps
+yarn deduplicate
+yarn doctor
+yarn expo-doctor
+
+# regenerate native dirs
+rm -rf ./android && rm -rf ./ios
+npx expo prebuild
+```
+
+Open `./android/app/build.gradle` and add to `android.defaultConfig`:
+```
+    // after versionName "1.0.0"
+
+    manifestPlaceholders = [
+            appAuthRedirectScheme: 'customUriScheme'
+    ]
+```
+
+```sh
+npx react-native build-android
+npx react-native build-ios
+```

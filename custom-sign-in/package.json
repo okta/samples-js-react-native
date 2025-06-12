@@ -3,21 +3,23 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "react-native start",
+    "start": "expo start --dev-client",
+    "start-ios": "react-native run-ios --no-packager",
+    "start-android": "react-native run-android --no-packager",
     "android": "expo run:android",
     "ios": "expo run:ios",
-    "test": "jest",
-    "lint": "eslint ."
+    "expo-doctor": "npx expo-doctor",
+    "doctor": "react-native doctor",
+    "fix-deps": "expo install --fix --yarn",
+    "deduplicate": "npx yarn-deduplicate yarn.lock",
+    "pod-install": "rm -rf ./ios/Pods && npx pod-install --non-interactive",
+    "clean": "react-native clean --include 'android,cocoapods,metro,watchman,yarn,npm' && rm -rf ./.expo && rm -rf ./ios/build && rm -rf ./ios/Pods && rm -rf ./android/build && rm -rf ./android/.gradle && rm -rf ./android/.idea && rm -rf ./android/.kotlin && rm -rf ./android/app/.cxx",
+    "test": "jest"
   },
   "dependencies": {
     "@okta/configuration-validation": "^1.1.0",
     "@okta/okta-react-native": "~2.17.0",
-    "@react-native-community/cli": "^18.0.0",
-    "@react-native-community/cli-platform-android": "18.0.0",
-    "@react-native-community/cli-platform-ios": "18.0.0",
     "@react-native-masked-view/masked-view": "^0.3.2",
-    "@react-native/babel-preset": "0.79.3",
-    "@react-native/metro-config": "0.79.3",
     "@react-navigation/native": "^7.1.10",
     "@react-navigation/stack": "^7.3.3",
     "events": "^3.3.0",
@@ -27,21 +29,36 @@
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "react-native": "0.79.3",
-    "react-native-dotenv": "^3.4.11",
+    "react-native-dotenv": "^3.4.9",
     "react-native-gesture-handler": "~2.24.0",
     "react-native-loading-spinner-overlay": "^3.0.1",
     "react-native-reanimated": "~3.17.4",
     "react-native-safe-area-context": "5.4.0",
-    "react-native-screens": "^4.11.1"
+    "react-native-screens": "~4.11.1",
+    "semver": "^7.7.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.25.2",
-    "@babel/preset-env": "^7.25.3",
-    "@babel/runtime": "^7.25.0",
-    "@types/react": "~19.0.1",
+    "@babel/core": "^7.27.4",
+    "@babel/runtime": "^7.27.6",
+    "@react-native-community/cli": "^18.0.0",
+    "@react-native/babel-preset": "0.79.3",
+    "@react-native/metro-config": "0.79.3",
+    "@react-native/typescript-config": "0.79.3",
+    "@types/react": "~19.0.0",
     "typescript": "^5.8.3"
   },
   "jest": {
     "preset": "react-native"
+  },
+  "expo": {
+    "doctor": {
+      "reactNativeDirectoryCheck": {
+        "exclude": [
+          "@okta/okta-react-native",
+          "@okta/configuration-validation",
+          "events"
+        ]
+      }
+    }
   }
 }
