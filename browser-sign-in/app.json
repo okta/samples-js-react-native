@@ -1,6 +1,5 @@
 {
   "name": "browserSignIn",
-  "displayName": "browserSignIn",
   "version": "1.0.0",
   "runtimeVersion": "1.0.0",
   "assetBundlePatterns": [

@@ -3,26 +3,24 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "react-native start",
+    "start": "expo start --dev-client",
+    "start-ios": "react-native run-ios --no-packager",
+    "start-android": "react-native run-android --no-packager",
     "android": "expo run:android",
     "ios": "expo run:ios",
-    "test": "jest",
-    "lint": "eslint .",
-    "run-ios": "react-native run-ios --verbose",
-    "run-android": "react-native run-android --verbose",
+    "expo-doctor": "npx expo-doctor",
     "doctor": "react-native doctor",
-    "install-fix": "expo install --fix",
-    "delme---pod-reinstall": "rm -rf ./ios/Pods && rm -f ./ios/Podfile.lock && npx --yes pod-install --non-interactive",
-    "clean": "react-native clean --include 'android,cocoapods,metro,watchman,yarn,npm' && rm -rf ./.expo && rm -rf ./ios/build && rm -rf ./ios/Pods && rm -rf ./android/build && rm -rf ./android/.gradle && rm -rf ./android/.idea && rm -rf ./android/.kotlin"
+    "fix-deps": "expo install --fix --yarn",
+    "deduplicate": "npx yarn-deduplicate yarn.lock",
+    "pod-install": "rm -rf ./ios/Pods && npx pod-install --non-interactive",
+    "clean": "react-native clean --include 'android,cocoapods,metro,watchman,yarn,npm' && rm -rf ./.expo && rm -rf ./ios/build && rm -rf ./ios/Pods && rm -rf ./android/build && rm -rf ./android/.gradle && rm -rf ./android/.idea && rm -rf ./android/.kotlin && rm -rf ./android/app/.cxx",
+    "test": "jest"
   },
   "dependencies": {
     "@okta/okta-react-native": "~2.17.0",
-    "@react-native-community/cli": "^15.0.0",
-    "@react-native/babel-preset": "0.79.3",
-    "@react-native/metro-config": "^0.79.3",
-    "@react-native/typescript-config": "0.79.3",
     "@react-navigation/native": "^6.1.18",
     "@react-navigation/native-stack": "^6.11.0",
+    "events": "^3.3.0",
     "expo": "^53.0.11",
     "expo-build-properties": "~0.14.6",
     "expo-dev-client": "~5.2.0",
@@ -40,7 +38,12 @@
     "semver": "^7.7.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.24.6",
+    "@react-native-community/cli": "^18.0.0",
+    "@react-native/babel-preset": "0.79.3",
+    "@react-native/metro-config": "0.79.3",
+    "@react-native/typescript-config": "0.79.3",
+    "@babel/core": "^7.27.4",
+    "@babel/runtime": "^7.27.6",
     "@types/react": "~19.0.0",
     "typescript": "^5.8.3"
   },
@@ -53,5 +56,15 @@
     "setupFiles": [
       "./setupJest.js"
     ]
+  },
+  "expo": {
+    "doctor": {
+      "reactNativeDirectoryCheck": {
+        "exclude": [
+          "@okta/okta-react-native",
+          "events"
+        ]
+      }
+    }
   }
 }
