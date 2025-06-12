@@ -56,7 +56,24 @@ export default {
 
 ### For iOS
 
-* In `browser-sign-in/ios/browserSignIn/Info.plist` for key `CFBundleURLTypes` in `CFBundleURLSchemes` change string value from `com.browsersignin` to `com.okta.example` (or your redirect scheme used in Okta app configuration above)
+* In `browser-sign-in/ios/browserSignIn/Info.plist` for key `CFBundleURLTypes` add `CFBundleURLSchemes` with `com.okta.example` (or your redirect scheme used in Okta app configuration above) like this:
+```xml
+    <key>CFBundleURLTypes</key>
+    <array>
+      <dict>
+        <key>CFBundleURLSchemes</key>
+        <array>
+          <string>exp+browsersignin</string>
+        </array>
+      </dict>
+      <dict>
+        <key>CFBundleURLSchemes</key>
+        <array>
+          <string>com.okta.example</string>
+        </array>
+      </dict>
+    </array>
+```
 
 ## Samples
 
