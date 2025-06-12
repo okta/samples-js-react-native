@@ -90,6 +90,9 @@ Open `./android/app/build.gradle` and add to `android.defaultConfig`:
 
 ```sh
 npx react-native build-android
+
 yarn pod-install
 npx react-native build-ios
 ```
+
+Then you can run `yarn start` (`yarn android` and `yarn ios`) to check how it works on Android and iOS devices.
