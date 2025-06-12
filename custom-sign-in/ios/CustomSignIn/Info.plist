@@ -28,6 +28,11 @@
         <key>CFBundleURLSchemes</key>
         <array>
           <string>com.customsignin</string>
+        </array>
+      </dict>
+      <dict>
+        <key>CFBundleURLSchemes</key>
+        <array>
           <string>exp+customsignin</string>
         </array>
       </dict>
