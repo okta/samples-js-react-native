@@ -78,5 +78,6 @@ Open `./android/app/build.gradle` and add to `android.defaultConfig`:
 
 ```sh
 npx react-native build-android
+yarn pod-install
 npx react-native build-ios
 ```
