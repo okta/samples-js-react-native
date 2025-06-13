@@ -13,8 +13,8 @@
 import React, {Fragment} from 'react';
 
 import {
-  ScrollView,
   SafeAreaView,
+  ScrollView,
   Button,
   StyleSheet,
   Text,
