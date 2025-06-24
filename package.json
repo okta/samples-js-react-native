@@ -17,6 +17,6 @@
   "homepage": "https://github.com/okta/samples-js-react-native",
   "private": true,
   "dependencies": {
-    "globby": "^14.0.2"
+    "globby": "^14.1.0"
   }
 }

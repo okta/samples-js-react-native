@@ -1,32 +1,29 @@
 {
-  "expo": {
-    "name": "browserSignIn",
-    "displayName": "browserSignIn",
-    "version": "1.0.0",
-    "assetBundlePatterns": [
-      "**/*"
-    ],
-    "icon": "./app_logo.png",
-    "android": {
-      "package": "com.browsersignin"
-    },
-    "ios": {
-      "bundleIdentifier": "com.browsersignin"
-    },
-    "plugins": [
-      [
-        "expo-splash-screen",
-        {
-          "backgroundColor": "#ffffff",
-          "image": "./app_logo.png",
-          "dark": {
-            "image": "./app_logo.png",
-            "backgroundColor": "#000000"
-          },
-          "imageWidth": 200
-        }
-      ]
-    ]
+  "name": "browserSignIn",
+  "version": "1.0.0",
+  "runtimeVersion": "1.0.0",
+  "assetBundlePatterns": [
+    "**/*"
+  ],
+  "icon": "./app_logo.png",
+  "android": {
+    "package": "com.browsersignin"
   },
-  "name": "browserSignIn"
+  "ios": {
+    "bundleIdentifier": "com.browsersignin"
+  },
+  "plugins": [
+    [
+      "expo-splash-screen",
+      {
+        "backgroundColor": "#ffffff",
+        "image": "./app_logo.png",
+        "dark": {
+          "image": "./app_logo.png",
+          "backgroundColor": "#000000"
+        },
+        "imageWidth": 200
+      }
+    ]
+  ]
 }

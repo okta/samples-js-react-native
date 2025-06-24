@@ -284,7 +284,6 @@ export default class App extends React.Component {
           </View>
           {this.renderButtons()}
           <ScrollView
-            contentInsetAdjustmentBehavior="automatic"
             style={styles.context}>
             <Text testID="descriptionBox">{this.state.context}</Text>
           </ScrollView>

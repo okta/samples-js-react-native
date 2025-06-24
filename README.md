@@ -42,13 +42,18 @@ export default {
   oidc: {
     clientId: CLIENT_ID, // a1234abcdEf8gH1234mnIKS40
     discoveryUri: ISSUER, // https://dev-1234.oktapreview.com/oauth2/default
-    redirectUri: REDIRECT_URI, // com.oktapreview.dev-1234:/callback
-    endSessionRedirectUri: 'com.okta.{example}:/logoutCallback', // com.oktapreview.dev-1234:/logoutCallback
+    redirectUri: REDIRECT_URI, // com.okta.example:/callback
+    endSessionRedirectUri: LOGOUT_REDIRECT_URI, // 'com.okta.example:/logoutCallback',
     scope: ["openid", "profile", "offline_access"],
     requireHardwareBackedKeyStore: false
   }
 };
 ```
+
+### For Android
+
+* In `browser-sign-in/android/app/build.gradle` change value of `appAuthRedirectScheme` from `com.okta.example` to your redirect scheme used in Okta app configuration above
+
 
 ## Samples
 
@@ -60,3 +65,11 @@ Please find the sample that fits your use-case from the table below.
 | [Custom Sign In](/custom-sign-in) | A React Native application that adopts native authorization to take control over authorization flow and/or provide custom UI. |
 
 [Okta React Native Library]: https://github.com/okta/okta-oidc-js/tree/master/packages/okta-react-native
+
+### Troubleshooting
+
+* Please use redirect scheme (`com.okta.example` in examples above) other than `com.browsersignin` or `exp+browsersignin` for `Browser Sign In` sample for Android
+
+* Don't use `expo-dev-client` in `Custom Sign In` sample for iOS
+
+* If you run samples on Android emulator please use system images with `Google Play` services and not `Android Open Source` image. Virtual device should have Chrome browser.
