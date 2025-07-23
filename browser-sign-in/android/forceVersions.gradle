@@ -5,6 +5,8 @@ def forceVersions(ConfigurationContainer configurations) {
             force 'io.netty:netty-handler:4.1.118.Final' // from 4.1.93.Final
             force 'io.netty:netty-codec-http:4.1.118.Final' // from 4.1.93.Final
             force 'io.netty:netty-codec-http2:4.1.118.Final' // from 4.1.93.Final
+            force 'commons-codec:commons-codec:1.13' // from 1.10
+            force 'commons-io:commons-io:2.14.0' // from 2.6
         }
     }
 }
