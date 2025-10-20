@@ -1,16 +1,22 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
+  ext {
+    kotlin_version = '2.2.20'
+  }
   apply from: 'forceVersions.gradle'
   forceVersions(configurations)
   repositories {
+    // The Following line is required if trargeting React Native 0.80 and above
+    // gradlePluginPortal() // Update Gradle & Kotlin plugin support for community plugins for React Native 0.80+
     google()
     mavenCentral()
   }
   dependencies {
-    classpath('com.android.tools.build:gradle')
+    classpath('com.android.tools.build:gradle:8.7.2')
     classpath('com.facebook.react:react-native-gradle-plugin')
-    classpath('org.jetbrains.kotlin:kotlin-gradle-plugin')
+    classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlin_version}")
+    // classpath("com.ncorti.ktfmt.gradle:plugin:0.21.0") // Needed when React Native is 0.80 or above (Kotlin code formatter)
   }
 }
 
@@ -30,6 +36,8 @@ allprojects {
       url(reactNativeAndroidDir)
     }
 
+    // The Following line is required if trargeting React Native 0.80 and above
+    // gradlePluginPortal() // Update Gradle & Kotlin plugin support for community plugins for React Native 0.80+
     google()
     mavenCentral()
     maven { url 'https://www.jitpack.io' }
