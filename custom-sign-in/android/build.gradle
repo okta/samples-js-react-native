@@ -7,7 +7,8 @@ buildscript {
   apply from: 'forceVersions.gradle'
   forceVersions(configurations)
   repositories {
-    // gradlePluginPortal() // from RN 0.80+
+    // The Following line is required if trargeting React Native 0.80 and above
+    // gradlePluginPortal() // Update Gradle & Kotlin plugin support for community plugins for React Native 0.80+
     google()
     mavenCentral()
   }
@@ -15,7 +16,7 @@ buildscript {
     classpath('com.android.tools.build:gradle:8.7.2')
     classpath('com.facebook.react:react-native-gradle-plugin')
     classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlin_version}")
-    // classpath("com.ncorti.ktfmt.gradle:plugin:0.21.0") // from RN 0.80+
+    // classpath("com.ncorti.ktfmt.gradle:plugin:0.21.0") // Needed when React Native is 0.80 or above (Kotlin code formatter)
   }
 }
 
@@ -35,7 +36,8 @@ allprojects {
       url(reactNativeAndroidDir)
     }
 
-    // gradlePluginPortal() // from RN 0.80+
+    // The Following line is required if trargeting React Native 0.80 and above
+    // gradlePluginPortal() // Update Gradle & Kotlin plugin support for community plugins for React Native 0.80+
     google()
     mavenCentral()
     maven { url 'https://www.jitpack.io' }
