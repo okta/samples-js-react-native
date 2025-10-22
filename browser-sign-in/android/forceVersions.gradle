@@ -7,6 +7,9 @@ def forceVersions(ConfigurationContainer configurations) {
             force 'io.netty:netty-codec-http2:4.1.118.Final' // from 4.1.93.Final
             force 'commons-codec:commons-codec:1.14' // from 1.10
             force 'commons-io:commons-io:2.14.0' // from 2.6
+            force 'org.jetbrains.kotlin:kotlin-stdlib:2.2.20' // from 1.4.10
+            force 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:2.2.20' // from 1.4.10
+            force 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:2.2.20' // from 1.4.10
         }
     }
 }
