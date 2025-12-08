@@ -5,7 +5,7 @@ def forceVersions(ConfigurationContainer configurations) {
             force 'io.netty:netty-handler:4.1.118.Final' // from 4.1.93.Final
             force 'io.netty:netty-codec-http:4.1.118.Final' // from 4.1.93.Final
             force 'io.netty:netty-codec-http2:4.1.118.Final' // from 4.1.93.Final
-            force 'commons-codec:commons-codec:1.14' // from 1.10
+            force 'commons-codec:commons-codec:1.16.1' // from 1.10/1.14 upgraded to latest stable version compatible with Kotlin 2.2.20 and React Native 0.79.6
             force 'commons-io:commons-io:2.14.0' // from 2.6
             force 'org.jetbrains.kotlin:kotlin-stdlib:2.2.20' // from 1.4.10
             force 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:2.2.20' // from 1.4.10
