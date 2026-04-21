@@ -10,6 +10,9 @@ def forceVersions(ConfigurationContainer configurations) {
             force 'org.jetbrains.kotlin:kotlin-stdlib:2.2.20' // from 1.4.10
             force 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:2.2.20' // from 1.4.10
             force 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:2.2.20' // from 1.4.10
+            force 'org.bouncycastle:bcpkix-jdk18on:1.84' // from 1.80
+            force 'org.bouncycastle:bcprov-jdk18on:1.84' // from 1.80
+            force 'org.bouncycastle:bcutil-jdk18on:1.84' // from 1.80
         }
     }
 }
